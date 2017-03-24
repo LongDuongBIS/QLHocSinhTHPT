@@ -1,42 +1,46 @@
-﻿using System;
-using System.Data;
-using System.Text;
-using System.Drawing;
-using System.Windows.Forms;
-using QLHocSinhTHPT.Controller;
+﻿using DevComponents.DotNetBar;
 using QLHocSinhTHPT.Component;
-using DevComponents.DotNetBar;
+using QLHocSinhTHPT.Controller;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace QLHocSinhTHPT
 {
     public partial class frmDanToc : Office2007Form
     {
         #region Fields
-        DanTocCtrl  m_DanTocCtrl = new DanTocCtrl();
-        QuyDinh     quyDinh      = new QuyDinh();
-        #endregion
+
+        private DanTocCtrl m_DanTocCtrl = new DanTocCtrl();
+        private QuyDinh quyDinh = new QuyDinh();
+
+        #endregion Fields
 
         #region Constructor
+
         public frmDanToc()
         {
             InitializeComponent();
             DataService.OpenConnection();
         }
-        #endregion
+
+        #endregion Constructor
 
         #region Load
+
         private void frmDanToc_Load(object sender, EventArgs e)
         {
             m_DanTocCtrl.HienThi(dGVDanToc, bindingNavigatorDanToc);
         }
-        #endregion
+
+        #endregion Load
 
         #region BindingNavigatorItems
+
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
             if (dGVDanToc.RowCount == 0)
                 bindingNavigatorDeleteItem.Enabled = false;
-
             else if (MessageBoxEx.Show("Bạn có chắc chắn xóa dòng này không?", "DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bindingNavigatorDanToc.BindingSource.RemoveCurrent();
@@ -50,12 +54,11 @@ namespace QLHocSinhTHPT
 
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
         {
-            if (dGVDanToc.RowCount == 0)
-                bindingNavigatorDeleteItem.Enabled = true;
+            bindingNavigatorDeleteItem.Enabled |= dGVDanToc.RowCount == 0;
 
-            DataRow m_Row       = m_DanTocCtrl.ThemDongMoi();
-            m_Row["MaDanToc"]   = "DT" + quyDinh.LaySTT(dGVDanToc.Rows.Count + 1);
-            m_Row["TenDanToc"]  = "";
+            DataRow m_Row = m_DanTocCtrl.ThemDongMoi();
+            m_Row["MaDanToc"] = "DT" + quyDinh.LaySTT(dGVDanToc.Rows.Count + 1);
+            m_Row["TenDanToc"] = "";
             m_DanTocCtrl.ThemDanToc(m_Row);
             bindingNavigatorDanToc.BindingSource.MoveLast();
         }
@@ -79,20 +82,23 @@ namespace QLHocSinhTHPT
 
         private void bindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            if (KiemTraTruocKhiLuu("colMaDanToc")   == true &&
-                KiemTraTruocKhiLuu("colTenDanToc")  == true)
+            if (KiemTraTruocKhiLuu("colMaDanToc") == true &&
+                KiemTraTruocKhiLuu("colTenDanToc") == true)
             {
                 bindingNavigatorPositionItem.Focus();
                 m_DanTocCtrl.LuuDanToc();
             }
         }
-        #endregion
+
+        #endregion BindingNavigatorItems
 
         #region DataError event
+
         private void dGVDanToc_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
         }
-        #endregion
+
+        #endregion DataError event
     }
 }
