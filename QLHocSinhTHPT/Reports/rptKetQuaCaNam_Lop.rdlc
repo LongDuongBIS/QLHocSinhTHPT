@@ -494,8 +494,8 @@
   <DataSets>
     <DataSet Name="QLHocSinhTHPT_Bussiness_KQCaNamTongHopInfo">
       <rd:DataSetInfo>
-        <rd:DataSetName>QLHocSinhTHPT.Bussiness</rd:DataSetName>
-        <rd:ObjectDataSourceType>QLHocSinhTHPT.Bussiness.KQCaNamTongHopInfo, QLHocSinhTHPT, Version=3.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:DataSetName>QLHocSinhTHPT.DTO</rd:DataSetName>
+        <rd:ObjectDataSourceType>QLHocSinhTHPT.DTO.KQCaNamTongHopInfo, QLHocSinhTHPT, Version=3.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
         <rd:TableName>KQCaNamTongHopInfo</rd:TableName>
       </rd:DataSetInfo>
       <Query>
@@ -509,27 +509,27 @@
           <DataField>DTBCaNam</DataField>
         </Field>
         <Field Name="HanhKiem">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.HanhKiemInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.HanhKiemInfo</rd:TypeName>
           <DataField>HanhKiem</DataField>
         </Field>
         <Field Name="HocLuc">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.HocLucInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.HocLucInfo</rd:TypeName>
           <DataField>HocLuc</DataField>
         </Field>
         <Field Name="HocSinh">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.HocSinhInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.HocSinhInfo</rd:TypeName>
           <DataField>HocSinh</DataField>
         </Field>
         <Field Name="KetQua">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.KetQuaInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.KetQuaInfo</rd:TypeName>
           <DataField>KetQua</DataField>
         </Field>
         <Field Name="Lop">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.LopInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.LopInfo</rd:TypeName>
           <DataField>Lop</DataField>
         </Field>
         <Field Name="NamHoc">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.NamHocInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.NamHocInfo</rd:TypeName>
           <DataField>NamHoc</DataField>
         </Field>
       </Fields>

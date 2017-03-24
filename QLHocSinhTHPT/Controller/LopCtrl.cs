@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Controls;
 using System.Collections.Generic;
 using DevComponents.Editors;
-using QLHocSinhTHPT.Bussiness;
+using QLHocSinhTHPT.DTO;
 using QLHocSinhTHPT.DataLayer;
 
 namespace QLHocSinhTHPT.Controller
@@ -107,26 +107,26 @@ namespace QLHocSinhTHPT.Controller
         #endregion
 
         #region Lay danh sach lop do vao report
-        public static IList<LopInfo> LayDsLop()
+        public static IList<LopDTO> LayDsLop()
         {
             LopData m_LData = new LopData();
             DataTable m_DT = m_LData.LayDsLopForReport();
 
-            IList<LopInfo> dS = new List<LopInfo>();
+            IList<LopDTO> dS = new List<LopDTO>();
 
             foreach (DataRow Row in m_DT.Rows)
             {
-                LopInfo lop = new LopInfo();
+                LopDTO lop = new LopDTO();
 
-                GiaoVienInfo gv = new GiaoVienInfo();
+                GiaoVienDTO gv = new GiaoVienDTO();
                 gv.MaGiaoVien   = Convert.ToString(Row["MaGiaoVien"]);
                 gv.TenGiaoVien  = Convert.ToString(Row["TenGiaoVien"]);
 
-                KhoiLopInfo kl  = new KhoiLopInfo();
+                KhoiLopDTO kl  = new KhoiLopDTO();
                 kl.MaKhoiLop    = Convert.ToString(Row["MaKhoiLop"]);
                 kl.TenKhoiLop   = Convert.ToString(Row["TenKhoiLop"]);
 
-                NamHocInfo nh   = new NamHocInfo();
+                NamHocDTO nh   = new NamHocDTO();
                 nh.MaNamHoc     = Convert.ToString(Row["MaNamHoc"]);
                 nh.TenNamHoc    = Convert.ToString(Row["TenNamHoc"]);
 
@@ -142,26 +142,26 @@ namespace QLHocSinhTHPT.Controller
             return dS;
         }
 
-        public static IList<LopInfo> LayDsLop(String namHoc)
+        public static IList<LopDTO> LayDsLop(String namHoc)
         {
             LopData m_LData = new LopData();
             DataTable m_DT = m_LData.LayDsLopForReport(namHoc);
 
-            IList<LopInfo> dS = new List<LopInfo>();
+            IList<LopDTO> dS = new List<LopDTO>();
 
             foreach (DataRow Row in m_DT.Rows)
             {
-                LopInfo lop = new LopInfo();
+                LopDTO lop = new LopDTO();
 
-                GiaoVienInfo gv = new GiaoVienInfo();
+                GiaoVienDTO gv = new GiaoVienDTO();
                 gv.MaGiaoVien = Convert.ToString(Row["MaGiaoVien"]);
                 gv.TenGiaoVien = Convert.ToString(Row["TenGiaoVien"]);
 
-                KhoiLopInfo kl = new KhoiLopInfo();
+                KhoiLopDTO kl = new KhoiLopDTO();
                 kl.MaKhoiLop = Convert.ToString(Row["MaKhoiLop"]);
                 kl.TenKhoiLop = Convert.ToString(Row["TenKhoiLop"]);
 
-                NamHocInfo nh = new NamHocInfo();
+                NamHocDTO nh = new NamHocDTO();
                 nh.MaNamHoc = Convert.ToString(Row["MaNamHoc"]);
                 nh.TenNamHoc = Convert.ToString(Row["TenNamHoc"]);
 

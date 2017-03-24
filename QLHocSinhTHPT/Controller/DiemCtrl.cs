@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Controls;
 using System.Collections.Generic;
 using DevComponents.Editors;
-using QLHocSinhTHPT.Bussiness;
+using QLHocSinhTHPT.DTO;
 using QLHocSinhTHPT.DataLayer;
 
 namespace QLHocSinhTHPT.Controller

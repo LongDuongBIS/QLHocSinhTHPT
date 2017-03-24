@@ -6,7 +6,7 @@ using System.Collections;
 using System.Windows.Forms;
 using QLHocSinhTHPT.Controller;
 using QLHocSinhTHPT.Component;
-using QLHocSinhTHPT.Bussiness;
+using QLHocSinhTHPT.DTO;
 using DevComponents.DotNetBar;
 
 namespace QLHocSinhTHPT
@@ -73,8 +73,8 @@ namespace QLHocSinhTHPT
             for (int i = 0; i < numberOfRow; i++)
             {
                 ListViewItem item = lVDiem.Items[i];
-                DiemInfo diem = new DiemInfo();
-                diem = (DiemInfo)item.Tag;
+                DiemDTO diem = new DiemDTO();
+                diem = (DiemDTO)item.Tag;
 
                 m_DiemCtrl.LuuDiem(diem.HocSinh.MaHocSinh, diem.MonHoc.MaMonHoc, diem.HocKy.MaHocKy, diem.NamHoc.MaNamHoc, diem.Lop.MaLop, diem.LoaiDiem.MaLoai, diem.Diem);
             }
@@ -107,7 +107,7 @@ namespace QLHocSinhTHPT
                 item.SubItems.Add(cmbLoaiDiem.Text);
                 item.SubItems.Add(txtDiem.Text);
 
-                DiemInfo diem = new DiemInfo();
+                DiemDTO diem = new DiemDTO();
                 diem.HocSinh.MaHocSinh  = cmbHocSinh.SelectedValue.ToString();
                 diem.MonHoc.MaMonHoc    = cmbMonHoc.SelectedValue.ToString();
                 diem.HocKy.MaHocKy      = cmbHocKy.SelectedValue.ToString();
@@ -164,7 +164,7 @@ namespace QLHocSinhTHPT
                     item.SubItems.Add(cmbLoaiDiem.Text);
                     item.SubItems.Add(txtDiem.Text);
 
-                    DiemInfo diem = new DiemInfo();
+                    DiemDTO diem = new DiemDTO();
                     diem.HocSinh.MaHocSinh  = cmbHocSinh.SelectedValue.ToString();
                     diem.MonHoc.MaMonHoc    = cmbMonHoc.SelectedValue.ToString();
                     diem.HocKy.MaHocKy      = cmbHocKy.SelectedValue.ToString();

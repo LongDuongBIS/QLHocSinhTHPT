@@ -37,7 +37,7 @@
             // 
             // bSDSHocSinh
             // 
-            this.bSDSHocSinh.DataSource = typeof(QLHocSinhTHPT.Bussiness.HocSinhInfo);
+            this.bSDSHocSinh.DataSource = typeof(QLHocSinhTHPT.DTO.HocSinhDTO);
             // 
             // reportViewerDSHS
             // 

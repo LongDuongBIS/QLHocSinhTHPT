@@ -44,7 +44,7 @@
             // 
             // bSKQCNTH
             // 
-            this.bSKQCNTH.DataSource = typeof(QLHocSinhTHPT.Bussiness.KQCaNamTongHopInfo);
+            this.bSKQCNTH.DataSource = typeof(QLHocSinhTHPT.DTO.KQCaNamTongHopDTO);
             // 
             // reportViewerKQCNTH
             // 

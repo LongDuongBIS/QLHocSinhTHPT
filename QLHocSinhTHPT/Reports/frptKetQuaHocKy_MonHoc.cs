@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 using System.Drawing;
-using QLHocSinhTHPT.Bussiness;
+using QLHocSinhTHPT.DTO;
 using QLHocSinhTHPT.Component;
 using QLHocSinhTHPT.Controller;
 using DevComponents.DotNetBar;
@@ -58,13 +58,13 @@ namespace QLHocSinhTHPT.Reports
         #region Click event
         private void btnXem_Click(object sender, EventArgs e)
         {
-            IList<KQHocKyMonHocInfo> ketqua = KQHocKyMonHocCtrl.LayDsKQHocKyMonHoc(cmbLop.SelectedValue.ToString(),
+            IList<KQHocKyMonHocDTO> ketqua = KQHocKyMonHocCtrl.LayDsKQHocKyMonHoc(cmbLop.SelectedValue.ToString(),
                                                                                    cmbMonHoc.SelectedValue.ToString(),
                                                                                    cmbHocKy.SelectedValue.ToString(),
                                                                                    cmbNamHoc.SelectedValue.ToString());
 
             IList<ReportParameter> param = new List<ReportParameter>();
-            QuyDinhInfo m_ThongTinTruong = QuyDinh.LayThongTinTruong();
+            QuyDinhDTO m_ThongTinTruong = QuyDinh.LayThongTinTruong();
             param.Add(new ReportParameter("TenTruong", m_ThongTinTruong.TenTruong));
             param.Add(new ReportParameter("DiaChiTruong", m_ThongTinTruong.DiaChiTruong));
             param.Add(new ReportParameter("NgayLap", DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year));

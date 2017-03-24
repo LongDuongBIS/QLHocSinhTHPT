@@ -43,7 +43,7 @@
             // 
             // bSDSLop
             // 
-            this.bSDSLop.DataSource = typeof(QLHocSinhTHPT.Bussiness.LopInfo);
+            this.bSDSLop.DataSource = typeof(QLHocSinhTHPT.DTO.LopDTO);
             // 
             // reportViewerDSLop
             // 

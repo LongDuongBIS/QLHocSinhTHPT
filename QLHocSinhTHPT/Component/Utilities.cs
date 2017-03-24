@@ -4,7 +4,7 @@ using System.Data;
 using System.Xml;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using QLHocSinhTHPT.Bussiness;
+using QLHocSinhTHPT.DTO;
 using QLHocSinhTHPT.Reports;
 using QLHocSinhTHPT.Controller;
 using DevComponents.DotNetBar;
@@ -15,7 +15,7 @@ namespace QLHocSinhTHPT.Component
     #region Utilities
     public static class Utilities
     {
-        public static NguoiDungInfo NguoiDung;
+        public static NguoiDungDTO NguoiDung;
         public static String DatabaseName;
     }
     #endregion
@@ -23,9 +23,9 @@ namespace QLHocSinhTHPT.Component
     #region QuyDinh
     public class QuyDinh
     {
-        public static QuyDinhInfo LayThongTinTruong()
+        public static QuyDinhDTO LayThongTinTruong()
         {
-            QuyDinhInfo m_Truong = new QuyDinhInfo();
+            QuyDinhDTO m_Truong = new QuyDinhDTO();
             DataService dS = new DataService();
 
             dS.Load(new SqlCommand("SELECT TenTruong, DiaChiTruong FROM QUYDINH"));

@@ -37,7 +37,7 @@ namespace QLHocSinhTHPT.Reports
             // 
             // bSDSGiaoVien
             // 
-            this.bSDSGiaoVien.DataSource = typeof(QLHocSinhTHPT.Bussiness.GiaoVienInfo);
+            this.bSDSGiaoVien.DataSource = typeof(QLHocSinhTHPT.DTO.GiaoVienDTO);
             // 
             // reportViewerDSGV
             // 

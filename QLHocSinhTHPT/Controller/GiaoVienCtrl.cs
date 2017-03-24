@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Controls;
 using System.Collections.Generic;
 using QLHocSinhTHPT.DataLayer;
-using QLHocSinhTHPT.Bussiness;
+using QLHocSinhTHPT.DTO;
 
 namespace QLHocSinhTHPT.Controller
 {
@@ -75,18 +75,18 @@ namespace QLHocSinhTHPT.Controller
         #endregion
 
         #region Lay danh sach giao vien do vao report
-        public static IList<GiaoVienInfo> LayDsGiaoVien()
+        public static IList<GiaoVienDTO> LayDsGiaoVien()
         {
             GiaoVienData m_GVData = new GiaoVienData();
             DataTable m_DT = m_GVData.LayDsGiaoVienForReport();
 
-            IList<GiaoVienInfo> dS = new List<GiaoVienInfo>();
+            IList<GiaoVienDTO> dS = new List<GiaoVienDTO>();
 
             foreach (DataRow Row in m_DT.Rows)
             {
-                GiaoVienInfo gv = new GiaoVienInfo();
+                GiaoVienDTO gv = new GiaoVienDTO();
 
-                MonHocInfo mh = new MonHocInfo();
+                MonHocDTO mh = new MonHocDTO();
                 mh.MaMonHoc = Convert.ToString(Row["MaMonHoc"]);
                 mh.TenMonHoc = Convert.ToString(Row["TenMonHoc"]);
                 mh.SoTiet = Convert.ToInt32(Row["SoTiet"]);

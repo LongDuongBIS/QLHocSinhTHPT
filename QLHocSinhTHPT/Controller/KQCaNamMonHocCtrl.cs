@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Controls;
 using System.Collections.Generic;
 using DevComponents.Editors;
-using QLHocSinhTHPT.Bussiness;
+using QLHocSinhTHPT.DTO;
 using QLHocSinhTHPT.DataLayer;
 
 namespace QLHocSinhTHPT.Controller
@@ -29,30 +29,30 @@ namespace QLHocSinhTHPT.Controller
         #endregion
 
         #region Lay danh sach ket qua ca nam mon hoc do vao report
-        public static IList<KQCaNamMonHocInfo> LayDsKQCaNamMonHoc(String maLop, String maMonHoc, String maNamHoc)
+        public static IList<KQCaNamMonHocDTO> LayDsKQCaNamMonHoc(String maLop, String maMonHoc, String maNamHoc)
         {
             KQCaNamMonHocData m_KQCNMHData = new KQCaNamMonHocData();
             DataTable m_DT = m_KQCNMHData.LayDsKQCaNamMonHocForReport(maLop, maMonHoc, maNamHoc);
 
-            IList<KQCaNamMonHocInfo> dS = new List<KQCaNamMonHocInfo>();
+            IList<KQCaNamMonHocDTO> dS = new List<KQCaNamMonHocDTO>();
 
             foreach (DataRow Row in m_DT.Rows)
             {
-                KQCaNamMonHocInfo ketqua = new KQCaNamMonHocInfo();
+                KQCaNamMonHocDTO ketqua = new KQCaNamMonHocDTO();
 
-                HocSinhInfo hs      = new HocSinhInfo();
+                HocSinhDTO hs      = new HocSinhDTO();
                 hs.MaHocSinh        = Convert.ToString(Row["MaHocSinh"]);
                 hs.HoTen            = Convert.ToString(Row["HoTen"]);
 
-                LopInfo l           = new LopInfo();
+                LopDTO l           = new LopDTO();
                 l.MaLop             = Convert.ToString(Row["MaLop"]);
                 l.TenLop            = Convert.ToString(Row["TenLop"]);
 
-                MonHocInfo mh       = new MonHocInfo();
+                MonHocDTO mh       = new MonHocDTO();
                 mh.MaMonHoc         = Convert.ToString(Row["MaMonHoc"]);
                 mh.TenMonHoc        = Convert.ToString(Row["TenMonHoc"]);        
 
-                NamHocInfo nh       = new NamHocInfo();
+                NamHocDTO nh       = new NamHocDTO();
                 nh.MaNamHoc         = Convert.ToString(Row["MaNamHoc"]);
                 nh.TenNamHoc        = Convert.ToString(Row["TenNamHoc"]);
 

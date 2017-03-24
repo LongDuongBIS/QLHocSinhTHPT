@@ -432,8 +432,8 @@
   <DataSets>
     <DataSet Name="QLHocSinhTHPT_Bussiness_LopInfo">
       <rd:DataSetInfo>
-        <rd:DataSetName>QLHocSinhTHPT.Bussiness</rd:DataSetName>
-        <rd:ObjectDataSourceType>QLHocSinhTHPT.Bussiness.LopInfo, QLHocSinhTHPT, Version=3.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:DataSetName>QLHocSinhTHPT.DTO</rd:DataSetName>
+        <rd:ObjectDataSourceType>QLHocSinhTHPT.DTO.LopInfo, QLHocSinhTHPT, Version=3.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
         <rd:TableName>LopInfo</rd:TableName>
       </rd:DataSetInfo>
       <Query>
@@ -443,11 +443,11 @@
       </Query>
       <Fields>
         <Field Name="GiaoVien">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.GiaoVienInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.GiaoVienInfo</rd:TypeName>
           <DataField>GiaoVien</DataField>
         </Field>
         <Field Name="KhoiLop">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.KhoiLopInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.KhoiLopInfo</rd:TypeName>
           <DataField>KhoiLop</DataField>
         </Field>
         <Field Name="MaLop">
@@ -455,7 +455,7 @@
           <DataField>MaLop</DataField>
         </Field>
         <Field Name="NamHoc">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.NamHocInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.NamHocInfo</rd:TypeName>
           <DataField>NamHoc</DataField>
         </Field>
         <Field Name="SiSo">

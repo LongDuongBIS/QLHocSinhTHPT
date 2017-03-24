@@ -434,8 +434,8 @@
   <DataSets>
     <DataSet Name="QLHocSinhTHPT_Bussiness_KQCaNamMonHocInfo">
       <rd:DataSetInfo>
-        <rd:DataSetName>QLHocSinhTHPT.Bussiness</rd:DataSetName>
-        <rd:ObjectDataSourceType>QLHocSinhTHPT.Bussiness.KQCaNamMonHocInfo, QLHocSinhTHPT, Version=3.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:DataSetName>QLHocSinhTHPT.DTO</rd:DataSetName>
+        <rd:ObjectDataSourceType>QLHocSinhTHPT.DTO.KQCaNamMonHocInfo, QLHocSinhTHPT, Version=3.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
         <rd:TableName>KQCaNamMonHocInfo</rd:TableName>
       </rd:DataSetInfo>
       <Query>
@@ -453,19 +453,19 @@
           <DataField>DTBCaNam</DataField>
         </Field>
         <Field Name="HocSinh">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.HocSinhInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.HocSinhInfo</rd:TypeName>
           <DataField>HocSinh</DataField>
         </Field>
         <Field Name="Lop">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.LopInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.LopInfo</rd:TypeName>
           <DataField>Lop</DataField>
         </Field>
         <Field Name="MonHoc">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.MonHocInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.MonHocInfo</rd:TypeName>
           <DataField>MonHoc</DataField>
         </Field>
         <Field Name="NamHoc">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.NamHocInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.NamHocInfo</rd:TypeName>
           <DataField>NamHoc</DataField>
         </Field>
       </Fields>

@@ -5,15 +5,15 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Controls;
 using QLHocSinhTHPT.DataLayer;
 using QLHocSinhTHPT.Component;
-using QLHocSinhTHPT.Bussiness;
+using QLHocSinhTHPT.DTO;
 
 namespace QLHocSinhTHPT.Controller
 {
     public class NguoiDungCtrl
     {
         NguoiDungData m_NguoiDungData = new NguoiDungData();
-        NguoiDungInfo m_NguoiDungInfo = new NguoiDungInfo();
-        LoaiNguoiDungInfo m_LoaiNguoiDungInfo = new LoaiNguoiDungInfo();
+        NguoiDungDTO m_NguoiDungInfo = new NguoiDungDTO();
+        LoaiNguoiDungDTO m_LoaiNguoiDungInfo = new LoaiNguoiDungDTO();
 
         #region Hien thi ComboBox
         public void HienThiComboBox(ComboBoxEx comboBox)

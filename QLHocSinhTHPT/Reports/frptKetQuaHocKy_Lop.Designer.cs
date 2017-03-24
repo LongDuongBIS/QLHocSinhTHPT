@@ -166,7 +166,7 @@
             // 
             // bSKQHKTH
             // 
-            this.bSKQHKTH.DataSource = typeof(QLHocSinhTHPT.Bussiness.KQHocKyTongHopInfo);
+            this.bSKQHKTH.DataSource = typeof(QLHocSinhTHPT.DTO.KQHocKyTongHopDTO);
             // 
             // frptKetQuaHocKy_Lop
             // 

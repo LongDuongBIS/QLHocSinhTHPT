@@ -362,8 +362,8 @@
   <DataSets>
     <DataSet Name="QLHocSinhTHPT_Bussiness_GiaoVienInfo">
       <rd:DataSetInfo>
-        <rd:DataSetName>QLHocSinhTHPT.Bussiness</rd:DataSetName>
-        <rd:ObjectDataSourceType>QLHocSinhTHPT.Bussiness.GiaoVienInfo, QLHocSinhTHPT, Version=3.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:DataSetName>QLHocSinhTHPT.DTO</rd:DataSetName>
+        <rd:ObjectDataSourceType>QLHocSinhTHPT.DTO.GiaoVienInfo, QLHocSinhTHPT, Version=3.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
         <rd:TableName>GiaoVienInfo</rd:TableName>
       </rd:DataSetInfo>
       <Query>
@@ -385,7 +385,7 @@
           <DataField>MaGiaoVien</DataField>
         </Field>
         <Field Name="MonHoc">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.MonHocInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.MonHocInfo</rd:TypeName>
           <DataField>MonHoc</DataField>
         </Field>
         <Field Name="TenGiaoVien">

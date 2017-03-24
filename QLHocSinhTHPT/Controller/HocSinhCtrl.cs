@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Controls;
 using DevComponents.Editors.DateTimeAdv;
 using QLHocSinhTHPT.DataLayer;
-using QLHocSinhTHPT.Bussiness;
+using QLHocSinhTHPT.DTO;
 
 namespace QLHocSinhTHPT.Controller
 {
@@ -164,18 +164,18 @@ namespace QLHocSinhTHPT.Controller
         }
 
         #region Lay danh sach hoc sinh do vao report
-        public static IList<HocSinhInfo> LayDsHocSinh()
+        public static IList<HocSinhDTO> LayDsHocSinh()
         {
             HocSinhData m_HSData = new HocSinhData();
             DataTable m_DT = m_HSData.LayDsHocSinhForReport();
 
-            IList<HocSinhInfo> dS = new List<HocSinhInfo>();
+            IList<HocSinhDTO> dS = new List<HocSinhDTO>();
 
             foreach (DataRow Row in m_DT.Rows)
             {
-                HocSinhInfo hs = new HocSinhInfo();
+                HocSinhDTO hs = new HocSinhDTO();
 
-                NgheNghiepInfo nn   = new NgheNghiepInfo();
+                NgheNghiepDTO nn   = new NgheNghiepDTO();
                 nn.MaNghe           = Convert.ToString(Row["MaNghe"]);
                 nn.TenNghe          = Convert.ToString(Row["TenNghe"]);
 
@@ -183,7 +183,7 @@ namespace QLHocSinhTHPT.Controller
                 dt.MaDanToc         = Convert.ToString(Row["MaDanToc"]);
                 dt.TenDanToc        = Convert.ToString(Row["TenDanToc"]);
 
-                TonGiaoInfo tg      = new TonGiaoInfo();
+                TonGiaoDTO tg      = new TonGiaoDTO();
                 tg.MaTonGiao        = Convert.ToString(Row["MaTonGiao"]);
                 tg.TenTonGiao       = Convert.ToString(Row["TenTonGiao"]);
 

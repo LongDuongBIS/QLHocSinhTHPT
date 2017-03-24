@@ -6,7 +6,7 @@ using System.Collections;
 using System.Windows.Forms;
 using QLHocSinhTHPT.Controller;
 using QLHocSinhTHPT.Component;
-using QLHocSinhTHPT.Bussiness;
+using QLHocSinhTHPT.DTO;
 using DevComponents.DotNetBar;
 
 namespace QLHocSinhTHPT

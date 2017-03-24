@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 using System.Drawing;
-using QLHocSinhTHPT.Bussiness;
+using QLHocSinhTHPT.DTO;
 using QLHocSinhTHPT.Component;
 using QLHocSinhTHPT.Controller;
 using DevComponents.DotNetBar;
@@ -24,13 +24,13 @@ namespace QLHocSinhTHPT.Reports
         private void frptDanhSachHocSinh_Load(object sender, EventArgs e)
         {
             IList<ReportParameter> param = new List<ReportParameter>();
-            QuyDinhInfo m_ThongTinTruong = QuyDinh.LayThongTinTruong();
+            QuyDinhDTO m_ThongTinTruong = QuyDinh.LayThongTinTruong();
             param.Add(new ReportParameter("TenTruong", m_ThongTinTruong.TenTruong));
             param.Add(new ReportParameter("DiaChiTruong", m_ThongTinTruong.DiaChiTruong));
             param.Add(new ReportParameter("NgayLap", DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year));
             this.reportViewerDSHS.LocalReport.SetParameters(param);
 
-            IList<HocSinhInfo> hocsinh = HocSinhCtrl.LayDsHocSinh();
+            IList<HocSinhDTO> hocsinh = HocSinhCtrl.LayDsHocSinh();
             this.bSDSHocSinh.DataSource = hocsinh;
 
             this.reportViewerDSHS.RefreshReport();

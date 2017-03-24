@@ -48,7 +48,7 @@
             // 
             // bSKQHKMH
             // 
-            this.bSKQHKMH.DataSource = typeof(QLHocSinhTHPT.Bussiness.KQHocKyMonHocInfo);
+            this.bSKQHKMH.DataSource = typeof(QLHocSinhTHPT.DTO.KQHocKyMonHocDTO);
             // 
             // groupPanelDS
             // 

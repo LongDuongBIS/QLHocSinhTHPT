@@ -526,8 +526,8 @@
   <DataSets>
     <DataSet Name="QLHocSinhTHPT_Bussiness_HocSinhInfo">
       <rd:DataSetInfo>
-        <rd:DataSetName>QLHocSinhTHPT.Bussiness</rd:DataSetName>
-        <rd:ObjectDataSourceType>QLHocSinhTHPT.Bussiness.HocSinhInfo, QLHocSinhTHPT, Version=3.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:DataSetName>QLHocSinhTHPT.DTO</rd:DataSetName>
+        <rd:ObjectDataSourceType>QLHocSinhTHPT.DTO.HocSinhInfo, QLHocSinhTHPT, Version=3.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
         <rd:TableName>HocSinhInfo</rd:TableName>
       </rd:DataSetInfo>
       <Query>
@@ -537,7 +537,7 @@
       </Query>
       <Fields>
         <Field Name="DanToc">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.DanTocInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.DanTocInfo</rd:TypeName>
           <DataField>DanToc</DataField>
         </Field>
         <Field Name="GioiTinh">
@@ -565,11 +565,11 @@
           <DataField>NgaySinh</DataField>
         </Field>
         <Field Name="NNghiepCha">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.NgheNghiepInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.NgheNghiepInfo</rd:TypeName>
           <DataField>NNghiepCha</DataField>
         </Field>
         <Field Name="NNghiepMe">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.NgheNghiepInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.NgheNghiepInfo</rd:TypeName>
           <DataField>NNghiepMe</DataField>
         </Field>
         <Field Name="NoiSinh">
@@ -577,7 +577,7 @@
           <DataField>NoiSinh</DataField>
         </Field>
         <Field Name="TonGiao">
-          <rd:TypeName>QLHocSinhTHPT.Bussiness.TonGiaoInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.TonGiaoInfo</rd:TypeName>
           <DataField>TonGiao</DataField>
         </Field>
       </Fields>
