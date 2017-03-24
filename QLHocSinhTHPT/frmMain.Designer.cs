@@ -30,6 +30,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
             this.ribbonPanelQuanLy = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarGiaoVien = new DevComponents.DotNetBar.RibbonBar();
@@ -80,11 +81,6 @@
             this.ribbonBarKQHocKy = new DevComponents.DotNetBar.RibbonBar();
             this.btnKQHKTheoLop = new DevComponents.DotNetBar.ButtonItem();
             this.btnKQHKTheoMon = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonTabQuanLy = new DevComponents.DotNetBar.RibbonTabItem();
-            this.ribbonTabThongKe = new DevComponents.DotNetBar.RibbonTabItem();
-            this.ribbonTabTraCuu = new DevComponents.DotNetBar.RibbonTabItem();
-            this.ribbonTabQuyDinh = new DevComponents.DotNetBar.RibbonTabItem();
-            this.ribbonTabGiupDo = new DevComponents.DotNetBar.RibbonTabItem();
             this.buttonFile = new DevComponents.DotNetBar.Office2007StartButton();
             this.menuFileContainer = new DevComponents.DotNetBar.ItemContainer();
             this.menuFileItems = new DevComponents.DotNetBar.ItemContainer();
@@ -95,6 +91,11 @@
             this.btnSaoLuu = new DevComponents.DotNetBar.ButtonItem();
             this.btnPhucHoi = new DevComponents.DotNetBar.ButtonItem();
             this.btnThoat = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonTabQuanLy = new DevComponents.DotNetBar.RibbonTabItem();
+            this.ribbonTabThongKe = new DevComponents.DotNetBar.RibbonTabItem();
+            this.ribbonTabTraCuu = new DevComponents.DotNetBar.RibbonTabItem();
+            this.ribbonTabQuyDinh = new DevComponents.DotNetBar.RibbonTabItem();
+            this.ribbonTabGiupDo = new DevComponents.DotNetBar.RibbonTabItem();
             this.qatCustomizeItem = new DevComponents.DotNetBar.QatCustomizeItem();
             this.ribbonTabItemGroup = new DevComponents.DotNetBar.RibbonTabItemGroup();
             this.bottomBar = new DevComponents.DotNetBar.Bar();
@@ -1036,47 +1037,6 @@
             this.btnKQHKTheoMon.Tooltip = "Kết quả học kỳ theo môn học";
             this.btnKQHKTheoMon.Click += new System.EventHandler(this.btnKQHKTheoMon_Click);
             // 
-            // ribbonTabQuanLy
-            // 
-            this.ribbonTabQuanLy.Checked = true;
-            this.ribbonTabQuanLy.Name = "ribbonTabQuanLy";
-            this.ribbonTabQuanLy.Panel = this.ribbonPanelQuanLy;
-            this.ribbonTabQuanLy.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F2);
-            this.ribbonTabQuanLy.Text = "&Quản lý";
-            this.ribbonTabQuanLy.Tooltip = "Quản lý (F2)";
-            // 
-            // ribbonTabThongKe
-            // 
-            this.ribbonTabThongKe.Name = "ribbonTabThongKe";
-            this.ribbonTabThongKe.Panel = this.ribbonPanelThongKe;
-            this.ribbonTabThongKe.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F3);
-            this.ribbonTabThongKe.Text = "&Thống kê";
-            this.ribbonTabThongKe.Tooltip = "Thống kê (F3)";
-            // 
-            // ribbonTabTraCuu
-            // 
-            this.ribbonTabTraCuu.Name = "ribbonTabTraCuu";
-            this.ribbonTabTraCuu.Panel = this.ribbonPanelTraCuu;
-            this.ribbonTabTraCuu.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F4);
-            this.ribbonTabTraCuu.Text = "Tra cứu";
-            this.ribbonTabTraCuu.Tooltip = "Tra cứu (F4)";
-            // 
-            // ribbonTabQuyDinh
-            // 
-            this.ribbonTabQuyDinh.Name = "ribbonTabQuyDinh";
-            this.ribbonTabQuyDinh.Panel = this.ribbonPanelQuyDinh;
-            this.ribbonTabQuyDinh.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F5);
-            this.ribbonTabQuyDinh.Text = "&Quy định";
-            this.ribbonTabQuyDinh.Tooltip = "Quy định (F5)";
-            // 
-            // ribbonTabGiupDo
-            // 
-            this.ribbonTabGiupDo.Name = "ribbonTabGiupDo";
-            this.ribbonTabGiupDo.Panel = this.ribbonPanelGiupDo;
-            this.ribbonTabGiupDo.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F6);
-            this.ribbonTabGiupDo.Text = "&Giúp đỡ";
-            this.ribbonTabGiupDo.Tooltip = "Giúp đỡ (F6)";
-            // 
             // buttonFile
             // 
             this.buttonFile.AutoExpandOnClick = true;
@@ -1198,6 +1158,47 @@
             this.btnThoat.SubItemsExpandWidth = 24;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
+            // 
+            // ribbonTabQuanLy
+            // 
+            this.ribbonTabQuanLy.Checked = true;
+            this.ribbonTabQuanLy.Name = "ribbonTabQuanLy";
+            this.ribbonTabQuanLy.Panel = this.ribbonPanelQuanLy;
+            this.ribbonTabQuanLy.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F2);
+            this.ribbonTabQuanLy.Text = "&Quản lý";
+            this.ribbonTabQuanLy.Tooltip = "Quản lý (F2)";
+            // 
+            // ribbonTabThongKe
+            // 
+            this.ribbonTabThongKe.Name = "ribbonTabThongKe";
+            this.ribbonTabThongKe.Panel = this.ribbonPanelThongKe;
+            this.ribbonTabThongKe.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F3);
+            this.ribbonTabThongKe.Text = "&Thống kê";
+            this.ribbonTabThongKe.Tooltip = "Thống kê (F3)";
+            // 
+            // ribbonTabTraCuu
+            // 
+            this.ribbonTabTraCuu.Name = "ribbonTabTraCuu";
+            this.ribbonTabTraCuu.Panel = this.ribbonPanelTraCuu;
+            this.ribbonTabTraCuu.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F4);
+            this.ribbonTabTraCuu.Text = "Tra cứu";
+            this.ribbonTabTraCuu.Tooltip = "Tra cứu (F4)";
+            // 
+            // ribbonTabQuyDinh
+            // 
+            this.ribbonTabQuyDinh.Name = "ribbonTabQuyDinh";
+            this.ribbonTabQuyDinh.Panel = this.ribbonPanelQuyDinh;
+            this.ribbonTabQuyDinh.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F5);
+            this.ribbonTabQuyDinh.Text = "&Quy định";
+            this.ribbonTabQuyDinh.Tooltip = "Quy định (F5)";
+            // 
+            // ribbonTabGiupDo
+            // 
+            this.ribbonTabGiupDo.Name = "ribbonTabGiupDo";
+            this.ribbonTabGiupDo.Panel = this.ribbonPanelGiupDo;
+            this.ribbonTabGiupDo.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F6);
+            this.ribbonTabGiupDo.Text = "&Giúp đỡ";
+            this.ribbonTabGiupDo.Tooltip = "Giúp đỡ (F6)";
             // 
             // qatCustomizeItem
             // 
@@ -1327,7 +1328,7 @@
             this.btnMenuMain});
             this.ctxMenuMain.Location = new System.Drawing.Point(363, 267);
             this.ctxMenuMain.Name = "ctxMenuMain";
-            this.ctxMenuMain.Size = new System.Drawing.Size(75, 25);
+            this.ctxMenuMain.Size = new System.Drawing.Size(75, 27);
             this.ctxMenuMain.Stretch = true;
             this.ctxMenuMain.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.ctxMenuMain.TabIndex = 8;
@@ -1422,6 +1423,7 @@
             this.Controls.Add(this.bottomBar);
             this.Controls.Add(this.mdiClient);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
