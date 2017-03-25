@@ -1,46 +1,36 @@
-﻿using System;
-using System.Data;
-using System.Text;
-using System.Drawing;
-using System.Windows.Forms;
-using QLHocSinhTHPT.Controller;
+﻿using DevComponents.DotNetBar;
+using QLHocSinhTHPT.BLL;
 using QLHocSinhTHPT.Component;
-using DevComponents.DotNetBar;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace QLHocSinhTHPT
 {
     public partial class frmGiaoVien : Office2007Form
     {
-        #region Fields
-        GiaoVienCtrl    m_GiaoVienCtrl  = new GiaoVienCtrl();
-        MonHocCtrl      m_MonHocCtrl    = new MonHocCtrl();
-        QuyDinh         quyDinh         = new QuyDinh();
-        #endregion
+        private GiaoVienBLL giaoVienBLL = new GiaoVienBLL();
+        private MonHocBLL monHocBLL = new MonHocBLL();
+        private QuyDinh quyDinh = new QuyDinh();
 
-        #region Constructor
         public frmGiaoVien()
         {
             InitializeComponent();
             DataService.OpenConnection();
         }
-        #endregion
 
-        #region Load
         private void frmGiaoVien_Load(object sender, EventArgs e)
         {
-            m_MonHocCtrl.HienThiComboBox(cmbMonHoc);
-            m_MonHocCtrl.HienThiDataGridViewComboBoxColumnGiaoVien(colMaMonHoc);
-            
-            m_GiaoVienCtrl.HienThi(dGVGiaoVien, bindingNavigatorGiaoVien, txtMaGiaoVien, txtTenGiaoVien, txtDiaChi, txtDienThoai, cmbMonHoc);
-        }
-        #endregion
+            monHocBLL.HienThiComboBox(cmbMonHoc);
+            monHocBLL.HienThiDataGridViewComboBoxColumnGiaoVien(colMaMonHoc);
 
-        #region BindingNavigatorItems
+            giaoVienBLL.HienThi(dGVGiaoVien, bindingNavigatorGiaoVien, txtMaGiaoVien, txtTenGiaoVien, txtDiaChi, txtDienThoai, cmbMonHoc);
+        }
+
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
             if (dGVGiaoVien.RowCount == 0)
                 bindingNavigatorDeleteItem.Enabled = false;
-
             else if (MessageBoxEx.Show("Bạn có chắc chắn xóa dòng này không?", "DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bindingNavigatorGiaoVien.BindingSource.RemoveCurrent();
@@ -54,34 +44,33 @@ namespace QLHocSinhTHPT
 
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
         {
-            if (dGVGiaoVien.RowCount == 0)
-                bindingNavigatorDeleteItem.Enabled = true;
+            bindingNavigatorDeleteItem.Enabled |= dGVGiaoVien.RowCount == 0;
 
-            DataRow m_Row       = m_GiaoVienCtrl.ThemDongMoi();
-            m_Row["MaGiaoVien"] = "GV" + quyDinh.LaySTT(dGVGiaoVien.Rows.Count + 1);
-            m_Row["TenGiaoVien"]= "";
-            m_Row["DiaChi"]     = "";
-            m_Row["DienThoai"]  = "";
-            m_Row["MaMonHoc"]   = "";
-            m_GiaoVienCtrl.ThemGiaoVien(m_Row);
+            DataRow row = giaoVienBLL.ThemDongMoi();
+            row["MaGiaoVien"] = string.Format("GV{0}", quyDinh.LaySTT(dGVGiaoVien.Rows.Count + 1));
+            row["TenGiaoVien"] = string.Empty;
+            row["DiaChi"] = string.Empty;
+            row["DienThoai"] = string.Empty;
+            row["MaMonHoc"] = string.Empty;
+            giaoVienBLL.ThemGiaoVien(row);
             bindingNavigatorGiaoVien.BindingSource.MoveLast();
         }
 
         private void bindingNavigatorRefreshItem_Click(object sender, EventArgs e)
         {
-            m_GiaoVienCtrl.HienThi(dGVGiaoVien, bindingNavigatorGiaoVien, txtMaGiaoVien, txtTenGiaoVien, txtDiaChi, txtDienThoai, cmbMonHoc);
+            giaoVienBLL.HienThi(dGVGiaoVien, bindingNavigatorGiaoVien, txtMaGiaoVien, txtTenGiaoVien, txtDiaChi, txtDienThoai, cmbMonHoc);
         }
 
-        public Boolean KiemTraTruocKhiLuu(String cellString)
+        public bool KiemTraTruocKhiLuu(string cellString)
         {
             foreach (DataGridViewRow row in dGVGiaoVien.Rows)
             {
                 if (row.Cells[cellString].Value != null)
                 {
-                    String str = row.Cells[cellString].Value.ToString();
-                    if (str == "")
+                    string str = row.Cells[cellString].Value.ToString();
+                    if (str == string.Empty)
                     {
-                        MessageBoxEx.Show("Thông tin giáo viên " + row.Cells["colTenGiaoVien"].Value.ToString() + " không hợp lệ!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBoxEx.Show(string.Format("Thông tin giáo viên {0} không hợp lệ!", row.Cells["colTenGiaoVien"].Value), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
                 }
@@ -91,26 +80,18 @@ namespace QLHocSinhTHPT
 
         private void bindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            if (KiemTraTruocKhiLuu("colMaGiaoVien")     == true &&
-                KiemTraTruocKhiLuu("colTenGiaoVien")    == true &&
-                KiemTraTruocKhiLuu("colDiaChi")         == true &&
-                KiemTraTruocKhiLuu("colDienThoai")      == true &&
-                KiemTraTruocKhiLuu("colMaMonHoc")       == true)
+            if (KiemTraTruocKhiLuu("colMaGiaoVien") == true && KiemTraTruocKhiLuu("colTenGiaoVien") == true && KiemTraTruocKhiLuu("colDiaChi") == true && KiemTraTruocKhiLuu("colDienThoai") == true && KiemTraTruocKhiLuu("colMaMonHoc") == true)
             {
                 bindingNavigatorPositionItem.Focus();
-                m_GiaoVienCtrl.LuuGiaoVien();
+                giaoVienBLL.LuuGiaoVien();
             }
         }
-        #endregion
 
-        #region DataError event
         private void dGVGiaoVien_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
         }
-        #endregion
 
-        #region Tìm kiếm giáo viên
         private void txtTimKiem_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -124,41 +105,31 @@ namespace QLHocSinhTHPT
             TimKiemGiaoVien();
         }
 
-        void TimKiemGiaoVien()
+        private void TimKiemGiaoVien()
         {
             if (chkTimTheoMa.Checked == true)
-            {
-                m_GiaoVienCtrl.TimTheoMa(txtTimKiem.Text);
-            }
+                giaoVienBLL.TimTheoMa(txtTimKiem.Text);
             else
-            {
-                m_GiaoVienCtrl.TimTheoTen(txtTimKiem.Text);
-            }
+                giaoVienBLL.TimTheoTen(txtTimKiem.Text);
         }
-        #endregion
 
-        #region Click event
         private void btnThemMonHoc_Click(object sender, EventArgs e)
         {
             ThamSo.ShowFormMonHoc();
-            m_MonHocCtrl.HienThiDataGridViewComboBoxColumnGiaoVien(colMaMonHoc);
+            monHocBLL.HienThiDataGridViewComboBoxColumnGiaoVien(colMaMonHoc);
         }
 
         private void btnLuuVaoDS_Click(object sender, EventArgs e)
         {
-            if (txtTenGiaoVien.Text     != "" &&
-                txtDiaChi.Text          != "" &&
-                txtDienThoai.Text       != "" &&
-                cmbMonHoc.SelectedValue != null)
+            if (txtTenGiaoVien.Text != string.Empty && txtDiaChi.Text != string.Empty && txtDienThoai.Text != string.Empty && cmbMonHoc.SelectedValue != null)
             {
-                m_GiaoVienCtrl.LuuGiaoVien(txtMaGiaoVien.Text, txtTenGiaoVien.Text, txtDiaChi.Text, txtDienThoai.Text, cmbMonHoc.SelectedValue.ToString());
-                m_GiaoVienCtrl.HienThi(dGVGiaoVien, bindingNavigatorGiaoVien, txtMaGiaoVien, txtTenGiaoVien, txtDiaChi, txtDienThoai, cmbMonHoc);
-                
+                giaoVienBLL.LuuGiaoVien(txtMaGiaoVien.Text, txtTenGiaoVien.Text, txtDiaChi.Text, txtDienThoai.Text, cmbMonHoc.SelectedValue.ToString());
+                giaoVienBLL.HienThi(dGVGiaoVien, bindingNavigatorGiaoVien, txtMaGiaoVien, txtTenGiaoVien, txtDiaChi, txtDienThoai, cmbMonHoc);
+
                 bindingNavigatorGiaoVien.BindingSource.MoveLast();
             }
             else
                 MessageBoxEx.Show("Giá trị của các ô không được rỗng!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        #endregion
     }
 }

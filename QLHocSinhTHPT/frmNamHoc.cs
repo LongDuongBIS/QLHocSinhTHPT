@@ -1,40 +1,30 @@
-﻿using System;
+﻿using DevComponents.DotNetBar;
+using QLHocSinhTHPT.BLL;
+using System;
 using System.Data;
-using System.Text;
-using System.Drawing;
 using System.Windows.Forms;
-using QLHocSinhTHPT.Controller;
-using DevComponents.DotNetBar;
 
 namespace QLHocSinhTHPT
 {
     public partial class frmNamHoc : Office2007Form
     {
-        #region Field
-        NamHocCtrl m_NamHocCtrl = new NamHocCtrl();
-        #endregion
+        private NamHocBLL namHocBLL = new NamHocBLL();
 
-        #region Constructor
         public frmNamHoc()
         {
             InitializeComponent();
             DataService.OpenConnection();
         }
-        #endregion
 
-        #region Load
         private void frmNamHoc_Load(object sender, EventArgs e)
         {
-            m_NamHocCtrl.HienThi(dGVNamHoc, bindingNavigatorNamHoc);
+            namHocBLL.HienThi(dGVNamHoc, bindingNavigatorNamHoc);
         }
-        #endregion
 
-        #region BindingNavigatorItems
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
             if (dGVNamHoc.RowCount == 0)
                 bindingNavigatorDeleteItem.Enabled = false;
-
             else if (MessageBoxEx.Show("Bạn có chắc chắn xóa dòng này không?", "DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bindingNavigatorNamHoc.BindingSource.RemoveCurrent();
@@ -48,24 +38,23 @@ namespace QLHocSinhTHPT
 
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
         {
-            if (dGVNamHoc.RowCount == 0)
-                bindingNavigatorDeleteItem.Enabled = true;
+            bindingNavigatorDeleteItem.Enabled |= dGVNamHoc.RowCount == 0;
 
-            DataRow m_Row       = m_NamHocCtrl.ThemDongMoi();
-            m_Row["MaNamHoc"]   = "";
-            m_Row["TenNamHoc"]  = "";
-            m_NamHocCtrl.ThemNamHoc(m_Row);
+            DataRow row = namHocBLL.ThemDongMoi();
+            row["MaNamHoc"] = string.Empty;
+            row["TenNamHoc"] = string.Empty;
+            namHocBLL.ThemNamHoc(row);
             bindingNavigatorNamHoc.BindingSource.MoveLast();
         }
 
-        public Boolean KiemTraTruocKhiLuu(String cellString)
+        public bool KiemTraTruocKhiLuu(string cellString)
         {
             foreach (DataGridViewRow row in dGVNamHoc.Rows)
             {
                 if (row.Cells[cellString].Value != null)
                 {
-                    String str = row.Cells[cellString].Value.ToString();
-                    if (str == "")
+                    string str = row.Cells[cellString].Value.ToString();
+                    if (str == string.Empty)
                     {
                         MessageBoxEx.Show("Giá trị của ô không được rỗng!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
@@ -77,20 +66,16 @@ namespace QLHocSinhTHPT
 
         private void bindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            if (KiemTraTruocKhiLuu("colMaNamHoc")  == true &&
-                KiemTraTruocKhiLuu("colTenNamHoc") == true)
+            if (KiemTraTruocKhiLuu("colMaNamHoc") == true && KiemTraTruocKhiLuu("colTenNamHoc") == true)
             {
                 bindingNavigatorPositionItem.Focus();
-                m_NamHocCtrl.LuuNamHoc();
+                namHocBLL.LuuNamHoc();
             }
         }
-        #endregion
 
-        #region DataError event
         private void dGVNamHoc_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
         }
-        #endregion
     }
 }

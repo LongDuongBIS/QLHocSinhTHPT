@@ -1,13 +1,13 @@
 using System;
-using System.Text;
 using System.Windows.Forms;
 
 namespace QLHocSinhTHPT.Component
 {
-    #region CalendarColumn
     public class CalendarColumn : DataGridViewColumn
     {
-        public CalendarColumn() : base(new CalendarCell()) { }
+        public CalendarColumn() : base(new CalendarCell())
+        {
+        }
 
         public override DataGridViewCell CellTemplate
         {
@@ -18,19 +18,15 @@ namespace QLHocSinhTHPT.Component
             set
             {
                 if (value != null && !value.GetType().IsAssignableFrom(typeof(CalendarCell)))
-                {
                     throw new InvalidCastException("Must be a CalendarCell");
-                }
                 base.CellTemplate = value;
             }
         }
     }
-    #endregion
 
-    #region CalendarCell
     public class CalendarCell : DataGridViewTextBoxCell
     {
-        public CalendarCell() : base()
+        public CalendarCell()
         {
             this.Style.Format = "dd/MM/yyyy";
         }
@@ -57,14 +53,12 @@ namespace QLHocSinhTHPT.Component
             get { return DateTime.Now; }
         }
     }
-    #endregion
 
-    #region CalendarEditingControl
     public class CalendarEditingControl : DateTimePicker, IDataGridViewEditingControl
     {
-        DataGridView dataGridView;
-        private bool valueChanged = false;
-        int rowIndex;
+        private DataGridView dataGridView;
+        private bool valueChanged;
+        private int rowIndex;
 
         public CalendarEditingControl()
         {
@@ -79,10 +73,8 @@ namespace QLHocSinhTHPT.Component
             }
             set
             {
-                if (value is String)
-                {
-                    this.Value = DateTime.Parse((String)value);
-                }
+                if (value is string)
+                    this.Value = DateTime.Parse((string)value);
             }
         }
 
@@ -117,6 +109,7 @@ namespace QLHocSinhTHPT.Component
                 case Keys.PageDown:
                 case Keys.PageUp:
                     return true;
+
                 default:
                     return false;
             }
@@ -156,5 +149,4 @@ namespace QLHocSinhTHPT.Component
             base.OnValueChanged(eventargs);
         }
     }
-    #endregion
 }

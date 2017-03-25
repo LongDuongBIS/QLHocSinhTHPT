@@ -1,6 +1,6 @@
 ﻿using DevComponents.DotNetBar;
+using QLHocSinhTHPT.BLL;
 using QLHocSinhTHPT.Component;
-using QLHocSinhTHPT.Controller;
 using System;
 using System.Windows.Forms;
 
@@ -8,19 +8,11 @@ namespace QLHocSinhTHPT
 {
     public partial class frmMain : Office2007RibbonForm
     {
-        #region Fields
-
-        private NguoiDungCtrl m_NguoiDungCtrl = new NguoiDungCtrl();
-        private frmDoiMatKhau m_FrmDoiMatKhau;
-        private frmDangNhap m_FrmLogin;
-        private frmNguoiDung m_FrmNguoiDung;
-        private frmConnection m_Connection;
-
-        #endregion Fields
-
-        #region frmMain
-
-        #region Constructor
+        private NguoiDungBLL nguoiDungBLL = new NguoiDungBLL();
+        private frmDoiMatKhau frmDoiMatKhau;
+        private frmDangNhap frmDangNhap;
+        private frmNguoiDung frmNguoiDung;
+        private frmConnection frmConnection;
 
         public frmMain()
         {
@@ -30,10 +22,6 @@ namespace QLHocSinhTHPT
             System.Threading.Thread.Sleep(2000);
             f.Close();
         }
-
-        #endregion Constructor
-
-        #region Load
 
         private void frmMain_Load(object sender, System.EventArgs e)
         {
@@ -75,29 +63,21 @@ namespace QLHocSinhTHPT
             }
         }
 
-        #endregion Load
-
-        #region Kết nối lại CSDL
-
         public void ReConnection()
         {
             MessageBoxEx.Show("Lỗi kết nối đến cơ sở dữ liệu! Xin vui lòng thiết lập lại kết nối...", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            if (m_Connection == null || m_Connection.IsDisposed)
-                m_Connection = new frmConnection();
+            if (frmConnection == null || frmConnection.IsDisposed)
+                frmConnection = new frmConnection();
 
-            if (m_Connection.ShowDialog() == DialogResult.OK)
+            if (frmConnection.ShowDialog() == DialogResult.OK)
             {
-                MessageBoxEx.Show("Đã thiết lập kết nối cho lần chạy đầu tiên.\nHãy khởi động lại chương trình để thực thi kết nối!", "SUCCESSED", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Đã thiết lập kết nối cho lần chạy đầu tiên." + "\nHãy khởi động lại chương trình để thực thi kết nối!", "SUCCESSED", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             else
                 return;
         }
-
-        #endregion Kết nối lại CSDL
-
-        #region Lưu lại trạng thái khi thoát chương trình
 
         private void frmMain_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -116,23 +96,15 @@ namespace QLHocSinhTHPT
             }
         }
 
-        #endregion Lưu lại trạng thái khi thoát chương trình
-
-        #endregion frmMain
-
-        #region Form show
-
-        #region Menu start
-
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
-            if (m_FrmLogin == null || m_FrmLogin.IsDisposed)
-                m_FrmLogin = new frmDangNhap();
+            if (frmDangNhap == null || frmDangNhap.IsDisposed)
+                frmDangNhap = new frmDangNhap();
 
-            m_FrmLogin.txtUsername.Text = "";
-            m_FrmLogin.txtPassword.Text = "";
-            m_FrmLogin.lblUserError.Text = "";
-            m_FrmLogin.lblPassError.Text = "";
+            frmDangNhap.txtUsername.Text = string.Empty;
+            frmDangNhap.txtPassword.Text = string.Empty;
+            frmDangNhap.lblUserError.Text = string.Empty;
+            frmDangNhap.lblPassError.Text = string.Empty;
 
             DangNhap();
         }
@@ -145,38 +117,41 @@ namespace QLHocSinhTHPT
 
         private void btnDoiMatKhau_Click(object sender, EventArgs e)
         {
-            if (m_FrmDoiMatKhau == null || m_FrmDoiMatKhau.IsDisposed)
-                m_FrmDoiMatKhau = new frmDoiMatKhau();
+            if (frmDoiMatKhau == null || frmDoiMatKhau.IsDisposed)
+                frmDoiMatKhau = new frmDoiMatKhau();
 
-            m_FrmDoiMatKhau.txtOldPassword.Text = "";
-            m_FrmDoiMatKhau.txtNewPassword.Text = "";
-            m_FrmDoiMatKhau.txtReNPassword.Text = "";
-            m_FrmDoiMatKhau.lblOldPassError.Text = "";
-            m_FrmDoiMatKhau.lblNewPassError.Text = "";
-            m_FrmDoiMatKhau.lblReNPassError.Text = "";
+            frmDoiMatKhau.txtOldPassword.Text = string.Empty;
+            frmDoiMatKhau.txtNewPassword.Text = string.Empty;
+            frmDoiMatKhau.txtReNPassword.Text = string.Empty;
+            frmDoiMatKhau.lblOldPassError.Text = string.Empty;
+            frmDoiMatKhau.lblNewPassError.Text = string.Empty;
+            frmDoiMatKhau.lblReNPassError.Text = string.Empty;
 
             DoiMatKhau();
         }
 
         private void btnQLNguoiDung_Click(object sender, EventArgs e)
         {
-            if (m_FrmNguoiDung == null || m_FrmNguoiDung.IsDisposed)
+            if (frmNguoiDung == null || frmNguoiDung.IsDisposed)
             {
-                m_FrmNguoiDung = new frmNguoiDung();
-                m_FrmNguoiDung.MdiParent = this;
-                m_FrmNguoiDung.Show();
+                frmNguoiDung = new frmNguoiDung();
+                frmNguoiDung.MdiParent = this;
+                frmNguoiDung.Show();
             }
             else
-                m_FrmNguoiDung.Activate();
+                frmNguoiDung.Activate();
         }
 
         private void btnSaoLuu_Click(object sender, EventArgs e)
         {
             if (backupDialog.ShowDialog() == DialogResult.OK)
             {
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("BACKUP DATABASE " + Utilities.DatabaseName + " TO DISK = '" + backupDialog.FileName.ToString() + "'");
-                DataService data = new DataService();
-                data.Load(cmd);
+                using (System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(string.Format("BACKUP DATABASE {0} " + "TO DISK = '{1}'", Utilities.DatabaseName, backupDialog.FileName)))
+                {
+                    DataService ds = new DataService();
+                    ds.Load(cmd);
+                }
+
                 MessageBoxEx.Show("Sao lưu dữ liệu thành công!", "BACKUP COMPLETED", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -187,9 +162,12 @@ namespace QLHocSinhTHPT
         {
             if (restoreDialog.ShowDialog() == DialogResult.OK)
             {
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("USE master RESTORE DATABASE " + Utilities.DatabaseName + " FROM DISK = '" + restoreDialog.FileName.ToString() + "'");
-                DataService data = new DataService();
-                data.Load(cmd);
+                using (System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(string.Format("USE master " + "RESTORE DATABASE {0} " + "FROM DISK = '{1}'", Utilities.DatabaseName, restoreDialog.FileName)))
+                {
+                    DataService data = new DataService();
+                    data.Load(cmd);
+                }
+
                 MessageBoxEx.Show("Phục hồi dữ liệu thành công!", "RESTORE COMPLETED", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -200,10 +178,6 @@ namespace QLHocSinhTHPT
         {
             this.Close();
         }
-
-        #endregion Menu start
-
-        #region Menu quan ly
 
         private void btnLopHoc_Click(object sender, EventArgs e)
         {
@@ -290,10 +264,6 @@ namespace QLHocSinhTHPT
             ThamSo.ShowFormPhanCong();
         }
 
-        #endregion Menu quan ly
-
-        #region Menu thong ke
-
         private void btnKQHKTheoLop_Click(object sender, EventArgs e)
         {
             ThamSo.ShowFormKQHKTheoLop();
@@ -329,10 +299,6 @@ namespace QLHocSinhTHPT
             ThamSo.ShowFormDanhSachLopHoc();
         }
 
-        #endregion Menu thong ke
-
-        #region Tra cuu
-
         private void btnTimKiemHS_Click(object sender, EventArgs e)
         {
             ThamSo.ShowFormTimKiemHS();
@@ -342,10 +308,6 @@ namespace QLHocSinhTHPT
         {
             ThamSo.ShowFormTimKiemGV();
         }
-
-        #endregion Tra cuu
-
-        #region Menu quy dinh
 
         private frmQuyDinh m_FrmQD = new frmQuyDinh();
 
@@ -373,10 +335,6 @@ namespace QLHocSinhTHPT
             m_FrmQD.tabControlPanelTruong.Select();
         }
 
-        #endregion Menu quy dinh
-
-        #region Menu giup do
-
         private void btnHuongDan_Click(object sender, EventArgs e)
         {
             Help.ShowHelp(this, helpProvider.HelpNamespace, HelpNavigator.TableOfContents);
@@ -387,48 +345,40 @@ namespace QLHocSinhTHPT
             ThamSo.ShowFormThongTin();
         }
 
-        #endregion Menu giup do
-
-        #endregion Form show
-
-        #region Permissions
-
-        #region DangNhap
-
         public void DangNhap()
         {
-        Cont:
-            if (m_FrmLogin == null || m_FrmLogin.IsDisposed)
-                m_FrmLogin = new frmDangNhap();
+        Nhan:
+            if (frmDangNhap == null || frmDangNhap.IsDisposed)
+                frmDangNhap = new frmDangNhap();
 
-            if (m_FrmLogin.ShowDialog() == DialogResult.OK)
+            if (frmDangNhap.ShowDialog() == DialogResult.OK)
             {
-                if (m_FrmLogin.txtUsername.Text == "")
+                if (frmDangNhap.txtUsername.Text == string.Empty)
                 {
-                    m_FrmLogin.lblPassError.Text = "";
-                    m_FrmLogin.lblUserError.Text = "Bạn chưa nhập tên!";
-                    goto Cont;
+                    frmDangNhap.lblPassError.Text = string.Empty;
+                    frmDangNhap.lblUserError.Text = "Bạn chưa nhập tên!";
+                    goto Nhan;
                 }
 
-                if (m_FrmLogin.txtPassword.Text == "")
+                if (frmDangNhap.txtPassword.Text == string.Empty)
                 {
-                    m_FrmLogin.lblUserError.Text = "";
-                    m_FrmLogin.lblPassError.Text = "Bạn chưa nhập mật khẩu!";
-                    goto Cont;
+                    frmDangNhap.lblUserError.Text = string.Empty;
+                    frmDangNhap.lblPassError.Text = "Bạn chưa nhập mật khẩu!";
+                    goto Nhan;
                 }
 
-                int ketQua = m_NguoiDungCtrl.DangNhap(m_FrmLogin.txtUsername.Text, m_FrmLogin.txtPassword.Text);
+                int ketQua = nguoiDungBLL.DangNhap(frmDangNhap.txtUsername.Text, frmDangNhap.txtPassword.Text);
 
                 switch (ketQua)
                 {
                     case 0:
-                        m_FrmLogin.lblPassError.Text = "";
-                        m_FrmLogin.lblUserError.Text = "Người dùng này không tồn tại!";
-                        goto Cont;
+                        frmDangNhap.lblPassError.Text = string.Empty;
+                        frmDangNhap.lblUserError.Text = "Người dùng này không tồn tại!";
+                        goto Nhan;
                     case 1:
-                        m_FrmLogin.lblUserError.Text = "";
-                        m_FrmLogin.lblPassError.Text = "Mật khẩu không hợp lệ!";
-                        goto Cont;
+                        frmDangNhap.lblUserError.Text = string.Empty;
+                        frmDangNhap.lblPassError.Text = "Mật khẩu không hợp lệ!";
+                        goto Nhan;
                     case 2:
                         lblTenNguoiDung.Text = Utilities.NguoiDung.TenND;
                         Permissions(Utilities.NguoiDung.LoaiND.MaLoai);
@@ -439,13 +389,9 @@ namespace QLHocSinhTHPT
                 return;
         }
 
-        #endregion DangNhap
-
-        #region Phân quyền
-
-        public void Permissions(String m_Per)
+        public void Permissions(string permission)
         {
-            switch (m_Per)
+            switch (permission)
             {
                 case "LND001": IsBGH(); break;
                 case "LND002": IsGiaoVien(); break;
@@ -454,73 +400,62 @@ namespace QLHocSinhTHPT
             }
         }
 
-        #endregion Phân quyền
-
-        #region DoiMatKhau
-
         public void DoiMatKhau()
         {
-        Cont:
-            if (m_FrmDoiMatKhau.ShowDialog() == DialogResult.OK)
+        Nhan:
+            if (frmDoiMatKhau.ShowDialog() == DialogResult.OK)
             {
-                if (m_FrmDoiMatKhau.txtOldPassword.Text == "")
+                if (frmDoiMatKhau.txtOldPassword.Text == string.Empty)
                 {
-                    m_FrmDoiMatKhau.lblOldPassError.Text = "Chưa nhập mật khẩu hiện tại!";
-                    m_FrmDoiMatKhau.lblNewPassError.Text = "";
-                    m_FrmDoiMatKhau.lblReNPassError.Text = "";
-                    goto Cont;
+                    frmDoiMatKhau.lblOldPassError.Text = "Chưa nhập mật khẩu hiện tại!";
+                    frmDoiMatKhau.lblNewPassError.Text = string.Empty;
+                    frmDoiMatKhau.lblReNPassError.Text = string.Empty;
+                    goto Nhan;
                 }
 
-                if (m_FrmDoiMatKhau.txtNewPassword.Text == "")
+                if (frmDoiMatKhau.txtNewPassword.Text == string.Empty)
                 {
-                    m_FrmDoiMatKhau.lblOldPassError.Text = "";
-                    m_FrmDoiMatKhau.lblNewPassError.Text = "Chưa nhập mật khẩu mới!";
-                    m_FrmDoiMatKhau.lblReNPassError.Text = "";
-                    goto Cont;
+                    frmDoiMatKhau.lblOldPassError.Text = string.Empty;
+                    frmDoiMatKhau.lblNewPassError.Text = "Chưa nhập mật khẩu mới!";
+                    frmDoiMatKhau.lblReNPassError.Text = string.Empty;
+                    goto Nhan;
                 }
 
-                if (m_FrmDoiMatKhau.txtReNPassword.Text == "")
+                if (frmDoiMatKhau.txtReNPassword.Text == string.Empty)
                 {
-                    m_FrmDoiMatKhau.lblOldPassError.Text = "";
-                    m_FrmDoiMatKhau.lblNewPassError.Text = "";
-                    m_FrmDoiMatKhau.lblReNPassError.Text = "Chưa nhập xác nhận mật khẩu!";
-                    goto Cont;
+                    frmDoiMatKhau.lblOldPassError.Text = string.Empty;
+                    frmDoiMatKhau.lblNewPassError.Text = string.Empty;
+                    frmDoiMatKhau.lblReNPassError.Text = "Chưa nhập xác nhận mật khẩu!";
+                    goto Nhan;
                 }
 
-                String m_Username = m_FrmLogin.txtUsername.Text;
-                String m_Password = m_FrmLogin.txtPassword.Text;
+                string username = frmDangNhap.txtUsername.Text;
+                string password = frmDangNhap.txtPassword.Text;
 
-                String m_OldPassword = m_FrmDoiMatKhau.txtOldPassword.Text;
-                String m_NewPassword = m_FrmDoiMatKhau.txtNewPassword.Text;
-                String m_ReNPassword = m_FrmDoiMatKhau.txtReNPassword.Text;
+                string oldPassword = frmDoiMatKhau.txtOldPassword.Text;
+                string newPassword = frmDoiMatKhau.txtNewPassword.Text;
+                string reNewPassword = frmDoiMatKhau.txtReNPassword.Text;
 
-                if (m_Password != m_OldPassword)
+                if (password != oldPassword)
                 {
-                    m_FrmDoiMatKhau.lblOldPassError.Text = "Nhập sai mật khẩu cũ!";
-                    m_FrmDoiMatKhau.lblNewPassError.Text = "";
-                    m_FrmDoiMatKhau.lblReNPassError.Text = "";
-                    goto Cont;
+                    frmDoiMatKhau.lblOldPassError.Text = "Nhập sai mật khẩu cũ!";
+                    frmDoiMatKhau.lblNewPassError.Text = string.Empty;
+                    frmDoiMatKhau.lblReNPassError.Text = string.Empty;
+                    goto Nhan;
                 }
-                else if (m_NewPassword != m_ReNPassword)
+                if (newPassword != reNewPassword)
                 {
-                    m_FrmDoiMatKhau.lblOldPassError.Text = "";
-                    m_FrmDoiMatKhau.lblNewPassError.Text = "";
-                    m_FrmDoiMatKhau.lblReNPassError.Text = "Nhập xác nhận không khớp!";
-                    goto Cont;
+                    frmDoiMatKhau.lblOldPassError.Text = string.Empty;
+                    frmDoiMatKhau.lblNewPassError.Text = string.Empty;
+                    frmDoiMatKhau.lblReNPassError.Text = "Nhập xác nhận không khớp!";
+                    goto Nhan;
                 }
-                else
-                {
-                    m_NguoiDungCtrl.ChangePassword(m_Username, m_NewPassword);
-                    MessageBoxEx.Show("Đổi mật khẩu thành công!", "PASSWORD CHANGED", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                nguoiDungBLL.ChangePassword(username, newPassword);
+                MessageBoxEx.Show("Đổi mật khẩu thành công!", "PASSWORD CHANGED", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
                 return;
         }
-
-        #endregion DoiMatKhau
-
-        #region Giao diện mặc định
 
         public void Default()
         {
@@ -576,10 +511,6 @@ namespace QLHocSinhTHPT
             btnTruong.Enabled = false;
         }
 
-        #endregion Giao diện mặc định
-
-        #region Giao diện khi đăng nhập với quyền BGH
-
         public void IsBGH()
         {
             //False
@@ -634,10 +565,6 @@ namespace QLHocSinhTHPT
             btnHuongDan.Enabled = true;
             btnThongTin.Enabled = true;
         }
-
-        #endregion Giao diện khi đăng nhập với quyền BGH
-
-        #region Giao diện khi đăng nhập với quyền Giáo viên
 
         public void IsGiaoVien()
         {
@@ -695,10 +622,6 @@ namespace QLHocSinhTHPT
             btnTruong.Enabled = false;
         }
 
-        #endregion Giao diện khi đăng nhập với quyền Giáo viên
-
-        #region Giao diện khi đăng nhập với quyền Giáo vụ
-
         public void IsGiaoVu()
         {
             //True
@@ -754,9 +677,5 @@ namespace QLHocSinhTHPT
             btnDoTuoi.Enabled = false;
             btnTruong.Enabled = false;
         }
-
-        #endregion Giao diện khi đăng nhập với quyền Giáo vụ
-
-        #endregion Permissions
     }
 }

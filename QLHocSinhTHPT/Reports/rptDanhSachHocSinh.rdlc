@@ -537,7 +537,7 @@
       </Query>
       <Fields>
         <Field Name="DanToc">
-          <rd:TypeName>QLHocSinhTHPT.DTO.DanTocInfo</rd:TypeName>
+          <rd:TypeName>QLHocSinhTHPT.DTO.DanTocDTO</rd:TypeName>
           <DataField>DanToc</DataField>
         </Field>
         <Field Name="GioiTinh">

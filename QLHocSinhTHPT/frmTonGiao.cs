@@ -1,42 +1,32 @@
-﻿using System;
-using System.Data;
-using System.Text;
-using System.Drawing;
-using System.Windows.Forms;
-using QLHocSinhTHPT.Controller;
+﻿using DevComponents.DotNetBar;
+using QLHocSinhTHPT.BLL;
 using QLHocSinhTHPT.Component;
-using DevComponents.DotNetBar;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace QLHocSinhTHPT
 {
     public partial class frmTonGiao : Office2007Form
     {
-        #region Fields
-        TonGiaoCtrl m_TonGiaoCtrl   = new TonGiaoCtrl();
-        QuyDinh     quyDinh         = new QuyDinh();
-        #endregion
+        private TonGiaoBLL tonGiaoBLL = new TonGiaoBLL();
+        private QuyDinh quyDinh = new QuyDinh();
 
-        #region Constructor
         public frmTonGiao()
         {
             InitializeComponent();
             DataService.OpenConnection();
         }
-        #endregion
 
-        #region Load
         private void frmTonGiao_Load(object sender, EventArgs e)
         {
-            m_TonGiaoCtrl.HienThi(dGVTonGiao, bindingNavigatorTonGiao);
+            tonGiaoBLL.HienThi(dGVTonGiao, bindingNavigatorTonGiao);
         }
-        #endregion
 
-        #region BindingNavigatorItems
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
             if (dGVTonGiao.RowCount == 0)
                 bindingNavigatorDeleteItem.Enabled = false;
-
             else if (MessageBoxEx.Show("Bạn có chắc chắn xóa dòng này không?", "DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bindingNavigatorTonGiao.BindingSource.RemoveCurrent();
@@ -50,24 +40,23 @@ namespace QLHocSinhTHPT
 
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
         {
-            if (dGVTonGiao.RowCount == 0)
-                bindingNavigatorDeleteItem.Enabled = false;
+            bindingNavigatorDeleteItem.Enabled &= dGVTonGiao.RowCount != 0;
 
-            DataRow m_Row = m_TonGiaoCtrl.ThemDongMoi();
-            m_Row["MaTonGiao"] = "TG" + quyDinh.LaySTT(dGVTonGiao.Rows.Count + 1);
-            m_Row["TenTonGiao"] = "";
-            m_TonGiaoCtrl.ThemTonGiao(m_Row);
+            DataRow row = tonGiaoBLL.ThemDongMoi();
+            row["MaTonGiao"] = string.Format("TG{0}", quyDinh.LaySTT(dGVTonGiao.Rows.Count + 1));
+            row["TenTonGiao"] = string.Empty;
+            tonGiaoBLL.ThemTonGiao(row);
             bindingNavigatorTonGiao.BindingSource.MoveLast();
         }
 
-        public Boolean KiemTraTruocKhiLuu(String cellString)
+        public bool KiemTraTruocKhiLuu(string cellString)
         {
             foreach (DataGridViewRow row in dGVTonGiao.Rows)
             {
                 if (row.Cells[cellString].Value != null)
                 {
-                    String str = row.Cells[cellString].Value.ToString();
-                    if (str == "")
+                    string str = row.Cells[cellString].Value.ToString();
+                    if (str == string.Empty)
                     {
                         MessageBoxEx.Show("Giá trị của ô không được rỗng!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
@@ -79,20 +68,16 @@ namespace QLHocSinhTHPT
 
         private void bindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            if (KiemTraTruocKhiLuu("colMaTonGiao")  == true &&
-                KiemTraTruocKhiLuu("colTenTonGiao") == true)
+            if (KiemTraTruocKhiLuu("colMaTonGiao") == true && KiemTraTruocKhiLuu("colTenTonGiao") == true)
             {
                 bindingNavigatorPositionItem.Focus();
-                m_TonGiaoCtrl.LuuTonGiao();
+                tonGiaoBLL.LuuTonGiao();
             }
         }
-        #endregion
 
-        #region DataError event
         private void dGVTonGiao_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
         }
-        #endregion
     }
 }

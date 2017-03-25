@@ -1,44 +1,34 @@
-﻿using System;
-using System.Data;
-using System.Text;
-using System.Drawing;
-using System.Windows.Forms;
-using QLHocSinhTHPT.Controller;
+﻿using DevComponents.DotNetBar;
+using QLHocSinhTHPT.BLL;
 using QLHocSinhTHPT.Component;
-using DevComponents.DotNetBar;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace QLHocSinhTHPT
 {
     public partial class frmNguoiDung : Office2007Form
     {
-        #region Fields
-        NguoiDungCtrl       m_NguoiDungCtrl     = new NguoiDungCtrl();
-        LoaiNguoiDungCtrl   m_LoaiNguoiDungCtrl = new LoaiNguoiDungCtrl();
-        QuyDinh             quyDinh             = new QuyDinh();
-        #endregion
+        private NguoiDungBLL nguoiDungBLL = new NguoiDungBLL();
+        private LoaiNguoiDungBLL loaiNguoiDungBLL = new LoaiNguoiDungBLL();
+        private QuyDinh quyDinh = new QuyDinh();
 
-        #region Constructor
         public frmNguoiDung()
         {
             InitializeComponent();
             DataService.OpenConnection();
         }
-        #endregion
 
-        #region Load
         private void frmNguoiDung_Load(object sender, EventArgs e)
         {
-            m_LoaiNguoiDungCtrl.HienThiDataGridViewComboBoxColumn(colMaLoai);
-            m_NguoiDungCtrl.HienThi(dGVNguoiDung, bindingNavigatorNguoiDung);
+            loaiNguoiDungBLL.HienThiDataGridViewComboBoxColumn(colMaLoai);
+            nguoiDungBLL.HienThi(dGVNguoiDung, bindingNavigatorNguoiDung);
         }
-        #endregion
 
-        #region BindingNavigatorItems
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
             if (dGVNguoiDung.RowCount == 0)
                 bindingNavigatorDeleteItem.Enabled = false;
-
             else if (MessageBoxEx.Show("Bạn có chắc chắn xóa dòng này không?", "DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bindingNavigatorNguoiDung.BindingSource.RemoveCurrent();
@@ -52,27 +42,26 @@ namespace QLHocSinhTHPT
 
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
         {
-            if (dGVNguoiDung.RowCount == 0)
-                bindingNavigatorDeleteItem.Enabled = true;
+            bindingNavigatorDeleteItem.Enabled |= dGVNguoiDung.RowCount == 0;
 
-            DataRow m_Row       = m_NguoiDungCtrl.ThemDongMoi();
-            m_Row["MaND"]       = "ND" + quyDinh.LaySTT(dGVNguoiDung.Rows.Count + 1);
-            m_Row["MaLoai"]     = "";
-            m_Row["TenND"]      = "";
-            m_Row["TenDNhap"]   = "";
-            m_Row["MatKhau"]    = "";
-            m_NguoiDungCtrl.ThemNguoiDung(m_Row);
+            DataRow row = nguoiDungBLL.ThemDongMoi();
+            row["MaND"] = string.Format("ND{0}", quyDinh.LaySTT(dGVNguoiDung.Rows.Count + 1));
+            row["MaLoai"] = string.Empty;
+            row["TenND"] = string.Empty;
+            row["TenDNhap"] = string.Empty;
+            row["MatKhau"] = string.Empty;
+            nguoiDungBLL.ThemNguoiDung(row);
             bindingNavigatorNguoiDung.BindingSource.MoveLast();
         }
 
-        public Boolean KiemTraTruocKhiLuu(String cellString)
+        public bool KiemTraTruocKhiLuu(string cellString)
         {
             foreach (DataGridViewRow row in dGVNguoiDung.Rows)
             {
                 if (row.Cells[cellString].Value != null)
                 {
-                    String str = row.Cells[cellString].Value.ToString();
-                    if (str == "")
+                    string str = row.Cells[cellString].Value.ToString();
+                    if (str == string.Empty)
                     {
                         MessageBoxEx.Show("Thông tin người dùng không hợp lệ!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
@@ -84,31 +73,22 @@ namespace QLHocSinhTHPT
 
         private void bindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            if (KiemTraTruocKhiLuu("colMaND")       == true &&
-                KiemTraTruocKhiLuu("colMaLoai")     == true &&
-                KiemTraTruocKhiLuu("colTenND")      == true &&
-                KiemTraTruocKhiLuu("colTenDNhap")   == true &&
-                KiemTraTruocKhiLuu("colMatKhau")    == true)
+            if (KiemTraTruocKhiLuu("colMaND") == true && KiemTraTruocKhiLuu("colMaLoai") == true && KiemTraTruocKhiLuu("colTenND") == true && KiemTraTruocKhiLuu("colTenDNhap") == true && KiemTraTruocKhiLuu("colMatKhau") == true)
             {
                 bindingNavigatorPositionItem.Focus();
-                m_NguoiDungCtrl.LuuNguoiDung();
+                nguoiDungBLL.LuuNguoiDung();
             }
         }
-        #endregion
 
-        #region DataError event
         private void dGVNguoiDung_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
         }
-        #endregion
 
-        #region Click event
         private void btnThemLoaiND_Click(object sender, EventArgs e)
         {
             ThamSo.ShowFormLoaiNguoiDung();
-            m_LoaiNguoiDungCtrl.HienThiDataGridViewComboBoxColumn(colMaLoai);
+            loaiNguoiDungBLL.HienThiDataGridViewComboBoxColumn(colMaLoai);
         }
-        #endregion
     }
 }

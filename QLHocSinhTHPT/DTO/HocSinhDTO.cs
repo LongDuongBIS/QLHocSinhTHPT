@@ -10,7 +10,7 @@ namespace QLHocSinhTHPT.DTO
         public bool GioiTinh { get; set; }
         public DateTime NgaySinh { get; set; }
         public string NoiSinh { get; set; }
-        public DanTocInfo DanToc { get; set; }
+        public DanTocDTO DanToc { get; set; }
         public TonGiaoDTO TonGiao { get; set; }
         public string HoTenCha { get; set; }
         public NgheNghiepDTO NNghiepCha { get; set; }

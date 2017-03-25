@@ -1,29 +1,23 @@
-﻿using System;
-using System.Text;
+﻿using DevComponents.DotNetBar;
+using System;
 using System.Data;
-using System.Windows.Forms;
 using System.Data.SqlClient;
-using DevComponents.DotNetBar;
+using System.Windows.Forms;
 
 namespace QLHocSinhTHPT.Component
 {
     public partial class frmConnection : Office2007Form
     {
-        #region Constructor
         public frmConnection()
         {
             InitializeComponent();
         }
-        #endregion
 
-        #region Load
         private void frmConnection_Load(object sender, EventArgs e)
         {
             cmbAuthentication.SelectedIndex = 0;
         }
-        #endregion
 
-        #region Click event
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -45,31 +39,32 @@ namespace QLHocSinhTHPT.Component
             if (cmbAuthentication.SelectedIndex == 0)
             {
                 cmbDatabase.Items.Clear();
-                SqlConnection m_Conn = new SqlConnection("Data Source=" + txtServer.Text + ";Initial Catalog=master;Integrated Security=True;");
-                SqlCommand m_Cmd = new SqlCommand("SP_DATABASES", m_Conn);
-                SqlDataReader m_DReader;
-                
-                try
+                using (SqlConnection con = new SqlConnection(string.Format("Data Source={0};Initial Catalog=master;Integrated Security=True;", txtServer.Text)))
                 {
-                    m_Conn.Open();
-                    m_DReader = m_Cmd.ExecuteReader();
-                    while (m_DReader.Read())
+                    using (SqlCommand cmd = new SqlCommand("SP_DATABASES", con))
                     {
-                        cmbDatabase.Items.Add(m_DReader[0].ToString());
-                    }
-                    MessageBoxEx.Show("Kết nối thành công!", "SUCCESSED", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (SqlException sqlEx)
-                {
-                    MessageBoxEx.Show(sqlEx.Message, "FAILED", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-                finally
-                {
-                    if (m_Conn.State == ConnectionState.Open)
-                        m_Conn.Close();
+                        SqlDataReader reader;
 
-                    m_Conn.Dispose();
-                    m_Cmd.Dispose();
+                        try
+                        {
+                            con.Open();
+                            reader = cmd.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                cmbDatabase.Items.Add(reader[0].ToString());
+                            }
+                            MessageBoxEx.Show("Kết nối thành công!", "SUCCESSED", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        catch (SqlException sqlEx)
+                        {
+                            MessageBoxEx.Show(sqlEx.Message, "FAILED", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                        finally
+                        {
+                            if (con.State == ConnectionState.Open)
+                                con.Close();
+                        }
+                    }
                 }
             }
 
@@ -77,37 +72,36 @@ namespace QLHocSinhTHPT.Component
             if (cmbAuthentication.SelectedIndex == 1)
             {
                 cmbDatabase.Items.Clear();
-                SqlConnection m_Conn = new SqlConnection("Data Source=" + txtServer.Text + ";Initial Catalog=master;User Id=" + txtUsername.Text + ";Password=" + txtPassword.Text + ";");
-                SqlCommand m_Cmd = new SqlCommand("SP_DATABASES", m_Conn);
-                SqlDataReader m_DReader;
-                
-                try
+                using (SqlConnection con = new SqlConnection(string.Format("Data Source={0};Initial Catalog=master;User Id={1};Password={2};", txtServer.Text, txtUsername.Text, txtPassword.Text)))
                 {
-                    m_Conn.Open();
-                    m_DReader = m_Cmd.ExecuteReader();
-                    while (m_DReader.Read())
+                    using (SqlCommand cmd = new SqlCommand("SP_DATABASES", con))
                     {
-                        cmbDatabase.Items.Add(m_DReader[0].ToString());
-                    }
-                    MessageBoxEx.Show("Kết nối thành công!", "SUCCESSED", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (SqlException sqlEx)
-                {
-                    MessageBoxEx.Show(sqlEx.Message, "SUCCESSED", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-                finally
-                {
-                    if (m_Conn.State == ConnectionState.Open)
-                        m_Conn.Close();
+                        SqlDataReader reader;
 
-                    m_Conn.Dispose();
-                    m_Cmd.Dispose();
+                        try
+                        {
+                            con.Open();
+                            reader = cmd.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                cmbDatabase.Items.Add(reader[0].ToString());
+                            }
+                            MessageBoxEx.Show("Kết nối thành công!", "SUCCESSED", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        catch (SqlException sqlEx)
+                        {
+                            MessageBoxEx.Show(sqlEx.Message, "SUCCESSED", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                        finally
+                        {
+                            if (con.State == ConnectionState.Open)
+                                con.Close();
+                        }
+                    }
                 }
             }
         }
-        #endregion
 
-        #region SelectedIndexChanged event
         private void cmbAuthentication_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbAuthentication.SelectedIndex == 0)
@@ -121,6 +115,5 @@ namespace QLHocSinhTHPT.Component
                 txtPassword.Enabled = true;
             }
         }
-        #endregion
     }
 }

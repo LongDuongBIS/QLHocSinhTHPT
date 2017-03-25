@@ -1,51 +1,39 @@
-﻿using System;
-using System.Data;
-using System.Text;
-using System.Drawing;
+﻿using DevComponents.DotNetBar;
+using QLHocSinhTHPT.BLL;
+using System;
 using System.Collections;
 using System.Windows.Forms;
-using QLHocSinhTHPT.Controller;
-using QLHocSinhTHPT.Component;
-using QLHocSinhTHPT.DTO;
-using DevComponents.DotNetBar;
 
 namespace QLHocSinhTHPT
 {
     public partial class frmXemDiem : Office2007Form
     {
-        #region Fields
-        NamHocCtrl      m_NamHocCtrl    = new NamHocCtrl();
-        HocKyCtrl       m_HocKyCtrl     = new HocKyCtrl();
-        LopCtrl         m_LopCtrl       = new LopCtrl();
-        HocSinhCtrl     m_HocSinhCtrl   = new HocSinhCtrl();
-        MonHocCtrl      m_MonHocCtrl    = new MonHocCtrl();
-        DiemCtrl        m_DiemCtrl      = new DiemCtrl();
-        #endregion
+        private NamHocBLL namHocBLL = new NamHocBLL();
+        private HocKyBLL hocKyBLL = new HocKyBLL();
+        private LopBLL lopBLL = new LopBLL();
+        private HocSinhBLL hocSinhBLL = new HocSinhBLL();
+        private MonHocBLL monHocBLL = new MonHocBLL();
+        private DiemBLL diemBLL = new DiemBLL();
 
-        #region Constructor
         public frmXemDiem()
         {
             InitializeComponent();
             DataService.OpenConnection();
         }
-        #endregion
 
-        #region Load
         private void frmXemDiem_Load(object sender, EventArgs e)
         {
-            m_NamHocCtrl.HienThiComboBox(cmbNamHoc);
-            m_HocKyCtrl.HienThiComboBox(cmbHocKy);
+            namHocBLL.HienThiComboBox(cmbNamHoc);
+            hocKyBLL.HienThiComboBox(cmbHocKy);
             if (cmbNamHoc.SelectedValue != null)
-                m_LopCtrl.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop);
+                lopBLL.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop);
             if (cmbNamHoc.SelectedValue != null && cmbLop.SelectedValue != null)
             {
-                m_MonHocCtrl.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbMonHoc);
-                m_HocSinhCtrl.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbHocSinh);
+                monHocBLL.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbMonHoc);
+                hocSinhBLL.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbHocSinh);
             }
         }
-        #endregion
 
-        #region Click event
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
             if (MessageBoxEx.Show("Bạn có muốn xóa dòng này không?", "DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -55,7 +43,7 @@ namespace QLHocSinhTHPT
                 {
                     ListViewItem item = (ListViewItem)ie.Current;
                     int stt = Convert.ToInt32(item.SubItems[0].Text);
-                    m_DiemCtrl.XoaDiem(stt);
+                    diemBLL.XoaDiem(stt);
                     lVXemDiem.Items.Remove(item);
                 }
             }
@@ -65,23 +53,16 @@ namespace QLHocSinhTHPT
         {
             this.Close();
         }
-        
+
         private void btnHienThiDanhSach_Click(object sender, EventArgs e)
         {
-            m_DiemCtrl.HienThiDanhSachXemDiem(lVXemDiem,
-                                              cmbHocSinh.SelectedValue.ToString(),
-                                              cmbMonHoc.SelectedValue.ToString(),
-                                              cmbHocKy.SelectedValue.ToString(),
-                                              cmbNamHoc.SelectedValue.ToString(),
-                                              cmbLop.SelectedValue.ToString());
+            diemBLL.HienThiDanhSachXemDiem(lVXemDiem, cmbHocSinh.SelectedValue.ToString(), cmbMonHoc.SelectedValue.ToString(), cmbHocKy.SelectedValue.ToString(), cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString());
         }
-        #endregion
 
-        #region SelectedIndexChanged event
         private void cmbNamHoc_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbNamHoc.SelectedValue != null)
-                m_LopCtrl.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop);
+                lopBLL.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop);
             cmbLop.DataBindings.Clear();
         }
 
@@ -89,13 +70,12 @@ namespace QLHocSinhTHPT
         {
             if (cmbNamHoc.SelectedValue != null && cmbLop.SelectedValue != null)
             {
-                m_MonHocCtrl.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbMonHoc);
-                m_HocSinhCtrl.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbHocSinh);
+                monHocBLL.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbMonHoc);
+                hocSinhBLL.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbHocSinh);
             }
 
             cmbMonHoc.DataBindings.Clear();
             cmbHocSinh.DataBindings.Clear();
         }
-        #endregion
     }
 }

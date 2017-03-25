@@ -1,44 +1,30 @@
-﻿using System;
-using System.Xml;
+﻿using DevComponents.DotNetBar;
+using QLHocSinhTHPT.Component;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using DevComponents.DotNetBar;
-using QLHocSinhTHPT.Component;
+using System.Xml;
 
 namespace QLHocSinhTHPT
 {
-    partial class DataService : DataTable
+    internal class DataService : DataTable
     {
-        #region Fields
-        private static  SqlConnection   m_Connection;
-        public static   String          m_ConnectString = "";
-        private         SqlCommand      m_Command;
-        private         SqlDataAdapter  m_DataAdapter;
-        #endregion
+        private static SqlConnection sqlCon;
+        public static string str = string.Empty;
+        private SqlCommand sqlCMD;
+        private SqlDataAdapter sqlReader;
 
-        #region Constructor
-        public DataService()
-        {
-
-        }
-        #endregion
-
-        #region Hàm lấy lệnh connection
         public static void ConnectionString()
         {
             XmlDocument xmlDoc = XML.XMLReader("Connection.xml");
-            XmlElement  xmlEle = xmlDoc.DocumentElement;
+            XmlElement xmlEle = xmlDoc.DocumentElement;
 
             try
             {
-                if (xmlEle.SelectSingleNode("costatus").InnerText == "true")
-                {
-                    m_ConnectString = "Data Source=" + xmlEle.SelectSingleNode("servname").InnerText + ";Initial Catalog=" + xmlEle.SelectSingleNode("database").InnerText + ";Integrated Security=True;";
-                }
+                if (xmlEle.SelectSingleNode("constatus").InnerText == "true")
+                    str = string.Format("Data Source={0};Initial Catalog={1};Integrated Security=True;", xmlEle.SelectSingleNode("servername").InnerText, xmlEle.SelectSingleNode("database").InnerText);
                 else
-                {
-                    m_ConnectString = "Data Source=" + xmlEle.SelectSingleNode("servname").InnerText + ";Initial Catalog=" + xmlEle.SelectSingleNode("database").InnerText + ";User Id=" + xmlEle.SelectSingleNode("username").InnerText + ";Password=" + xmlEle.SelectSingleNode("password").InnerText + ";";
-                }
+                    str = string.Format("Data Source={0};Initial Catalog={1};User Id={2};Password={3};", xmlEle.SelectSingleNode("servername").InnerText, xmlEle.SelectSingleNode("database").InnerText, xmlEle.SelectSingleNode("username").InnerText, xmlEle.SelectSingleNode("password").InnerText);
 
                 Utilities.DatabaseName = xmlEle.SelectSingleNode("database").InnerText;
             }
@@ -47,182 +33,166 @@ namespace QLHocSinhTHPT
                 MessageBoxEx.Show("Lỗi kết nối đến cơ sở dữ liệu! Xin vui lòng thiết lập lại kết nối...", "ERROR", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
             }
         }
-        #endregion
 
-        #region Load
-        public void Load(SqlCommand m_Sql)
+        public void Load(SqlCommand cmd)
         {
-            m_Command = m_Sql;
+            sqlCMD = cmd;
             try
             {
-                m_Command.Connection = m_Connection;
+                sqlCMD.Connection = sqlCon;
 
-                m_DataAdapter = new SqlDataAdapter();
-                m_DataAdapter.SelectCommand = m_Command;
+                sqlReader = new SqlDataAdapter();
+                sqlReader.SelectCommand = sqlCMD;
 
                 this.Clear();
-                m_DataAdapter.Fill(this);
+                sqlReader.Fill(this);
             }
             catch (Exception e)
             {
-                MessageBoxEx.Show("Không thể thực thi câu lệnh SQL này!\nLỗi: " + e.Message, "ERROR", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                MessageBoxEx.Show(string.Format("Không thể thực thi câu lệnh SQL này!\nLỗi: {0}", e.Message), "ERROR", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
             }
         }
-        #endregion
 
-        #region OpenConnection
         public static bool OpenConnection()
         {
-            if (m_ConnectString == "")
+            if (str == string.Empty)
                 ConnectionString();
             try
             {
-                if (m_Connection == null)
-                    m_Connection = new SqlConnection(m_ConnectString);
-                if (m_Connection.State == ConnectionState.Closed)
-                    m_Connection.Open();
+                if (sqlCon == null)
+                    sqlCon = new SqlConnection(str);
+                if (sqlCon.State == ConnectionState.Closed)
+                    sqlCon.Open();
                 return true;
             }
             catch
             {
-                m_Connection.Close();
+                sqlCon.Close();
                 return false;
             }
         }
-        #endregion
 
-        #region CloseConnection
         public void CloseConnection()
         {
-            m_Connection.Close();
+            sqlCon.Close();
         }
-        #endregion
 
-        #region Update DataTable
-        public int ExecuteNoneQuery()
+        public int ExecuteNonQuery()
         {
             int result = 0;
-            SqlTransaction m_SqlTran = null;
+            SqlTransaction trans = null;
             try
             {
-                m_SqlTran = m_Connection.BeginTransaction();
+                trans = sqlCon.BeginTransaction();
 
-                m_Command.Connection = m_Connection;
-                m_Command.Transaction = m_SqlTran;
+                sqlCMD.Connection = sqlCon;
+                sqlCMD.Transaction = trans;
 
-                m_DataAdapter = new SqlDataAdapter();
-                m_DataAdapter.SelectCommand = m_Command;
+                sqlReader = new SqlDataAdapter();
+                sqlReader.SelectCommand = sqlCMD;
 
-                SqlCommandBuilder builder = new SqlCommandBuilder(m_DataAdapter);
+                SqlCommandBuilder builder = new SqlCommandBuilder(sqlReader);
 
-                result = m_DataAdapter.Update(this);
-                m_SqlTran.Commit();
+                result = sqlReader.Update(this);
+                trans.Commit();
             }
             catch
             {
-                if (m_SqlTran != null)
-                    m_SqlTran.Rollback();
+                if (trans != null)
+                    trans.Rollback();
                 throw;
             }
             return result;
         }
-        #endregion
 
-        #region Thực thi câu lệnh SQL
-        public int ExecuteNoneQuery(SqlCommand m_Sql)
+        public int ExecuteNoneQuery(SqlCommand cmd)
         {
             int result = 0;
-            SqlTransaction m_SqlTran = null;
+            SqlTransaction trans = null;
             try
             {
-                m_SqlTran = m_Connection.BeginTransaction();
+                trans = sqlCon.BeginTransaction();
 
-                m_Sql.Connection = m_Connection;
-                m_Sql.Transaction = m_SqlTran;
-                result = m_Sql.ExecuteNonQuery();
+                cmd.Connection = sqlCon;
+                cmd.Transaction = trans;
+                result = cmd.ExecuteNonQuery();
 
                 this.AcceptChanges();
-                m_SqlTran.Commit();
+                trans.Commit();
             }
             catch
             {
-                if (m_SqlTran != null)
-                    m_SqlTran.Rollback();
+                if (trans != null)
+                    trans.Rollback();
                 throw;
             }
             return result;
         }
-        #endregion
 
-        #region ExecuteScalar
-        public object ExecuteScalar(SqlCommand m_Sql)
+        public object ExecuteScalar(SqlCommand cmd)
         {
             object result = null;
-            SqlTransaction m_SqlTran = null;
+            SqlTransaction trans = null;
             try
             {
-                m_SqlTran = m_Connection.BeginTransaction();
-                m_Sql.Connection = m_Connection;
-                m_Sql.Transaction = m_SqlTran;
-                result = m_Sql.ExecuteScalar();
+                trans = sqlCon.BeginTransaction();
+                cmd.Connection = sqlCon;
+                cmd.Transaction = trans;
+                result = cmd.ExecuteScalar();
 
                 this.AcceptChanges();
-                m_SqlTran.Commit();
+                trans.Commit();
                 if (result == DBNull.Value)
-                {
                     result = null;
-                }
             }
             catch
             {
-                if (m_SqlTran != null)
-                    m_SqlTran.Rollback();
+                if (trans != null)
+                    trans.Rollback();
                 throw;
             }
             return result;
         }
-        #endregion
 
-        #region Đổi mật khẩu, thiết lập lại kết nối
-        public void ChangePassword(String userName, String newPassword)
+        public void ChangePassword(string userName, string newPassword)
         {
-            m_DataAdapter = new SqlDataAdapter();
-            
-            SqlCommand cmd = new SqlCommand("UPDATE NGUOIDUNG SET MatKhau = @matkhau WHERE TenDNhap = @tendangnhap");
-            cmd.Parameters.Add("tendangnhap", SqlDbType.VarChar).Value = userName;
-            cmd.Parameters.Add("matkhau", SqlDbType.VarChar).Value = newPassword;
-
-            if (m_ConnectString == "")
-                ConnectionString();
-
-            if (m_Connection == null || m_Connection.State == ConnectionState.Closed)
+            sqlReader = new SqlDataAdapter();
+            using (SqlCommand cmd = new SqlCommand("UPDATE NGUOIDUNG " + "SET MatKhau = @matkhau " + "WHERE TenDNhap = @tendangnhap"))
             {
-                m_Connection = new SqlConnection(m_ConnectString);
-                m_Connection.Open();
-            }
+                cmd.Parameters.Add("tendangnhap", SqlDbType.VarChar).Value = userName;
+                cmd.Parameters.Add("matkhau", SqlDbType.VarChar).Value = newPassword;
 
-            m_Command = new SqlCommand();
-            m_Command = cmd;
+                if (str == string.Empty)
+                    ConnectionString();
+
+                if (sqlCon == null || sqlCon.State == ConnectionState.Closed)
+                {
+                    sqlCon = new SqlConnection(str);
+                    sqlCon.Open();
+                }
+
+                sqlCMD = new SqlCommand();
+                sqlCMD = cmd;
+            }
 
             try
             {
-                m_Command.Connection = m_Connection;
+                sqlCMD.Connection = sqlCon;
 
-                m_DataAdapter = new SqlDataAdapter();
-                m_DataAdapter.SelectCommand = m_Command;
+                sqlReader = new SqlDataAdapter();
+                sqlReader.SelectCommand = sqlCMD;
 
                 //this.Clear();
 
-                m_DataAdapter.Fill(this);
+                sqlReader.Fill(this);
 
-                SqlCommandBuilder buider = new SqlCommandBuilder(m_DataAdapter);
-                m_DataAdapter.Update(this);
+                SqlCommandBuilder buider = new SqlCommandBuilder(sqlReader);
+                sqlReader.Update(this);
             }
             catch (Exception e)
             {
-                MessageBoxEx.Show("Không thể thực thi câu lệnh SQL này!\nLỗi: " + e.Message, "ERROR", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                MessageBoxEx.Show(string.Format("Không thể thực thi câu lệnh SQL này!\nLỗi: {0}", e.Message), "ERROR", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
             }
         }
-        #endregion
     }
 }

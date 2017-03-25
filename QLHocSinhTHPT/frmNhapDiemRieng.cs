@@ -1,54 +1,44 @@
-﻿using System;
-using System.Data;
-using System.Text;
-using System.Drawing;
-using System.Collections;
-using System.Windows.Forms;
-using QLHocSinhTHPT.Controller;
+﻿using DevComponents.DotNetBar;
+using QLHocSinhTHPT.BLL;
 using QLHocSinhTHPT.Component;
 using QLHocSinhTHPT.DTO;
-using DevComponents.DotNetBar;
+using System;
+using System.Collections;
+using System.Windows.Forms;
 
 namespace QLHocSinhTHPT
 {
     public partial class frmNhapDiemRieng : Office2007Form
     {
-        #region Fields
-        NamHocCtrl      m_NamHocCtrl    = new NamHocCtrl();
-        HocKyCtrl       m_HocKyCtrl     = new HocKyCtrl();
-        LopCtrl         m_LopCtrl       = new LopCtrl();
-        HocSinhCtrl     m_HocSinhCtrl   = new HocSinhCtrl();
-        MonHocCtrl      m_MonHocCtrl    = new MonHocCtrl();
-        LoaiDiemCtrl    m_LoaiDiemCtrl  = new LoaiDiemCtrl();
-        DiemCtrl        m_DiemCtrl      = new DiemCtrl();
-        QuyDinh         quyDinh         = new QuyDinh();
-        #endregion
+        private NamHocBLL namHocBLL = new NamHocBLL();
+        private HocKyBLL hocKyBLL = new HocKyBLL();
+        private LopBLL lopBLL = new LopBLL();
+        private HocSinhBLL hocSinhBLL = new HocSinhBLL();
+        private MonHocBLL monHocBLL = new MonHocBLL();
+        private LoaiDiemBLL loaiDiemBLL = new LoaiDiemBLL();
+        private DiemBLL diemBLL = new DiemBLL();
+        private QuyDinh quyDinh = new QuyDinh();
 
-        #region Constructor
         public frmNhapDiemRieng()
         {
             InitializeComponent();
             DataService.OpenConnection();
         }
-        #endregion
 
-        #region Load
         private void frmNhapDiemRieng_Load(object sender, EventArgs e)
         {
-            m_NamHocCtrl.HienThiComboBox(cmbNamHoc);
-            m_HocKyCtrl.HienThiComboBox(cmbHocKy);
-            m_LoaiDiemCtrl.HienThiComboBox(cmbLoaiDiem);
+            namHocBLL.HienThiComboBox(cmbNamHoc);
+            hocKyBLL.HienThiComboBox(cmbHocKy);
+            loaiDiemBLL.HienThiComboBox(cmbLoaiDiem);
             if (cmbNamHoc.SelectedValue != null)
-                m_LopCtrl.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop);
+                lopBLL.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop);
             if (cmbNamHoc.SelectedValue != null && cmbLop.SelectedValue != null)
             {
-                m_MonHocCtrl.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbMonHoc);
-                m_HocSinhCtrl.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbHocSinh);
+                monHocBLL.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbMonHoc);
+                hocSinhBLL.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbHocSinh);
             }
         }
-        #endregion
 
-        #region BindingNavigatorItems
         private void btnXoa_Click(object sender, EventArgs e)
         {
             if (MessageBoxEx.Show("Bạn có muốn xóa dòng này không?", "DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -76,7 +66,7 @@ namespace QLHocSinhTHPT
                 DiemDTO diem = new DiemDTO();
                 diem = (DiemDTO)item.Tag;
 
-                m_DiemCtrl.LuuDiem(diem.HocSinh.MaHocSinh, diem.MonHoc.MaMonHoc, diem.HocKy.MaHocKy, diem.NamHoc.MaNamHoc, diem.Lop.MaLop, diem.LoaiDiem.MaLoai, diem.Diem);
+                diemBLL.LuuDiem(diem.HocSinh.MaHocSinh, diem.MonHoc.MaMonHoc, diem.HocKy.MaHocKy, diem.NamHoc.MaNamHoc, diem.Lop.MaLop, diem.LoaiDiem.MaLoai, diem.Diem);
             }
             lVDiem.Items.Clear();
 
@@ -87,12 +77,10 @@ namespace QLHocSinhTHPT
         {
             ThamSo.ShowFormXemDiem();
         }
-        #endregion
 
-        #region Click event
         private void btnLuuVaoDS_Click(object sender, EventArgs e)
         {
-            if (quyDinh.KiemTraDiem(txtDiem.Text) == false || txtDiem.Text == "")
+            if (quyDinh.KiemTraDiem(txtDiem.Text) == false || txtDiem.Text == string.Empty)
             {
                 MessageBoxEx.Show("Giá trị điểm không hợp lệ!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -108,26 +96,24 @@ namespace QLHocSinhTHPT
                 item.SubItems.Add(txtDiem.Text);
 
                 DiemDTO diem = new DiemDTO();
-                diem.HocSinh.MaHocSinh  = cmbHocSinh.SelectedValue.ToString();
-                diem.MonHoc.MaMonHoc    = cmbMonHoc.SelectedValue.ToString();
-                diem.HocKy.MaHocKy      = cmbHocKy.SelectedValue.ToString();
-                diem.NamHoc.MaNamHoc    = cmbNamHoc.SelectedValue.ToString();
-                diem.Lop.MaLop          = cmbLop.SelectedValue.ToString();
-                diem.LoaiDiem.MaLoai    = cmbLoaiDiem.SelectedValue.ToString();
-                diem.Diem               = Convert.ToSingle(txtDiem.Text);
+                diem.HocSinh.MaHocSinh = cmbHocSinh.SelectedValue.ToString();
+                diem.MonHoc.MaMonHoc = cmbMonHoc.SelectedValue.ToString();
+                diem.HocKy.MaHocKy = cmbHocKy.SelectedValue.ToString();
+                diem.NamHoc.MaNamHoc = cmbNamHoc.SelectedValue.ToString();
+                diem.Lop.MaLop = cmbLop.SelectedValue.ToString();
+                diem.LoaiDiem.MaLoai = cmbLoaiDiem.SelectedValue.ToString();
+                diem.Diem = Convert.ToSingle(txtDiem.Text);
 
                 item.Tag = diem;
 
                 lVDiem.Items.Add(item);
             }
         }
-        #endregion
 
-        #region SelectedIndexChanged event
         private void cmbNamHoc_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbNamHoc.SelectedValue != null)
-                m_LopCtrl.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop);
+                lopBLL.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop);
             cmbLop.DataBindings.Clear();
         }
 
@@ -135,21 +121,19 @@ namespace QLHocSinhTHPT
         {
             if (cmbNamHoc.SelectedValue != null && cmbLop.SelectedValue != null)
             {
-                m_MonHocCtrl.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbMonHoc);
-                m_HocSinhCtrl.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbHocSinh);
+                monHocBLL.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbMonHoc);
+                hocSinhBLL.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbHocSinh);
             }
 
             cmbMonHoc.DataBindings.Clear();
             cmbHocSinh.DataBindings.Clear();
         }
-        #endregion
 
-        #region Key event
         private void txtDiem_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (quyDinh.KiemTraDiem(txtDiem.Text) == false || txtDiem.Text == "")
+                if (quyDinh.KiemTraDiem(txtDiem.Text) == false || txtDiem.Text == string.Empty)
                 {
                     MessageBoxEx.Show("Giá trị điểm không hợp lệ!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -165,13 +149,13 @@ namespace QLHocSinhTHPT
                     item.SubItems.Add(txtDiem.Text);
 
                     DiemDTO diem = new DiemDTO();
-                    diem.HocSinh.MaHocSinh  = cmbHocSinh.SelectedValue.ToString();
-                    diem.MonHoc.MaMonHoc    = cmbMonHoc.SelectedValue.ToString();
-                    diem.HocKy.MaHocKy      = cmbHocKy.SelectedValue.ToString();
-                    diem.NamHoc.MaNamHoc    = cmbNamHoc.SelectedValue.ToString();
-                    diem.Lop.MaLop          = cmbLop.SelectedValue.ToString();
-                    diem.LoaiDiem.MaLoai    = cmbLoaiDiem.SelectedValue.ToString();
-                    diem.Diem               = Convert.ToSingle(txtDiem.Text);
+                    diem.HocSinh.MaHocSinh = cmbHocSinh.SelectedValue.ToString();
+                    diem.MonHoc.MaMonHoc = cmbMonHoc.SelectedValue.ToString();
+                    diem.HocKy.MaHocKy = cmbHocKy.SelectedValue.ToString();
+                    diem.NamHoc.MaNamHoc = cmbNamHoc.SelectedValue.ToString();
+                    diem.Lop.MaLop = cmbLop.SelectedValue.ToString();
+                    diem.LoaiDiem.MaLoai = cmbLoaiDiem.SelectedValue.ToString();
+                    diem.Diem = Convert.ToSingle(txtDiem.Text);
 
                     item.Tag = diem;
 
@@ -182,11 +166,8 @@ namespace QLHocSinhTHPT
 
         private void txtDiem_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
-            {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
                 e.Handled = true;
-            }
         }
-        #endregion
     }
 }

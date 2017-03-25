@@ -1,55 +1,45 @@
-﻿using System;
-using System.Data;
-using System.Text;
-using System.Drawing;
-using System.Windows.Forms;
-using QLHocSinhTHPT.Controller;
+﻿using DevComponents.DotNetBar;
+using QLHocSinhTHPT.BLL;
 using QLHocSinhTHPT.Component;
-using DevComponents.DotNetBar;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace QLHocSinhTHPT
 {
     public partial class frmPhanCong : Office2007Form
     {
-        #region Fields
-        PhanCongCtrl    m_PhanCongCtrl  = new PhanCongCtrl();
-        NamHocCtrl      m_NamHocCtrl    = new NamHocCtrl();
-        LopCtrl         m_LopCtrl       = new LopCtrl();
-        MonHocCtrl      m_MonHocCtrl    = new MonHocCtrl();
-        GiaoVienCtrl    m_GiaoVienCtrl  = new GiaoVienCtrl();
-        #endregion
+        private PhanCongBLL phanCongBLL = new PhanCongBLL();
+        private NamHocBLL namHocBLL = new NamHocBLL();
+        private LopBLL lopBLL = new LopBLL();
+        private MonHocBLL monHocBLL = new MonHocBLL();
+        private GiaoVienBLL giaoVienBLL = new GiaoVienBLL();
 
-        #region Constructor
         public frmPhanCong()
         {
             InitializeComponent();
             DataService.OpenConnection();
         }
-        #endregion
 
-        #region Load
         private void frmPhanCong_Load(object sender, EventArgs e)
         {
-            m_NamHocCtrl.HienThiComboBox(cmbNamHoc);
-            m_LopCtrl.HienThiComboBox(cmbLop);
-            m_MonHocCtrl.HienThiComboBox(cmbMonHoc);
-            m_GiaoVienCtrl.HienThiComboBox(cmbGiaoVien);
+            namHocBLL.HienThiComboBox(cmbNamHoc);
+            lopBLL.HienThiComboBox(cmbLop);
+            monHocBLL.HienThiComboBox(cmbMonHoc);
+            giaoVienBLL.HienThiComboBox(cmbGiaoVien);
 
-            m_NamHocCtrl.HienThiDataGridViewComboBoxColumn(colMaNamHoc);
-            m_LopCtrl.HienThiDataGridViewComboBoxColumn(colMaLop);
-            m_MonHocCtrl.HienThiDataGridViewComboBoxColumn(colMaMonHoc);
-            m_GiaoVienCtrl.HienThiDataGridViewComboBoxColumn(colMaGiaoVien);
+            namHocBLL.HienThiDataGridViewComboBoxColumn(colMaNamHoc);
+            lopBLL.HienThiDataGridViewComboBoxColumn(colMaLop);
+            monHocBLL.HienThiDataGridViewComboBoxColumn(colMaMonHoc);
+            giaoVienBLL.HienThiDataGridViewComboBoxColumn(colMaGiaoVien);
 
-            m_PhanCongCtrl.HienThi(dGVPhanCong, bindingNavigatorPhanCong, txtSTT, cmbNamHoc, cmbLop, cmbMonHoc, cmbGiaoVien);
+            phanCongBLL.HienThi(dGVPhanCong, bindingNavigatorPhanCong, txtSTT, cmbNamHoc, cmbLop, cmbMonHoc, cmbGiaoVien);
         }
-        #endregion
 
-        #region BindingNavigatorItems
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
             if (dGVPhanCong.RowCount == 0)
                 bindingNavigatorDeleteItem.Enabled = false;
-
             else if (MessageBoxEx.Show("Bạn có chắc chắn xóa dòng này không?", "DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bindingNavigatorPhanCong.BindingSource.RemoveCurrent();
@@ -63,32 +53,31 @@ namespace QLHocSinhTHPT
 
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
         {
-            if (dGVPhanCong.RowCount == 0)
-                bindingNavigatorDeleteItem.Enabled = true;
+            bindingNavigatorDeleteItem.Enabled |= dGVPhanCong.RowCount == 0;
 
-            DataRow m_Row       = m_PhanCongCtrl.ThemDongMoi();
-            m_Row["STT"]        = dGVPhanCong.RowCount + 1;
-            m_Row["MaNamHoc"]   = "";
-            m_Row["MaLop"]      = "";
-            m_Row["MaMonHoc"]   = "";
-            m_Row["MaGiaoVien"] = "";
-            m_PhanCongCtrl.ThemPhanCong(m_Row);
+            DataRow row = phanCongBLL.ThemDongMoi();
+            row["STT"] = dGVPhanCong.RowCount + 1;
+            row["MaNamHoc"] = string.Empty;
+            row["MaLop"] = string.Empty;
+            row["MaMonHoc"] = string.Empty;
+            row["MaGiaoVien"] = string.Empty;
+            phanCongBLL.ThemPhanCong(row);
             bindingNavigatorPhanCong.BindingSource.MoveLast();
         }
 
         private void bindingNavigatorRefreshItem_Click(object sender, EventArgs e)
         {
-            m_PhanCongCtrl.HienThi(dGVPhanCong, bindingNavigatorPhanCong, txtSTT, cmbNamHoc, cmbLop, cmbMonHoc, cmbGiaoVien);
+            phanCongBLL.HienThi(dGVPhanCong, bindingNavigatorPhanCong, txtSTT, cmbNamHoc, cmbLop, cmbMonHoc, cmbGiaoVien);
         }
 
-        public Boolean KiemTraTruocKhiLuu(String cellString)
+        public bool KiemTraTruocKhiLuu(string cellString)
         {
             foreach (DataGridViewRow row in dGVPhanCong.Rows)
             {
                 if (row.Cells[cellString].Value != null)
                 {
-                    String str = row.Cells[cellString].Value.ToString();
-                    if (str == "")
+                    string str = row.Cells[cellString].Value.ToString();
+                    if (str == string.Empty)
                     {
                         MessageBoxEx.Show("Giá trị của ô không được rỗng!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
@@ -100,105 +89,82 @@ namespace QLHocSinhTHPT
 
         private void bindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            if (KiemTraTruocKhiLuu("colMaNamHoc")   == true &&
-                KiemTraTruocKhiLuu("colMaLop")      == true &&
-                KiemTraTruocKhiLuu("colMaMonHoc")   == true &&
-                KiemTraTruocKhiLuu("colMaGiaoVien") == true)
+            if (KiemTraTruocKhiLuu("colMaNamHoc") == true && KiemTraTruocKhiLuu("colMaLop") == true && KiemTraTruocKhiLuu("colMaMonHoc") == true && KiemTraTruocKhiLuu("colMaGiaoVien") == true)
             {
                 bindingNavigatorPositionItem.Focus();
-                m_PhanCongCtrl.LuuPhanCong();
+                phanCongBLL.LuuPhanCong();
             }
         }
-        #endregion
 
-        #region DataError Event
         private void dGVPhanCong_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
         }
-        #endregion
 
-        #region Tìm kiếm giáo viên trong bảng phân công
         private void txtTimKiem_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            {
                 TimKiemPhanCong();
-            }
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            if (txtTimKiem.Text == "")
+            if (txtTimKiem.Text == string.Empty)
                 MessageBoxEx.Show("Chưa nhập nội dung cần tìm kiếm vào khung!", "LỖI TÌM KIẾM", MessageBoxButtons.OK, MessageBoxIcon.Error);
             TimKiemPhanCong();
         }
 
-        void TimKiemPhanCong()
+        private void TimKiemPhanCong()
         {
             if (chkTimTheoTenLop.Checked == true)
-            {
-                m_PhanCongCtrl.TimTheoTenLop(txtTimKiem.Text);
-            }
+                phanCongBLL.TimTheoTenLop(txtTimKiem.Text);
             else
-            {
-                m_PhanCongCtrl.TimTheoTenGV(txtTimKiem.Text);
-            }
+                phanCongBLL.TimTheoTenGV(txtTimKiem.Text);
         }
-        #endregion
 
-        #region Click event
         private void btnThemNamHoc_Click(object sender, EventArgs e)
         {
             ThamSo.ShowFormNamHoc();
-            m_NamHocCtrl.HienThiDataGridViewComboBoxColumn(colMaNamHoc);
+            namHocBLL.HienThiDataGridViewComboBoxColumn(colMaNamHoc);
         }
 
         private void btnThemLop_Click(object sender, EventArgs e)
         {
             ThamSo.ShowFormLopHoc();
-            m_LopCtrl.HienThiDataGridViewComboBoxColumn(colMaLop);
+            lopBLL.HienThiDataGridViewComboBoxColumn(colMaLop);
         }
 
         private void btnThemMonHoc_Click(object sender, EventArgs e)
         {
             ThamSo.ShowFormMonHoc();
-            m_MonHocCtrl.HienThiDataGridViewComboBoxColumn(colMaMonHoc);
+            monHocBLL.HienThiDataGridViewComboBoxColumn(colMaMonHoc);
         }
 
         private void btnThemGiaoVien_Click(object sender, EventArgs e)
         {
             ThamSo.ShowFormGiaoVien();
-            m_GiaoVienCtrl.HienThiDataGridViewComboBoxColumn(colMaGiaoVien);
+            giaoVienBLL.HienThiDataGridViewComboBoxColumn(colMaGiaoVien);
         }
 
         private void btnLuuVaoDS_Click(object sender, EventArgs e)
         {
-            if (cmbNamHoc.SelectedValue     != null &&
-                cmbLop.SelectedValue        != null &&
-                cmbMonHoc.SelectedValue     != null &&
-                cmbGiaoVien.SelectedValue   != null)
+            if (cmbNamHoc.SelectedValue != null && cmbLop.SelectedValue != null && cmbMonHoc.SelectedValue != null && cmbGiaoVien.SelectedValue != null)
             {
-                m_PhanCongCtrl.LuuPhanCong(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbMonHoc.SelectedValue.ToString(), cmbGiaoVien.SelectedValue.ToString());
+                phanCongBLL.LuuPhanCong(cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), cmbMonHoc.SelectedValue.ToString(), cmbGiaoVien.SelectedValue.ToString());
 
-                //Load 2 lan cho chac an
-                m_PhanCongCtrl.HienThi(dGVPhanCong, bindingNavigatorPhanCong, txtSTT, cmbNamHoc, cmbLop, cmbMonHoc, cmbGiaoVien);
-                m_PhanCongCtrl.HienThi(dGVPhanCong, bindingNavigatorPhanCong, txtSTT, cmbNamHoc, cmbLop, cmbMonHoc, cmbGiaoVien);
+                phanCongBLL.HienThi(dGVPhanCong, bindingNavigatorPhanCong, txtSTT, cmbNamHoc, cmbLop, cmbMonHoc, cmbGiaoVien);
 
                 bindingNavigatorPhanCong.BindingSource.MoveLast();
             }
             else
                 MessageBoxEx.Show("Giá trị của các ô không được rỗng!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        #endregion
 
-        #region SelectedIndexChanged event
         private void cmbNamHoc_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbNamHoc.SelectedValue != null)
-                m_LopCtrl.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop);
+                lopBLL.HienThiComboBox(cmbNamHoc.SelectedValue.ToString(), cmbLop);
             cmbLop.DataBindings.Clear();
         }
-        #endregion
     }
 }

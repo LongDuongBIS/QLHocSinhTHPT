@@ -156,33 +156,33 @@
       <DependentUpon>frmDangNhap.cs</DependentUpon>
     </Compile>
     <Compile Include="Component\Utilities.cs" />
-    <Compile Include="Controller\KQCaNamTongHopCtrl.cs" />
-    <Compile Include="Controller\KQHocKyTongHopCtrl.cs" />
-    <Compile Include="Controller\KQHocKyMonHocCtrl.cs" />
-    <Compile Include="Controller\KQCaNamMonHocCtrl.cs" />
-    <Compile Include="Controller\DiemCtrl.cs" />
-    <Compile Include="Controller\QuyDinhCtrl.cs" />
-    <Compile Include="Controller\PhanCongCtrl.cs" />
-    <Compile Include="Controller\LopCtrl.cs" />
-    <Compile Include="Controller\HocSinhCtrl.cs" />
-    <Compile Include="Controller\GiaoVienCtrl.cs" />
-    <Compile Include="Controller\NgheNghiepCtrl.cs" />
-    <Compile Include="Controller\NguoiDungCtrl.cs" />
-    <Compile Include="Controller\LoaiNguoiDungCtrl.cs" />
-    <Compile Include="Controller\LoaiDiemCtrl.cs" />
-    <Compile Include="Controller\KetQuaCtrl.cs" />
-    <Compile Include="Controller\HanhKiemCtrl.cs" />
-    <Compile Include="Controller\HocLucCtrl.cs" />
-    <Compile Include="Controller\KhoiLopCtrl.cs" />
-    <Compile Include="Controller\HocKyCtrl.cs" />
-    <Compile Include="Controller\NamHocCtrl.cs" />
-    <Compile Include="Controller\MonHocCtrl.cs" />
-    <Compile Include="Controller\TonGiaoCtrl.cs" />
-    <Compile Include="Controller\DanTocCtrl.cs" />
-    <Compile Include="DataLayer\KQCaNamTongHopData.cs" />
-    <Compile Include="DataLayer\KQHocKyTongHopData.cs" />
-    <Compile Include="DataLayer\KQCaNamMonHocData.cs" />
-    <Compile Include="DataLayer\KQHocKyMonHocData.cs" />
+    <Compile Include="BLL\KQCaNamTongHopBLL.cs" />
+    <Compile Include="BLL\KQHocKyTongHopBLL.cs" />
+    <Compile Include="BLL\KQHocKyMonHocBLL.cs" />
+    <Compile Include="BLL\KQCaNamMonHocBLL.cs" />
+    <Compile Include="BLL\DiemBLL.cs" />
+    <Compile Include="BLL\QuyDinhBLL.cs" />
+    <Compile Include="BLL\PhanCongBLL.cs" />
+    <Compile Include="BLL\LopBLL.cs" />
+    <Compile Include="BLL\HocSinhBLL.cs" />
+    <Compile Include="BLL\GiaoVienBLL.cs" />
+    <Compile Include="BLL\NgheNghiepBLL.cs" />
+    <Compile Include="BLL\NguoiDungBLL.cs" />
+    <Compile Include="BLL\LoaiNguoiDungBLL.cs" />
+    <Compile Include="BLL\LoaiDiemBLL.cs" />
+    <Compile Include="BLL\KetQuaBLL.cs" />
+    <Compile Include="BLL\HanhKiemBLL.cs" />
+    <Compile Include="BLL\HocLucBLL.cs" />
+    <Compile Include="BLL\KhoiLopBLL.cs" />
+    <Compile Include="BLL\HocKyBLL.cs" />
+    <Compile Include="BLL\NamHocBLL.cs" />
+    <Compile Include="BLL\MonHocBLL.cs" />
+    <Compile Include="BLL\TonGiaoBLL.cs" />
+    <Compile Include="BLL\DanTocBLL.cs" />
+    <Compile Include="DAL\KQCaNamTongHopDAL.cs" />
+    <Compile Include="DAL\KQHocKyTongHopDAL.cs" />
+    <Compile Include="DAL\KQCaNamMonHocDAL.cs" />
+    <Compile Include="DAL\KQHocKyMonHocDAL.cs" />
     <Compile Include="frmXemDiem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,8 +201,8 @@
     <Compile Include="frmNhapDiemChung.designer.cs">
       <DependentUpon>frmNhapDiemChung.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLayer\DiemData.cs" />
-    <Compile Include="DataLayer\QuyDinhData.cs" />
+    <Compile Include="DAL\DiemDAL.cs" />
+    <Compile Include="DAL\QuyDinhDAL.cs" />
     <Compile Include="frmTimKiemHS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,43 +221,43 @@
     <Compile Include="frmPhanLop.designer.cs">
       <DependentUpon>frmPhanLop.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLayer\PhanCongData.cs" />
+    <Compile Include="DAL\PhanCongDAL.cs" />
     <Compile Include="frmPhanCong.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPhanCong.designer.cs">
       <DependentUpon>frmPhanCong.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLayer\LopData.cs" />
+    <Compile Include="DAL\LopDAL.cs" />
     <Compile Include="frmLop.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmLop.designer.cs">
       <DependentUpon>frmLop.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLayer\HocSinhData.cs" />
+    <Compile Include="DAL\HocSinhDAL.cs" />
     <Compile Include="frmHocSinh.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmHocSinh.designer.cs">
       <DependentUpon>frmHocSinh.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLayer\GiaoVienData.cs" />
+    <Compile Include="DAL\GiaoVienDAL.cs" />
     <Compile Include="frmGiaoVien.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmGiaoVien.designer.cs">
       <DependentUpon>frmGiaoVien.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLayer\NgheNghiepData.cs" />
+    <Compile Include="DAL\NgheNghiepDAL.cs" />
     <Compile Include="frmNgheNghiep.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmNgheNghiep.designer.cs">
       <DependentUpon>frmNgheNghiep.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLayer\NguoiDungData.cs" />
-    <Compile Include="DataLayer\LoaiNguoiDungData.cs" />
+    <Compile Include="DAL\NguoiDungDAL.cs" />
+    <Compile Include="DAL\LoaiNguoiDungDAL.cs" />
     <Compile Include="frmLoaiNguoiDung.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -270,70 +270,70 @@
     <Compile Include="frmNguoiDung.designer.cs">
       <DependentUpon>frmNguoiDung.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLayer\LoaiDiemData.cs" />
+    <Compile Include="DAL\LoaiDiemDAL.cs" />
     <Compile Include="frmLoaiDiem.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmLoaiDiem.designer.cs">
       <DependentUpon>frmLoaiDiem.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLayer\KetQuaData.cs" />
+    <Compile Include="DAL\KetQuaDAL.cs" />
     <Compile Include="frmKetQua.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmKetQua.designer.cs">
       <DependentUpon>frmKetQua.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLayer\HanhKiemData.cs" />
+    <Compile Include="DAL\HanhKiemDAL.cs" />
     <Compile Include="frmHanhKiem.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmHanhKiem.designer.cs">
       <DependentUpon>frmHanhKiem.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLayer\HocLucData.cs" />
+    <Compile Include="DAL\HocLucDAL.cs" />
     <Compile Include="frmHocLuc.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmHocLuc.designer.cs">
       <DependentUpon>frmHocLuc.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLayer\KhoiLopData.cs" />
+    <Compile Include="DAL\KhoiLopDAL.cs" />
     <Compile Include="frmKhoiLop.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmKhoiLop.designer.cs">
       <DependentUpon>frmKhoiLop.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLayer\HocKyData.cs" />
+    <Compile Include="DAL\HocKyDAL.cs" />
     <Compile Include="frmHocKy.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmHocKy.designer.cs">
       <DependentUpon>frmHocKy.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLayer\NamHocData.cs" />
+    <Compile Include="DAL\NamHocDAL.cs" />
     <Compile Include="frmNamHoc.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmNamHoc.designer.cs">
       <DependentUpon>frmNamHoc.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLayer\MonHocData.cs" />
+    <Compile Include="DAL\MonHocDAL.cs" />
     <Compile Include="frmMonHoc.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMonHoc.designer.cs">
       <DependentUpon>frmMonHoc.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLayer\TonGiaoData.cs" />
+    <Compile Include="DAL\TonGiaoDAL.cs" />
     <Compile Include="frmTonGiao.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmTonGiao.designer.cs">
       <DependentUpon>frmTonGiao.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataLayer\DanTocData.cs" />
+    <Compile Include="DAL\DanTocDAL.cs" />
     <Compile Include="frmDanToc.cs">
       <SubType>Form</SubType>
     </Compile>
