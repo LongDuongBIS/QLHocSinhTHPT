@@ -73,9 +73,9 @@ namespace QLHocSinhTHPT.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap background {
+        internal static System.Drawing.Bitmap background1 {
             get {
-                object obj = ResourceManager.GetObject("background", resourceCulture);
+                object obj = ResourceManager.GetObject("background1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -563,9 +563,9 @@ namespace QLHocSinhTHPT.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap splash {
+        internal static System.Drawing.Bitmap splashPic {
             get {
-                object obj = ResourceManager.GetObject("splash", resourceCulture);
+                object obj = ResourceManager.GetObject("splashPic", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

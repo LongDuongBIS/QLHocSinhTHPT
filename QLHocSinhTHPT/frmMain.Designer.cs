@@ -1311,7 +1311,7 @@
             // mdiClient
             // 
             this.mdiClient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.mdiClient.BackgroundImage = global::QLHocSinhTHPT.Properties.Resources.background;
+            this.mdiClient.BackgroundImage = global::QLHocSinhTHPT.Properties.Resources.background1;
             this.mdiClient.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.mdiClient.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mdiClient.Location = new System.Drawing.Point(5, 176);
@@ -1414,7 +1414,7 @@
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
-            this.BackgroundImage = global::QLHocSinhTHPT.Properties.Resources.background;
+            this.BackgroundImage = global::QLHocSinhTHPT.Properties.Resources.background1;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 558);
             this.Controls.Add(this.ctxMenuMain);

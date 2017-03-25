@@ -309,30 +309,30 @@ namespace QLHocSinhTHPT
             ThamSo.ShowFormTimKiemGV();
         }
 
-        private frmQuyDinh m_FrmQD = new frmQuyDinh();
+        private frmQuyDinh frmQuyDinh = new frmQuyDinh();
 
         private void btnDoTuoi_Click(object sender, EventArgs e)
         {
             ThamSo.ShowFormQuyDinh();
-            m_FrmQD.tabControlPanelDoTuoi.Select();
+            frmQuyDinh.tabControlPanelDoTuoi.Select();
         }
 
         private void btnSiSo_Click(object sender, EventArgs e)
         {
             ThamSo.ShowFormQuyDinh();
-            m_FrmQD.tabControlPanelSiSo.Select();
+            frmQuyDinh.tabControlPanelSiSo.Select();
         }
 
         private void btnThangDiem_Click(object sender, EventArgs e)
         {
             ThamSo.ShowFormQuyDinh();
-            m_FrmQD.tabControlPanelThangDiem.Select();
+            frmQuyDinh.tabControlPanelThangDiem.Select();
         }
 
         private void btnTruong_Click(object sender, EventArgs e)
         {
             ThamSo.ShowFormQuyDinh();
-            m_FrmQD.tabControlPanelTruong.Select();
+            frmQuyDinh.tabControlPanelTruong.Select();
         }
 
         private void btnHuongDan_Click(object sender, EventArgs e)

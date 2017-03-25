@@ -46,6 +46,7 @@
             // 
             // gPanelDangNhap
             // 
+            this.gPanelDangNhap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gPanelDangNhap.CanvasColor = System.Drawing.SystemColors.Control;
             this.gPanelDangNhap.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.gPanelDangNhap.Controls.Add(this.lblPassError);
@@ -57,6 +58,7 @@
             this.gPanelDangNhap.Controls.Add(this.lblUsername);
             this.gPanelDangNhap.Controls.Add(this.txtPassword);
             this.gPanelDangNhap.Controls.Add(this.txtUsername);
+            this.gPanelDangNhap.DisabledBackColor = System.Drawing.Color.Empty;
             this.gPanelDangNhap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gPanelDangNhap.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gPanelDangNhap.Location = new System.Drawing.Point(0, 40);
@@ -82,6 +84,14 @@
             this.gPanelDangNhap.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
             this.gPanelDangNhap.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.gPanelDangNhap.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.gPanelDangNhap.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.gPanelDangNhap.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.gPanelDangNhap.TabIndex = 0;
             this.gPanelDangNhap.Text = "Thông tin đăng nhập";
             // 
@@ -113,6 +123,7 @@
             // 
             // 
             // 
+            this.rImageDangNhap.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.rImageDangNhap.BackgroundStyle.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
             this.rImageDangNhap.Image = global::QLHocSinhTHPT.Properties.Resources.loginimage;
             this.rImageDangNhap.Location = new System.Drawing.Point(5, 15);
@@ -148,6 +159,10 @@
             // lblPassword
             // 
             this.lblPassword.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.lblPassword.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblPassword.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPassword.Location = new System.Drawing.Point(61, 55);
             this.lblPassword.Name = "lblPassword";
@@ -159,6 +174,10 @@
             // lblUsername
             // 
             this.lblUsername.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.lblUsername.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblUsername.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUsername.Location = new System.Drawing.Point(61, 15);
             this.lblUsername.Name = "lblUsername";
@@ -169,10 +188,14 @@
             // 
             // txtPassword
             // 
+            this.txtPassword.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.txtPassword.Border.Class = "TextBoxBorder";
+            this.txtPassword.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtPassword.DisabledBackColor = System.Drawing.Color.White;
+            this.txtPassword.ForeColor = System.Drawing.Color.Black;
             this.txtPassword.Location = new System.Drawing.Point(169, 55);
             this.txtPassword.MaxLength = 30;
             this.txtPassword.Name = "txtPassword";
@@ -190,6 +213,9 @@
             // 
             // 
             this.txtUsername.Border.Class = "TextBoxBorder";
+            this.txtUsername.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtUsername.DisabledBackColor = System.Drawing.Color.White;
+            this.txtUsername.ForeColor = System.Drawing.Color.Black;
             this.txtUsername.Location = new System.Drawing.Point(169, 15);
             this.txtUsername.MaxLength = 30;
             this.txtUsername.Name = "txtUsername";
@@ -208,14 +234,18 @@
             // 
             // lblTitle
             // 
+            // 
+            // 
+            // 
+            this.lblTitle.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTitle.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.SystemColors.Desktop;
             this.lblTitle.Location = new System.Drawing.Point(0, 0);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(344, 40);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "QUẢN LÝ ĐIỂM HỌC SINH THPT";
+            this.lblTitle.Text = "QUẢN LÝ ĐIỂM HỌC SINH THPT CÁT TIÊN";
             this.lblTitle.TextAlignment = System.Drawing.StringAlignment.Center;
             // 
             // frmDangNhap
@@ -225,6 +255,7 @@
             this.ClientSize = new System.Drawing.Size(344, 188);
             this.Controls.Add(this.gPanelDangNhap);
             this.Controls.Add(this.panelTop);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

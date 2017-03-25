@@ -58,13 +58,17 @@
             // 
             // lblTitle
             // 
-            this.lblTitle.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            // 
+            // 
+            // 
+            this.lblTitle.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblTitle.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.SystemColors.Desktop;
             this.lblTitle.Location = new System.Drawing.Point(107, 7);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(260, 27);
             this.lblTitle.TabIndex = 1;
-            this.lblTitle.Text = "QUẢN LÝ ĐIỂM HỌC SINH THPT";
+            this.lblTitle.Text = "QUẢN LÝ ĐIỂM HỌC SINH THPT CÁT TIÊN";
             this.lblTitle.TextAlignment = System.Drawing.StringAlignment.Center;
             // 
             // pnlLine
@@ -116,57 +120,57 @@
             this.lbl09.AutoSize = true;
             this.lbl09.Location = new System.Drawing.Point(109, 140);
             this.lbl09.Name = "lbl09";
-            this.lbl09.Size = new System.Drawing.Size(65, 13);
+            this.lbl09.Size = new System.Drawing.Size(23, 13);
             this.lbl09.TabIndex = 6;
-            this.lbl09.Text = "Home-page:";
+            this.lbl09.Text = "FB:";
             // 
             // lbl02
             // 
             this.lbl02.AutoSize = true;
-            this.lbl02.Location = new System.Drawing.Point(171, 40);
+            this.lbl02.Location = new System.Drawing.Point(160, 40);
             this.lbl02.Name = "lbl02";
             this.lbl02.Size = new System.Drawing.Size(22, 13);
             this.lbl02.TabIndex = 2;
-            this.lbl02.Text = "3.0";
+            this.lbl02.Text = "1.0";
             // 
             // lbl04
             // 
             this.lbl04.AutoSize = true;
-            this.lbl04.Location = new System.Drawing.Point(171, 65);
+            this.lbl04.Location = new System.Drawing.Point(160, 65);
             this.lbl04.Name = "lbl04";
             this.lbl04.Size = new System.Drawing.Size(65, 13);
             this.lbl04.TabIndex = 3;
-            this.lbl04.Text = "16/09/2008";
+            this.lbl04.Text = "01/04/2017";
             // 
             // lbl06
             // 
             this.lbl06.AutoSize = true;
-            this.lbl06.Location = new System.Drawing.Point(171, 90);
+            this.lbl06.Location = new System.Drawing.Point(160, 90);
             this.lbl06.Name = "lbl06";
             this.lbl06.Size = new System.Drawing.Size(159, 13);
             this.lbl06.TabIndex = 4;
-            this.lbl06.Text = "Nguyễn Hoàng Tùng - DH6TH2";
+            this.lbl06.Text = "Dương Hữu Long - TH001 - K40";
             // 
             // lbl08Email
             // 
             this.lbl08Email.AutoSize = true;
-            this.lbl08Email.Location = new System.Drawing.Point(171, 115);
+            this.lbl08Email.Location = new System.Drawing.Point(160, 115);
             this.lbl08Email.Name = "lbl08Email";
-            this.lbl08Email.Size = new System.Drawing.Size(117, 13);
+            this.lbl08Email.Size = new System.Drawing.Size(133, 13);
             this.lbl08Email.TabIndex = 5;
             this.lbl08Email.TabStop = true;
-            this.lbl08Email.Text = "hoangtung@inbox.com";
+            this.lbl08Email.Text = "huulongduong@gmail.com";
             this.lbl08Email.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbl08Email_LinkClicked);
             // 
             // lbl10Website
             // 
             this.lbl10Website.AutoSize = true;
-            this.lbl10Website.Location = new System.Drawing.Point(171, 140);
+            this.lbl10Website.Location = new System.Drawing.Point(160, 140);
             this.lbl10Website.Name = "lbl10Website";
-            this.lbl10Website.Size = new System.Drawing.Size(122, 13);
+            this.lbl10Website.Size = new System.Drawing.Size(216, 13);
             this.lbl10Website.TabIndex = 6;
             this.lbl10Website.TabStop = true;
-            this.lbl10Website.Text = "http://hoangtung.rap.vn";
+            this.lbl10Website.Text = "https://www.facebook.com/LongDuongBIS";
             this.lbl10Website.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbl10Website_LinkClicked);
             // 
             // pictureBox
@@ -202,6 +206,7 @@
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.btnClose);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
