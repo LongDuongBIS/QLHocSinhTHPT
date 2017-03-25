@@ -676,17 +676,10 @@
     <None Include="Resources\background1.jpg" />
     <None Include="Resources\splashPic.jpg" />
     <None Include="Resources\phanlop.png" />
-    <None Include="Properties\DataSources\QLHocSinhTHPT.Bussiness.KQCaNamMonHocInfo.datasource" />
-    <None Include="Properties\DataSources\QLHocSinhTHPT.Bussiness.KQCaNamTongHopInfo.datasource" />
-    <None Include="Properties\DataSources\QLHocSinhTHPT.Bussiness.KQHocKyMonHocInfo.datasource" />
-    <None Include="Properties\DataSources\QLHocSinhTHPT.Bussiness.KQHocKyTongHopInfo.datasource" />
-    <None Include="Properties\DataSources\QLHocSinhTHPT.Bussiness.LopInfo.datasource" />
     <None Include="Resources\help.png" />
     <None Include="Resources\cachnhapdiem.png" />
     <None Include="Resources\xemdiem.png" />
     <None Include="Resources\connection.png" />
-    <None Include="Properties\DataSources\QLHocSinhTHPT.Bussiness.GiaoVienInfo.datasource" />
-    <None Include="Properties\DataSources\QLHocSinhTHPT.Bussiness.HocSinhInfo.datasource" />
     <None Include="Resources\loainguoidung.png" />
     <None Include="Resources\closephanlop.png" />
     <None Include="Resources\xoachuyenlop.png" />
