@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace QLHocSinhTHPT.Component
+namespace QLHocSinhTHPT.Components
 {
     public static class Utilities
     {

@@ -44,7 +44,7 @@
             this.colMaHocSinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGioiTinh = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colNgaySinh = new QLHocSinhTHPT.Component.CalendarColumn();
+            this.colNgaySinh = new QLHocSinhTHPT.Components.CalendarColumn();
             this.colNoiSinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaDanToc = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colMaTonGiao = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -1109,7 +1109,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaHocSinh;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHoTen;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colGioiTinh;
-        private QLHocSinhTHPT.Component.CalendarColumn colNgaySinh;
+        private QLHocSinhTHPT.Components.CalendarColumn colNgaySinh;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNoiSinh;
         private System.Windows.Forms.DataGridViewComboBoxColumn colMaDanToc;
         private System.Windows.Forms.DataGridViewComboBoxColumn colMaTonGiao;

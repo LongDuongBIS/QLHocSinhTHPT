@@ -121,41 +121,41 @@
     <Compile Include="DTO\NguoiDungDTO.cs" />
     <Compile Include="DTO\PhanCongDTO.cs" />
     <Compile Include="DTO\TonGiaoDTO.cs" />
-    <Compile Include="Component\CalendarColumn.cs" />
-    <Compile Include="Component\frmConnection.cs">
+    <Compile Include="Components\CalendarColumn.cs" />
+    <Compile Include="Components\frmConnection.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Component\frmConnection.Designer.cs">
+    <Compile Include="Components\frmConnection.Designer.cs">
       <DependentUpon>frmConnection.cs</DependentUpon>
     </Compile>
-    <Compile Include="Component\frmQuyDinh.cs">
+    <Compile Include="Components\frmQuyDinh.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Component\frmQuyDinh.Designer.cs">
+    <Compile Include="Components\frmQuyDinh.Designer.cs">
       <DependentUpon>frmQuyDinh.cs</DependentUpon>
     </Compile>
-    <Compile Include="Component\frmDoiMatKhau.cs">
+    <Compile Include="Components\frmDoiMatKhau.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Component\frmDoiMatKhau.Designer.cs">
+    <Compile Include="Components\frmDoiMatKhau.Designer.cs">
       <DependentUpon>frmDoiMatKhau.cs</DependentUpon>
     </Compile>
-    <Compile Include="Component\Cursors.cs">
+    <Compile Include="Components\Cursors.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Component\frmSplash.cs">
+    <Compile Include="Components\frmSplash.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Component\frmSplash.Designer.cs">
+    <Compile Include="Components\frmSplash.Designer.cs">
       <DependentUpon>frmSplash.cs</DependentUpon>
     </Compile>
-    <Compile Include="Component\frmDangNhap.cs">
+    <Compile Include="Components\frmDangNhap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Component\frmDangNhap.Designer.cs">
+    <Compile Include="Components\frmDangNhap.Designer.cs">
       <DependentUpon>frmDangNhap.cs</DependentUpon>
     </Compile>
-    <Compile Include="Component\Utilities.cs" />
+    <Compile Include="Components\Utilities.cs" />
     <Compile Include="BLL\KQCaNamTongHopBLL.cs" />
     <Compile Include="BLL\KQHocKyTongHopBLL.cs" />
     <Compile Include="BLL\KQHocKyMonHocBLL.cs" />
@@ -340,13 +340,13 @@
     <Compile Include="frmDanToc.designer.cs">
       <DependentUpon>frmDanToc.cs</DependentUpon>
     </Compile>
-    <Compile Include="Component\DataService.cs">
+    <Compile Include="Components\DataService.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Component\frmAbout.cs">
+    <Compile Include="Components\frmAbout.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Component\frmAbout.designer.cs">
+    <Compile Include="Components\frmAbout.designer.cs">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMain.cs">
@@ -357,23 +357,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Component\frmConnection.resx">
+    <EmbeddedResource Include="Components\frmConnection.resx">
       <DependentUpon>frmConnection.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Component\frmQuyDinh.resx">
+    <EmbeddedResource Include="Components\frmQuyDinh.resx">
       <DependentUpon>frmQuyDinh.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Component\frmDoiMatKhau.resx">
+    <EmbeddedResource Include="Components\frmDoiMatKhau.resx">
       <DependentUpon>frmDoiMatKhau.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Component\frmSplash.resx">
+    <EmbeddedResource Include="Components\frmSplash.resx">
       <DependentUpon>frmSplash.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Component\frmDangNhap.resx">
+    <EmbeddedResource Include="Components\frmDangNhap.resx">
       <DependentUpon>frmDangNhap.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -503,7 +503,7 @@
       <DependentUpon>frptDanhSachGiaoVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptDanhSachHocSinh.rdlc" />
-    <EmbeddedResource Include="Component\frmAbout.resx">
+    <EmbeddedResource Include="Components\frmAbout.resx">
       <DependentUpon>frmAbout.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

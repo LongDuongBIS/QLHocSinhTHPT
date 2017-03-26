@@ -1,7 +1,7 @@
 using DevComponents.DotNetBar;
 using Microsoft.Reporting.WinForms;
 using QLHocSinhTHPT.BLL;
-using QLHocSinhTHPT.Component;
+using QLHocSinhTHPT.Components;
 using QLHocSinhTHPT.DTO;
 using System;
 using System.Collections.Generic;

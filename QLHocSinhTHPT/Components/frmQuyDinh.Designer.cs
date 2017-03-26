@@ -1,4 +1,4 @@
-﻿namespace QLHocSinhTHPT.Component
+﻿namespace QLHocSinhTHPT.Components
 {
     partial class frmQuyDinh
     {

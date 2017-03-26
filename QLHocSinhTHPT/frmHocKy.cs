@@ -3,7 +3,7 @@ using QLHocSinhTHPT.BLL;
 using System;
 using System.Data;
 using System.Windows.Forms;
-
+using QLHocSinhTHPT.Components;
 namespace QLHocSinhTHPT
 {
     public partial class frmHocKy : Office2007Form

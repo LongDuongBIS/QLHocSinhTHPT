@@ -1,6 +1,6 @@
 ﻿using DevComponents.DotNetBar;
 using QLHocSinhTHPT.BLL;
-using QLHocSinhTHPT.Component;
+using QLHocSinhTHPT.Components;
 using QLHocSinhTHPT.DAL;
 using System;
 using System.Data;

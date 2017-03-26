@@ -1,5 +1,6 @@
 ﻿using DevComponents.DotNetBar;
 using QLHocSinhTHPT.BLL;
+using QLHocSinhTHPT.Components;
 using System;
 using System.Collections;
 using System.Windows.Forms;

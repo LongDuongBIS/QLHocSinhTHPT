@@ -1,11 +1,11 @@
 ﻿using DevComponents.DotNetBar;
-using QLHocSinhTHPT.Component;
+using QLHocSinhTHPT.Components;
 using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Xml;
 
-namespace QLHocSinhTHPT
+namespace QLHocSinhTHPT.Components
 {
     internal class DataService : DataTable
     {

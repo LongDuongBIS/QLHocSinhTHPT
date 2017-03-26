@@ -1,5 +1,5 @@
 ﻿using DevComponents.DotNetBar.Controls;
-using QLHocSinhTHPT.Component;
+using QLHocSinhTHPT.Components;
 using QLHocSinhTHPT.DAL;
 using QLHocSinhTHPT.DTO;
 using System.Data;

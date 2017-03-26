@@ -2,7 +2,7 @@ using DevComponents.DotNetBar;
 using System;
 using System.Windows.Forms;
 
-namespace QLHocSinhTHPT.Component
+namespace QLHocSinhTHPT.Components
 {
     public partial class frmDoiMatKhau : Office2007Form
     {

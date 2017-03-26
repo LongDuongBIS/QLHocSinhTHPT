@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace QLHocSinhTHPT.Component
+namespace QLHocSinhTHPT.Components
 {
     public class MyCursors : UserControl
     {

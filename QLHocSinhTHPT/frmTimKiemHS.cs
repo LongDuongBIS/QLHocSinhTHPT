@@ -2,7 +2,7 @@
 using QLHocSinhTHPT.BLL;
 using System;
 using System.Windows.Forms;
-
+using QLHocSinhTHPT.Components;
 namespace QLHocSinhTHPT
 {
     public partial class frmTimKiemHS : Office2007Form
