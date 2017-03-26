@@ -122,37 +122,37 @@
     <Compile Include="DTO\PhanCongDTO.cs" />
     <Compile Include="DTO\TonGiaoDTO.cs" />
     <Compile Include="Components\CalendarColumn.cs" />
-    <Compile Include="frmConnection.cs">
+    <Compile Include="PL\frmConnection.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmConnection.Designer.cs">
+    <Compile Include="PL\frmConnection.Designer.cs">
       <DependentUpon>frmConnection.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmQuyDinh.cs">
+    <Compile Include="PL\frmQuyDinh.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmQuyDinh.Designer.cs">
+    <Compile Include="PL\frmQuyDinh.Designer.cs">
       <DependentUpon>frmQuyDinh.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmDoiMatKhau.cs">
+    <Compile Include="PL\frmDoiMatKhau.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDoiMatKhau.Designer.cs">
+    <Compile Include="PL\frmDoiMatKhau.Designer.cs">
       <DependentUpon>frmDoiMatKhau.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Cursors.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="frmSplash.cs">
+    <Compile Include="PL\frmSplash.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSplash.Designer.cs">
+    <Compile Include="PL\frmSplash.Designer.cs">
       <DependentUpon>frmSplash.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmDangNhap.cs">
+    <Compile Include="PL\frmDangNhap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDangNhap.Designer.cs">
+    <Compile Include="PL\frmDangNhap.Designer.cs">
       <DependentUpon>frmDangNhap.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Utilities.cs" />
@@ -183,290 +183,290 @@
     <Compile Include="DAL\KQHocKyTongHopDAL.cs" />
     <Compile Include="DAL\KQCaNamMonHocDAL.cs" />
     <Compile Include="DAL\KQHocKyMonHocDAL.cs" />
-    <Compile Include="frmXemDiem.cs">
+    <Compile Include="PL\frmXemDiem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmXemDiem.designer.cs">
+    <Compile Include="PL\frmXemDiem.designer.cs">
       <DependentUpon>frmXemDiem.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmNhapDiemRieng.cs">
+    <Compile Include="PL\frmNhapDiemRieng.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmNhapDiemRieng.designer.cs">
+    <Compile Include="PL\frmNhapDiemRieng.designer.cs">
       <DependentUpon>frmNhapDiemRieng.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmNhapDiemChung.cs">
+    <Compile Include="PL\frmNhapDiemChung.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmNhapDiemChung.designer.cs">
+    <Compile Include="PL\frmNhapDiemChung.designer.cs">
       <DependentUpon>frmNhapDiemChung.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\DiemDAL.cs" />
     <Compile Include="DAL\QuyDinhDAL.cs" />
-    <Compile Include="frmTimKiemHS.cs">
+    <Compile Include="PL\frmTimKiemHS.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTimKiemHS.designer.cs">
+    <Compile Include="PL\frmTimKiemHS.designer.cs">
       <DependentUpon>frmTimKiemHS.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTimKiemGV.cs">
+    <Compile Include="PL\frmTimKiemGV.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTimKiemGV.designer.cs">
+    <Compile Include="PL\frmTimKiemGV.designer.cs">
       <DependentUpon>frmTimKiemGV.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPhanLop.cs">
+    <Compile Include="PL\frmPhanLop.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPhanLop.designer.cs">
+    <Compile Include="PL\frmPhanLop.designer.cs">
       <DependentUpon>frmPhanLop.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\PhanCongDAL.cs" />
-    <Compile Include="frmPhanCong.cs">
+    <Compile Include="PL\frmPhanCong.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPhanCong.designer.cs">
+    <Compile Include="PL\frmPhanCong.designer.cs">
       <DependentUpon>frmPhanCong.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\LopDAL.cs" />
-    <Compile Include="frmLop.cs">
+    <Compile Include="PL\frmLop.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLop.designer.cs">
+    <Compile Include="PL\frmLop.designer.cs">
       <DependentUpon>frmLop.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\HocSinhDAL.cs" />
-    <Compile Include="frmHocSinh.cs">
+    <Compile Include="PL\frmHocSinh.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmHocSinh.designer.cs">
+    <Compile Include="PL\frmHocSinh.designer.cs">
       <DependentUpon>frmHocSinh.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\GiaoVienDAL.cs" />
-    <Compile Include="frmGiaoVien.cs">
+    <Compile Include="PL\frmGiaoVien.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmGiaoVien.designer.cs">
+    <Compile Include="PL\frmGiaoVien.designer.cs">
       <DependentUpon>frmGiaoVien.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\NgheNghiepDAL.cs" />
-    <Compile Include="frmNgheNghiep.cs">
+    <Compile Include="PL\frmNgheNghiep.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmNgheNghiep.designer.cs">
+    <Compile Include="PL\frmNgheNghiep.designer.cs">
       <DependentUpon>frmNgheNghiep.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\NguoiDungDAL.cs" />
     <Compile Include="DAL\LoaiNguoiDungDAL.cs" />
-    <Compile Include="frmLoaiNguoiDung.cs">
+    <Compile Include="PL\frmLoaiNguoiDung.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLoaiNguoiDung.designer.cs">
+    <Compile Include="PL\frmLoaiNguoiDung.designer.cs">
       <DependentUpon>frmLoaiNguoiDung.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmNguoiDung.cs">
+    <Compile Include="PL\frmNguoiDung.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmNguoiDung.designer.cs">
+    <Compile Include="PL\frmNguoiDung.designer.cs">
       <DependentUpon>frmNguoiDung.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\LoaiDiemDAL.cs" />
-    <Compile Include="frmLoaiDiem.cs">
+    <Compile Include="PL\frmLoaiDiem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLoaiDiem.designer.cs">
+    <Compile Include="PL\frmLoaiDiem.designer.cs">
       <DependentUpon>frmLoaiDiem.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\KetQuaDAL.cs" />
-    <Compile Include="frmKetQua.cs">
+    <Compile Include="PL\frmKetQua.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmKetQua.designer.cs">
+    <Compile Include="PL\frmKetQua.designer.cs">
       <DependentUpon>frmKetQua.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\HanhKiemDAL.cs" />
-    <Compile Include="frmHanhKiem.cs">
+    <Compile Include="PL\frmHanhKiem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmHanhKiem.designer.cs">
+    <Compile Include="PL\frmHanhKiem.designer.cs">
       <DependentUpon>frmHanhKiem.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\HocLucDAL.cs" />
-    <Compile Include="frmHocLuc.cs">
+    <Compile Include="PL\frmHocLuc.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmHocLuc.designer.cs">
+    <Compile Include="PL\frmHocLuc.designer.cs">
       <DependentUpon>frmHocLuc.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\KhoiLopDAL.cs" />
-    <Compile Include="frmKhoiLop.cs">
+    <Compile Include="PL\frmKhoiLop.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmKhoiLop.designer.cs">
+    <Compile Include="PL\frmKhoiLop.designer.cs">
       <DependentUpon>frmKhoiLop.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\HocKyDAL.cs" />
-    <Compile Include="frmHocKy.cs">
+    <Compile Include="PL\frmHocKy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmHocKy.designer.cs">
+    <Compile Include="PL\frmHocKy.designer.cs">
       <DependentUpon>frmHocKy.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\NamHocDAL.cs" />
-    <Compile Include="frmNamHoc.cs">
+    <Compile Include="PL\frmNamHoc.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmNamHoc.designer.cs">
+    <Compile Include="PL\frmNamHoc.designer.cs">
       <DependentUpon>frmNamHoc.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\MonHocDAL.cs" />
-    <Compile Include="frmMonHoc.cs">
+    <Compile Include="PL\frmMonHoc.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMonHoc.designer.cs">
+    <Compile Include="PL\frmMonHoc.designer.cs">
       <DependentUpon>frmMonHoc.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\TonGiaoDAL.cs" />
-    <Compile Include="frmTonGiao.cs">
+    <Compile Include="PL\frmTonGiao.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTonGiao.designer.cs">
+    <Compile Include="PL\frmTonGiao.designer.cs">
       <DependentUpon>frmTonGiao.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\DanTocDAL.cs" />
-    <Compile Include="frmDanToc.cs">
+    <Compile Include="PL\frmDanToc.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDanToc.designer.cs">
+    <Compile Include="PL\frmDanToc.designer.cs">
       <DependentUpon>frmDanToc.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\DataService.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="frmAbout.cs">
+    <Compile Include="PL\frmAbout.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAbout.designer.cs">
+    <Compile Include="PL\frmAbout.designer.cs">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMain.cs">
+    <Compile Include="PL\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
+    <Compile Include="PL\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmConnection.resx">
+    <EmbeddedResource Include="PL\frmConnection.resx">
       <DependentUpon>frmConnection.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmQuyDinh.resx">
+    <EmbeddedResource Include="PL\frmQuyDinh.resx">
       <DependentUpon>frmQuyDinh.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDoiMatKhau.resx">
+    <EmbeddedResource Include="PL\frmDoiMatKhau.resx">
       <DependentUpon>frmDoiMatKhau.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSplash.resx">
+    <EmbeddedResource Include="PL\frmSplash.resx">
       <DependentUpon>frmSplash.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDangNhap.resx">
+    <EmbeddedResource Include="PL\frmDangNhap.resx">
       <DependentUpon>frmDangNhap.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptKetQuaHocKy_MonHoc.rdlc" />
-    <EmbeddedResource Include="frmXemDiem.resx">
+    <EmbeddedResource Include="PL\frmXemDiem.resx">
       <DependentUpon>frmXemDiem.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNhapDiemRieng.resx">
+    <EmbeddedResource Include="PL\frmNhapDiemRieng.resx">
       <DependentUpon>frmNhapDiemRieng.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNhapDiemChung.resx">
+    <EmbeddedResource Include="PL\frmNhapDiemChung.resx">
       <DependentUpon>frmNhapDiemChung.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTimKiemHS.resx">
+    <EmbeddedResource Include="PL\frmTimKiemHS.resx">
       <DependentUpon>frmTimKiemHS.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTimKiemGV.resx">
+    <EmbeddedResource Include="PL\frmTimKiemGV.resx">
       <DependentUpon>frmTimKiemGV.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPhanLop.resx">
+    <EmbeddedResource Include="PL\frmPhanLop.resx">
       <DependentUpon>frmPhanLop.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPhanCong.resx">
+    <EmbeddedResource Include="PL\frmPhanCong.resx">
       <DependentUpon>frmPhanCong.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLop.resx">
+    <EmbeddedResource Include="PL\frmLop.resx">
       <DependentUpon>frmLop.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmHocSinh.resx">
+    <EmbeddedResource Include="PL\frmHocSinh.resx">
       <DependentUpon>frmHocSinh.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGiaoVien.resx">
+    <EmbeddedResource Include="PL\frmGiaoVien.resx">
       <DependentUpon>frmGiaoVien.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNgheNghiep.resx">
+    <EmbeddedResource Include="PL\frmNgheNghiep.resx">
       <DependentUpon>frmNgheNghiep.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLoaiNguoiDung.resx">
+    <EmbeddedResource Include="PL\frmLoaiNguoiDung.resx">
       <DependentUpon>frmLoaiNguoiDung.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNguoiDung.resx">
+    <EmbeddedResource Include="PL\frmNguoiDung.resx">
       <DependentUpon>frmNguoiDung.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLoaiDiem.resx">
+    <EmbeddedResource Include="PL\frmLoaiDiem.resx">
       <DependentUpon>frmLoaiDiem.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmKetQua.resx">
+    <EmbeddedResource Include="PL\frmKetQua.resx">
       <DependentUpon>frmKetQua.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmHanhKiem.resx">
+    <EmbeddedResource Include="PL\frmHanhKiem.resx">
       <DependentUpon>frmHanhKiem.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmHocLuc.resx">
+    <EmbeddedResource Include="PL\frmHocLuc.resx">
       <DependentUpon>frmHocLuc.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmKhoiLop.resx">
+    <EmbeddedResource Include="PL\frmKhoiLop.resx">
       <DependentUpon>frmKhoiLop.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmHocKy.resx">
+    <EmbeddedResource Include="PL\frmHocKy.resx">
       <DependentUpon>frmHocKy.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNamHoc.resx">
+    <EmbeddedResource Include="PL\frmNamHoc.resx">
       <DependentUpon>frmNamHoc.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMonHoc.resx">
+    <EmbeddedResource Include="PL\frmMonHoc.resx">
       <DependentUpon>frmMonHoc.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTonGiao.resx">
+    <EmbeddedResource Include="PL\frmTonGiao.resx">
       <DependentUpon>frmTonGiao.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDanToc.resx">
+    <EmbeddedResource Include="PL\frmDanToc.resx">
       <DependentUpon>frmDanToc.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -503,11 +503,11 @@
       <DependentUpon>frptDanhSachGiaoVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptDanhSachHocSinh.rdlc" />
-    <EmbeddedResource Include="frmAbout.resx">
+    <EmbeddedResource Include="PL\frmAbout.resx">
       <DependentUpon>frmAbout.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
+    <EmbeddedResource Include="PL\frmMain.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
