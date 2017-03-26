@@ -3,8 +3,8 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-
-namespace QLHocSinhTHPT.Components
+using QLHocSinhTHPT.Components;
+namespace QLHocSinhTHPT
 {
     public partial class frmConnection : Office2007Form
     {

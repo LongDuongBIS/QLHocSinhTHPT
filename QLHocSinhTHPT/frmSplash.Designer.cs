@@ -1,4 +1,4 @@
-﻿namespace QLHocSinhTHPT.Components
+﻿namespace QLHocSinhTHPT
 {
     partial class frmSplash
     {

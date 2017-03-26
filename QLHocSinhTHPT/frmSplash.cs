@@ -1,6 +1,6 @@
 using DevComponents.DotNetBar;
 
-namespace QLHocSinhTHPT.Components
+namespace QLHocSinhTHPT
 {
     public partial class frmSplash : Office2007Form
     {

@@ -2,18 +2,17 @@ using DevComponents.DotNetBar;
 using System;
 using System.Windows.Forms;
 
-namespace QLHocSinhTHPT.Components
+namespace QLHocSinhTHPT
 {
-    public partial class frmDoiMatKhau : Office2007Form
+    public partial class frmDangNhap : Office2007Form
     {
-        public frmDoiMatKhau()
+        public frmDangNhap()
         {
             InitializeComponent();
         }
 
-        private void btnDongY_Click(object sender, EventArgs e)
+        private void btnDangNhap_Click(object sender, EventArgs e)
         {
-            txtNewPassword.Focus();
             this.DialogResult = DialogResult.OK;
         }
 
@@ -22,7 +21,7 @@ namespace QLHocSinhTHPT.Components
             this.DialogResult = DialogResult.Cancel;
         }
 
-        private void txtReNewPassword_KeyDown(object sender, KeyEventArgs e)
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
