@@ -1,10 +1,11 @@
 ﻿using DevComponents.DotNetBar;
 using QLHocSinhTHPT.BLL;
+using QLHocSinhTHPT.Components;
 using System;
 using System.Collections;
 using System.Data;
 using System.Windows.Forms;
-using QLHocSinhTHPT.Components;
+
 namespace QLHocSinhTHPT
 {
     public partial class frmPhanLop : Office2007Form

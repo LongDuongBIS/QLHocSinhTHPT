@@ -1,9 +1,10 @@
 ﻿using DevComponents.DotNetBar;
+using QLHocSinhTHPT.Components;
 using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using QLHocSinhTHPT.Components;
+
 namespace QLHocSinhTHPT
 {
     public partial class frmConnection : Office2007Form

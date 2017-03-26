@@ -1,7 +1,8 @@
-﻿using System;
+﻿using QLHocSinhTHPT.Components;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using QLHocSinhTHPT.Components;
+
 namespace QLHocSinhTHPT.DAL
 {
     public class KQCaNamMonHocDAL

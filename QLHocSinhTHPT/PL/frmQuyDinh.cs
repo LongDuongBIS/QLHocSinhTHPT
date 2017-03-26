@@ -1,8 +1,9 @@
 ﻿using DevComponents.DotNetBar;
 using QLHocSinhTHPT.BLL;
+using QLHocSinhTHPT.Components;
 using System;
 using System.Windows.Forms;
-using QLHocSinhTHPT.Components;
+
 namespace QLHocSinhTHPT
 {
     public partial class frmQuyDinh : Office2007Form
