@@ -1301,6 +1301,7 @@
             this.tabStrip.Name = "tabStrip";
             this.tabStrip.SelectedTab = null;
             this.tabStrip.SelectedTabFont = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabStrip.ShowMdiChildIcon = false;
             this.tabStrip.Size = new System.Drawing.Size(790, 26);
             this.tabStrip.Style = DevComponents.DotNetBar.eTabStripStyle.Office2007Document;
             this.tabStrip.TabAlignment = DevComponents.DotNetBar.eTabStripAlignment.Top;

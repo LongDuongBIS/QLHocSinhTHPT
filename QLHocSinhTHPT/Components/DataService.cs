@@ -104,7 +104,7 @@ namespace QLHocSinhTHPT.Components
             return result;
         }
 
-        public int ExecuteNoneQuery(SqlCommand cmd)
+        public int ExecuteNonQuery(SqlCommand cmd)
         {
             int result = 0;
             SqlTransaction trans = null;
