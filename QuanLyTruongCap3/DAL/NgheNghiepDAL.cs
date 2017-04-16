@@ -4,9 +4,15 @@ using System.Data.SqlClient;
 
 namespace QuanLyTruongCap3.DAL
 {
-    public class NgheNghiepDAL
+    public class NgheNghiepDAL : System.IDisposable
     {
         private readonly DataService ngheNghiepDS = new DataService();
+
+        public void Dispose()
+        {
+            ngheNghiepDS.Dispose();
+            System.GC.SuppressFinalize(this);
+        }
 
         public DataTable LayDsNgheNghiep()
         {
@@ -18,6 +24,11 @@ namespace QuanLyTruongCap3.DAL
             return ngheNghiepDS;
         }
 
+        public bool LuuNgheNghiep()
+        {
+            return ngheNghiepDS.ExecuteNonQuery() > 0;
+        }
+
         public DataRow ThemDongMoi()
         {
             return ngheNghiepDS.NewRow();
@@ -26,11 +37,6 @@ namespace QuanLyTruongCap3.DAL
         public void ThemNgheNghiep(DataRow row)
         {
             ngheNghiepDS.Rows.Add(row);
-        }
-
-        public bool LuuNgheNghiep()
-        {
-            return ngheNghiepDS.ExecuteNonQuery() > 0;
         }
     }
 }

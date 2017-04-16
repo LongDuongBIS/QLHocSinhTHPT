@@ -45,7 +45,7 @@ namespace QuanLyTruongCap3
             bindingNavigatorDeleteItem.Enabled |= dGVNguoiDung.RowCount == 0;
 
             DataRow row = nguoiDungBLL.ThemDongMoi();
-            row["MaND"] = string.Format("ND{0}", quyDinh.LaySTT(dGVNguoiDung.Rows.Count + 1));
+            row["MaND"] = string.Format("ND{0}", QuyDinh.LaySTT(dGVNguoiDung.Rows.Count + 1));
             row["MaLoai"] = string.Empty;
             row["TenND"] = string.Empty;
             row["TenDNhap"] = string.Empty;

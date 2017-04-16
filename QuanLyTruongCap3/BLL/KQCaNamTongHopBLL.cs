@@ -12,16 +12,6 @@ namespace QuanLyTruongCap3.BLL
         private HocLucBLL hocLucBLL = new HocLucBLL();
         private KQCaNamTongHopDAL kqCaNamTongHopDAL = new KQCaNamTongHopDAL();
 
-        public void LuuKetQua(string maHocSinh, string maLop, string maNamHoc)
-        {
-            float diemTBChungCacMonCN = (float)Math.Round(diemBLL.DiemTrungBinhChungCacMonCaNam(maHocSinh, maLop, maNamHoc), 2);
-            string hocLuc = hocLucBLL.XepLoaiLocLucCaNam(maHocSinh, maLop, maNamHoc);
-            string ketQua = "KQ0001";
-
-            kqCaNamTongHopDAL.XoaKetQua(maHocSinh, maLop, maNamHoc);
-            kqCaNamTongHopDAL.LuuKetQua(maHocSinh, maLop, maNamHoc, hocLuc, "HK0001", diemTBChungCacMonCN, ketQua);
-        }
-
         public static IList<KQCaNamTongHopDTO> LayDsKQCaNamTongHop(string maLop, string maNamHoc)
         {
             DataTable dt = new KQCaNamTongHopDAL().LayDsKQCaNamTongHopForReport(maLop, maNamHoc);
@@ -67,6 +57,16 @@ namespace QuanLyTruongCap3.BLL
                 dS.Add(kqCaNamTongHopDTO);
             }
             return dS;
+        }
+
+        public void LuuKetQua(string maHocSinh, string maLop, string maNamHoc)
+        {
+            float diemTBChungCacMonCN = (float)Math.Round(diemBLL.DiemTrungBinhChungCacMonCaNam(maHocSinh, maLop, maNamHoc), 2);
+            string hocLuc = hocLucBLL.XepLoaiLocLucCaNam(maHocSinh, maLop, maNamHoc);
+            string ketQua = "KQ0001";
+
+            kqCaNamTongHopDAL.XoaKetQua(maHocSinh, maLop, maNamHoc);
+            kqCaNamTongHopDAL.LuuKetQua(maHocSinh, maLop, maNamHoc, hocLuc, "HK0001", diemTBChungCacMonCN, ketQua);
         }
     }
 }

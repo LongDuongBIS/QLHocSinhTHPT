@@ -4,9 +4,15 @@ using System.Data.SqlClient;
 
 namespace QuanLyTruongCap3.DAL
 {
-    public class LoaiDiemDAL
+    public class LoaiDiemDAL : System.IDisposable
     {
         private readonly DataService loaiDiemDS = new DataService();
+
+        public void Dispose()
+        {
+            loaiDiemDS.Dispose();
+            System.GC.SuppressFinalize(this);
+        }
 
         public DataTable LayDsLoaiDiem()
         {
@@ -18,6 +24,11 @@ namespace QuanLyTruongCap3.DAL
             return loaiDiemDS;
         }
 
+        public bool LuuLoaiDiem()
+        {
+            return loaiDiemDS.ExecuteNonQuery() > 0;
+        }
+
         public DataRow ThemDongMoi()
         {
             return loaiDiemDS.NewRow();
@@ -26,11 +37,6 @@ namespace QuanLyTruongCap3.DAL
         public void ThemLoaiDiem(DataRow row)
         {
             loaiDiemDS.Rows.Add(row);
-        }
-
-        public bool LuuLoaiDiem()
-        {
-            return loaiDiemDS.ExecuteNonQuery() > 0;
         }
     }
 }

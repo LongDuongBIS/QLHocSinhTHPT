@@ -9,6 +9,15 @@ namespace QuanLyTruongCap3.BLL
     {
         private readonly LoaiNguoiDungDAL loaiNguoiDungDAL = new LoaiNguoiDungDAL();
 
+        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        {
+            BindingSource bS = new BindingSource();
+
+            bS.DataSource = loaiNguoiDungDAL.LayDsLoaiNguoiDung();
+            bN.BindingSource = bS;
+            dGV.DataSource = bS;
+        }
+
         public void HienThiComboBox(ComboBoxEx comboBox)
         {
             comboBox.DataSource = loaiNguoiDungDAL.LayDsLoaiNguoiDung();
@@ -25,13 +34,9 @@ namespace QuanLyTruongCap3.BLL
             cmbColumn.HeaderText = "Loại người dùng";
         }
 
-        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        public bool LuuLoaiNguoiDung()
         {
-            BindingSource bS = new BindingSource();
-
-            bS.DataSource = loaiNguoiDungDAL.LayDsLoaiNguoiDung();
-            bN.BindingSource = bS;
-            dGV.DataSource = bS;
+            return loaiNguoiDungDAL.LuuLoaiNguoiDung();
         }
 
         public DataRow ThemDongMoi()
@@ -42,11 +47,6 @@ namespace QuanLyTruongCap3.BLL
         public void ThemLoaiNguoiDung(DataRow row)
         {
             loaiNguoiDungDAL.ThemLoaiNguoiDung(row);
-        }
-
-        public bool LuuLoaiNguoiDung()
-        {
-            return loaiNguoiDungDAL.LuuLoaiNguoiDung();
         }
     }
 }

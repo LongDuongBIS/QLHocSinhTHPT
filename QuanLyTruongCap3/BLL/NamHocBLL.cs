@@ -9,6 +9,15 @@ namespace QuanLyTruongCap3.BLL
     {
         private readonly NamHocDAL namHocDAL = new NamHocDAL();
 
+        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        {
+            BindingSource bS = new BindingSource();
+
+            bS.DataSource = namHocDAL.LayDsNamHoc();
+            bN.BindingSource = bS;
+            dGV.DataSource = bS;
+        }
+
         public void HienThiComboBox(ComboBoxEx comboBox)
         {
             comboBox.DataSource = namHocDAL.LayDsNamHoc();
@@ -25,13 +34,9 @@ namespace QuanLyTruongCap3.BLL
             cmbColumn.HeaderText = "Năm học";
         }
 
-        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        public bool LuuNamHoc()
         {
-            BindingSource bS = new BindingSource();
-
-            bS.DataSource = namHocDAL.LayDsNamHoc();
-            bN.BindingSource = bS;
-            dGV.DataSource = bS;
+            return namHocDAL.LuuNamHoc();
         }
 
         public DataRow ThemDongMoi()
@@ -42,11 +47,6 @@ namespace QuanLyTruongCap3.BLL
         public void ThemNamHoc(DataRow row)
         {
             namHocDAL.ThemNamHoc(row);
-        }
-
-        public bool LuuNamHoc()
-        {
-            return namHocDAL.LuuNamHoc();
         }
     }
 }

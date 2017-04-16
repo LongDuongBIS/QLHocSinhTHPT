@@ -4,9 +4,15 @@ using System.Data.SqlClient;
 
 namespace QuanLyTruongCap3.DAL
 {
-    public class PhanCongDAL
+    public class PhanCongDAL : System.IDisposable
     {
         private readonly DataService phanCongDS = new DataService();
+
+        public void Dispose()
+        {
+            phanCongDS.Dispose();
+            System.GC.SuppressFinalize(this);
+        }
 
         public DataTable LayDsPhanCong()
         {
@@ -16,16 +22,6 @@ namespace QuanLyTruongCap3.DAL
             }
 
             return phanCongDS;
-        }
-
-        public DataRow ThemDongMoi()
-        {
-            return phanCongDS.NewRow();
-        }
-
-        public void ThemPhanCong(DataRow row)
-        {
-            phanCongDS.Rows.Add(row);
         }
 
         public bool LuuPhanCong()
@@ -46,9 +42,19 @@ namespace QuanLyTruongCap3.DAL
             }
         }
 
-        public DataTable TimTheoTenLop(string ten)
+        public DataRow ThemDongMoi()
         {
-            using (SqlCommand cmd = new SqlCommand("SELECT P.STT, P.MaNamHoc, P.MaLop, P.MaMonHoc, P.MaGiaoVien " + "FROM PHANCONG P, LOP L " + "WHERE P.MaLop = L.MaLop AND L.TenLop LIKE '%' + @ten + '%'"))
+            return phanCongDS.NewRow();
+        }
+
+        public void ThemPhanCong(DataRow row)
+        {
+            phanCongDS.Rows.Add(row);
+        }
+
+        public DataTable TimTheoTenGV(string ten)
+        {
+            using (SqlCommand cmd = new SqlCommand("SELECT P.STT, P.MaNamHoc, P.MaLop, P.MaMonHoc, P.MaGiaoVien " + "FROM PHANCONG P, GIAOVIEN G " + "WHERE P.MaGiaoVien = G.MaGiaoVien AND G.TenGiaoVien LIKE '%' + @ten + '%'"))
             {
                 cmd.Parameters.Add("ten", SqlDbType.NVarChar).Value = ten;
 
@@ -58,9 +64,9 @@ namespace QuanLyTruongCap3.DAL
             return phanCongDS;
         }
 
-        public DataTable TimTheoTenGV(string ten)
+        public DataTable TimTheoTenLop(string ten)
         {
-            using (SqlCommand cmd = new SqlCommand("SELECT P.STT, P.MaNamHoc, P.MaLop, P.MaMonHoc, P.MaGiaoVien " + "FROM PHANCONG P, GIAOVIEN G " + "WHERE P.MaGiaoVien = G.MaGiaoVien AND G.TenGiaoVien LIKE '%' + @ten + '%'"))
+            using (SqlCommand cmd = new SqlCommand("SELECT P.STT, P.MaNamHoc, P.MaLop, P.MaMonHoc, P.MaGiaoVien " + "FROM PHANCONG P, LOP L " + "WHERE P.MaLop = L.MaLop AND L.TenLop LIKE '%' + @ten + '%'"))
             {
                 cmd.Parameters.Add("ten", SqlDbType.NVarChar).Value = ten;
 

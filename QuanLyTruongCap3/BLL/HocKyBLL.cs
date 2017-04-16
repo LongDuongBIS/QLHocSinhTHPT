@@ -9,6 +9,15 @@ namespace QuanLyTruongCap3.BLL
     {
         private readonly HocKyDAL hocKyDAL = new HocKyDAL();
 
+        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        {
+            BindingSource bS = new BindingSource();
+
+            bS.DataSource = hocKyDAL.LayDsHocKy();
+            bN.BindingSource = bS;
+            dGV.DataSource = bS;
+        }
+
         public void HienThiComboBox(ComboBoxEx comboBox)
         {
             comboBox.DataSource = hocKyDAL.LayDsHocKy();
@@ -25,13 +34,9 @@ namespace QuanLyTruongCap3.BLL
             cmbColumn.HeaderText = "Học kỳ";
         }
 
-        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        public bool LuuHocKy()
         {
-            BindingSource bS = new BindingSource();
-
-            bS.DataSource = hocKyDAL.LayDsHocKy();
-            bN.BindingSource = bS;
-            dGV.DataSource = bS;
+            return hocKyDAL.LuuHocKy();
         }
 
         public DataRow ThemDongMoi()
@@ -42,11 +47,6 @@ namespace QuanLyTruongCap3.BLL
         public void ThemHocKy(DataRow row)
         {
             hocKyDAL.ThemHocKy(row);
-        }
-
-        public bool LuuHocKy()
-        {
-            return hocKyDAL.LuuHocKy();
         }
     }
 }

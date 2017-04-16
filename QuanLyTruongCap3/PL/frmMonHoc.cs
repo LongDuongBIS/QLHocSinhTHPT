@@ -43,7 +43,7 @@ namespace QuanLyTruongCap3
             bindingNavigatorDeleteItem.Enabled |= dGVMonHoc.RowCount == 0;
 
             DataRow row = monHocBLL.ThemDongMoi();
-            row["MaMonHoc"] = string.Format("MH{0}", quyDinh.LaySTT(dGVMonHoc.Rows.Count + 1));
+            row["MaMonHoc"] = string.Format("MH{0}", QuyDinh.LaySTT(dGVMonHoc.Rows.Count + 1));
             row["TenMonHoc"] = string.Empty;
             row["SoTiet"] = 0;
             row["HeSo"] = 0;

@@ -13,27 +13,43 @@ namespace QuanLyTruongCap3.BLL
     {
         private readonly HocSinhDAL hocSinhDAL = new HocSinhDAL();
 
-        public void HienThiComboBox(ComboBoxEx comboBox)
+        public static IList<HocSinhDTO> LayDsHocSinh()
         {
-            comboBox.DataSource = hocSinhDAL.LayDsHocSinh();
-            comboBox.DisplayMember = "HoTen";
-            comboBox.ValueMember = "MaHocSinh";
-        }
+            DataTable dt = new HocSinhDAL().LayDsHocSinhForReport();
 
-        public void HienThiComboBox(string namHoc, string lop, ComboBoxEx comboBox)
-        {
-            comboBox.DataSource = hocSinhDAL.LayDsHocSinhTheoLop(namHoc, lop);
-            comboBox.DisplayMember = "HoTen";
-            comboBox.ValueMember = "MaHocSinh";
-        }
+            IList<HocSinhDTO> dS = new List<HocSinhDTO>();
 
-        public void HienThiDataGridViewComboBoxColumn(DataGridViewComboBoxColumn cmbColumn)
-        {
-            cmbColumn.DataSource = hocSinhDAL.LayDsHocSinh();
-            cmbColumn.DisplayMember = "HoTen";
-            cmbColumn.ValueMember = "MaHocSinh";
-            cmbColumn.DataPropertyName = "MaHocSinh";
-            cmbColumn.HeaderText = "Học sinh";
+            foreach (DataRow Row in dt.Rows)
+            {
+                HocSinhDTO hocSinhDTO = new HocSinhDTO();
+
+                NgheNghiepDTO ngheNghiepDTO = new NgheNghiepDTO();
+                ngheNghiepDTO.MaNghe = Convert.ToString(Row["MaNghe"]);
+                ngheNghiepDTO.TenNghe = Convert.ToString(Row["TenNghe"]);
+
+                DanTocDTO danTocDTO = new DanTocDTO();
+                danTocDTO.MaDanToc = Convert.ToString(Row["MaDanToc"]);
+                danTocDTO.TenDanToc = Convert.ToString(Row["TenDanToc"]);
+
+                TonGiaoDTO tonGiaoDTO = new TonGiaoDTO();
+                tonGiaoDTO.MaTonGiao = Convert.ToString(Row["MaTonGiao"]);
+                tonGiaoDTO.TenTonGiao = Convert.ToString(Row["TenTonGiao"]);
+
+                hocSinhDTO.MaHocSinh = Convert.ToString(Row["MaHocSinh"]);
+                hocSinhDTO.HoTen = Convert.ToString(Row["HoTen"]);
+                hocSinhDTO.GioiTinh = Convert.ToBoolean(Row["GioiTinh"]);
+                hocSinhDTO.NgaySinh = Convert.ToDateTime(Row["NgaySinh"]);
+                hocSinhDTO.NoiSinh = Convert.ToString(Row["NoiSinh"]);
+                hocSinhDTO.DanToc = danTocDTO;
+                hocSinhDTO.TonGiao = tonGiaoDTO;
+                hocSinhDTO.HoTenCha = Convert.ToString(Row["HoTenCha"]);
+                hocSinhDTO.NNghiepCha = ngheNghiepDTO;
+                hocSinhDTO.HoTenMe = Convert.ToString(Row["HoTenMe"]);
+                hocSinhDTO.NNghiepMe = ngheNghiepDTO;
+
+                dS.Add(hocSinhDTO);
+            }
+            return dS;
         }
 
         public void HienThi(DataGridView dGV, BindingNavigator bN)
@@ -95,6 +111,29 @@ namespace QuanLyTruongCap3.BLL
             dGV.DataSource = bS;
         }
 
+        public void HienThiComboBox(ComboBoxEx comboBox)
+        {
+            comboBox.DataSource = hocSinhDAL.LayDsHocSinh();
+            comboBox.DisplayMember = "HoTen";
+            comboBox.ValueMember = "MaHocSinh";
+        }
+
+        public void HienThiComboBox(string namHoc, string lop, ComboBoxEx comboBox)
+        {
+            comboBox.DataSource = hocSinhDAL.LayDsHocSinhTheoLop(namHoc, lop);
+            comboBox.DisplayMember = "HoTen";
+            comboBox.ValueMember = "MaHocSinh";
+        }
+
+        public void HienThiDataGridViewComboBoxColumn(DataGridViewComboBoxColumn cmbColumn)
+        {
+            cmbColumn.DataSource = hocSinhDAL.LayDsHocSinh();
+            cmbColumn.DisplayMember = "HoTen";
+            cmbColumn.ValueMember = "MaHocSinh";
+            cmbColumn.DataPropertyName = "MaHocSinh";
+            cmbColumn.HeaderText = "Học sinh";
+        }
+
         public void HienThiDsHocSinhTheoLop(DataGridViewX dGV, BindingNavigator bN, string namHoc, string lop)
         {
             BindingSource bS = new BindingSource();
@@ -124,12 +163,14 @@ namespace QuanLyTruongCap3.BLL
             return hocSinhDAL.LayDsHocSinhTheoNamHoc(namHoc);
         }
 
-        public void XoaHSKhoiBangPhanLop(string namHocCu, string khoiLopCu, string lopCu, ListViewEx hocSinh)
+        public bool LuuHocSinh()
         {
-            foreach (ListViewItem item in hocSinh.Items)
-            {
-                hocSinhDAL.XoaHSKhoiBangPhanLop(namHocCu, khoiLopCu, lopCu, item.SubItems[0].Text);
-            }
+            return hocSinhDAL.LuuHocSinh();
+        }
+
+        public void LuuHocSinh(string maHocSinh, string hoTen, bool gioiTinh, DateTime ngaySinh, string noiSinh, string maDanToc, string maTonGiao, string hoTenCha, string maNgheCha, string hoTenMe, string maNgheMe)
+        {
+            hocSinhDAL.LuuHocSinh(maHocSinh, hoTen, gioiTinh, ngaySinh, noiSinh, maDanToc, maTonGiao, hoTenCha, maNgheCha, hoTenMe, maNgheMe);
         }
 
         public void LuuHSVaoBangPhanLop(string namHocMoi, string khoiLopMoi, string lopMoi, ListViewEx hocSinh)
@@ -140,45 +181,6 @@ namespace QuanLyTruongCap3.BLL
             }
         }
 
-        public static IList<HocSinhDTO> LayDsHocSinh()
-        {
-            DataTable dt = new HocSinhDAL().LayDsHocSinhForReport();
-
-            IList<HocSinhDTO> dS = new List<HocSinhDTO>();
-
-            foreach (DataRow Row in dt.Rows)
-            {
-                HocSinhDTO hocSinhDTO = new HocSinhDTO();
-
-                NgheNghiepDTO ngheNghiepDTO = new NgheNghiepDTO();
-                ngheNghiepDTO.MaNghe = Convert.ToString(Row["MaNghe"]);
-                ngheNghiepDTO.TenNghe = Convert.ToString(Row["TenNghe"]);
-
-                DanTocDTO danTocDTO = new DanTocDTO();
-                danTocDTO.MaDanToc = Convert.ToString(Row["MaDanToc"]);
-                danTocDTO.TenDanToc = Convert.ToString(Row["TenDanToc"]);
-
-                TonGiaoDTO tonGiaoDTO = new TonGiaoDTO();
-                tonGiaoDTO.MaTonGiao = Convert.ToString(Row["MaTonGiao"]);
-                tonGiaoDTO.TenTonGiao = Convert.ToString(Row["TenTonGiao"]);
-
-                hocSinhDTO.MaHocSinh = Convert.ToString(Row["MaHocSinh"]);
-                hocSinhDTO.HoTen = Convert.ToString(Row["HoTen"]);
-                hocSinhDTO.GioiTinh = Convert.ToBoolean(Row["GioiTinh"]);
-                hocSinhDTO.NgaySinh = Convert.ToDateTime(Row["NgaySinh"]);
-                hocSinhDTO.NoiSinh = Convert.ToString(Row["NoiSinh"]);
-                hocSinhDTO.DanToc = danTocDTO;
-                hocSinhDTO.TonGiao = tonGiaoDTO;
-                hocSinhDTO.HoTenCha = Convert.ToString(Row["HoTenCha"]);
-                hocSinhDTO.NNghiepCha = ngheNghiepDTO;
-                hocSinhDTO.HoTenMe = Convert.ToString(Row["HoTenMe"]);
-                hocSinhDTO.NNghiepMe = ngheNghiepDTO;
-
-                dS.Add(hocSinhDTO);
-            }
-            return dS;
-        }
-
         public DataRow ThemDongMoi()
         {
             return hocSinhDAL.ThemDongMoi();
@@ -187,16 +189,6 @@ namespace QuanLyTruongCap3.BLL
         public void ThemHocSinh(DataRow row)
         {
             hocSinhDAL.ThemHocSinh(row);
-        }
-
-        public bool LuuHocSinh()
-        {
-            return hocSinhDAL.LuuHocSinh();
-        }
-
-        public void LuuHocSinh(string maHocSinh, string hoTen, bool gioiTinh, DateTime ngaySinh, string noiSinh, string maDanToc, string maTonGiao, string hoTenCha, string maNgheCha, string hoTenMe, string maNgheMe)
-        {
-            hocSinhDAL.LuuHocSinh(maHocSinh, hoTen, gioiTinh, ngaySinh, noiSinh, maDanToc, maTonGiao, hoTenCha, maNgheCha, hoTenMe, maNgheMe);
         }
 
         public void TimKiemHocSinh(TextBoxX txtHoTen, ComboBoxEx cmbTheoNSinh, TextBoxX txtNoiSinh, ComboBoxEx cmbTheoDToc, ComboBoxEx cmbDanToc, ComboBoxEx cmbTheoTGiao, ComboBoxEx cmbTonGiao, DataGridViewX dGV, BindingNavigator bN)
@@ -216,6 +208,14 @@ namespace QuanLyTruongCap3.BLL
         public void TimTheoTen(string tenHocSinh)
         {
             hocSinhDAL.TimTheoTen(tenHocSinh);
+        }
+
+        public void XoaHSKhoiBangPhanLop(string namHocCu, string khoiLopCu, string lopCu, ListViewEx hocSinh)
+        {
+            foreach (ListViewItem item in hocSinh.Items)
+            {
+                hocSinhDAL.XoaHSKhoiBangPhanLop(namHocCu, khoiLopCu, lopCu, item.SubItems[0].Text);
+            }
         }
     }
 }

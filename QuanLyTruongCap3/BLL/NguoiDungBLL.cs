@@ -9,48 +9,13 @@ namespace QuanLyTruongCap3.BLL
 {
     public class NguoiDungBLL
     {
+        private LoaiNguoiDungDTO loaiNguoiDungDTO = new LoaiNguoiDungDTO();
         private readonly NguoiDungDAL nguoiDungDAL = new NguoiDungDAL();
         private NguoiDungDTO nguoiDungDTO = new NguoiDungDTO();
-        private LoaiNguoiDungDTO loaiNguoiDungDTO = new LoaiNguoiDungDTO();
 
-        public void HienThiComboBox(ComboBoxEx comboBox)
+        public void ChangePassword(string userName, string newPassword)
         {
-            comboBox.DataSource = nguoiDungDAL.LayDsNguoiDung();
-            comboBox.DisplayMember = "TenND";
-            comboBox.ValueMember = "MaND";
-        }
-
-        public void HienThiDataGridViewComboBoxColumn(DataGridViewComboBoxColumn cmbColumn)
-        {
-            cmbColumn.DataSource = nguoiDungDAL.LayDsNguoiDung();
-            cmbColumn.DisplayMember = "TenND";
-            cmbColumn.ValueMember = "MaND";
-            cmbColumn.DataPropertyName = "MaND";
-            cmbColumn.HeaderText = "Người dùng";
-        }
-
-        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
-        {
-            BindingSource bS = new BindingSource();
-
-            bS.DataSource = nguoiDungDAL.LayDsNguoiDung();
-            bN.BindingSource = bS;
-            dGV.DataSource = bS;
-        }
-
-        public DataRow ThemDongMoi()
-        {
-            return nguoiDungDAL.ThemDongMoi();
-        }
-
-        public void ThemNguoiDung(DataRow row)
-        {
-            nguoiDungDAL.ThemNguoiDung(row);
-        }
-
-        public bool LuuNguoiDung()
-        {
-            return nguoiDungDAL.LuuNguoiDung();
+            nguoiDungDAL.ChangePassword(userName, newPassword);
         }
 
         public int DangNhap(string username, string password)
@@ -73,9 +38,44 @@ namespace QuanLyTruongCap3.BLL
             return 2;
         }
 
-        public void ChangePassword(string userName, string newPassword)
+        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
         {
-            nguoiDungDAL.ChangePassword(userName, newPassword);
+            BindingSource bS = new BindingSource();
+
+            bS.DataSource = nguoiDungDAL.LayDsNguoiDung();
+            bN.BindingSource = bS;
+            dGV.DataSource = bS;
+        }
+
+        public void HienThiComboBox(ComboBoxEx comboBox)
+        {
+            comboBox.DataSource = nguoiDungDAL.LayDsNguoiDung();
+            comboBox.DisplayMember = "TenND";
+            comboBox.ValueMember = "MaND";
+        }
+
+        public void HienThiDataGridViewComboBoxColumn(DataGridViewComboBoxColumn cmbColumn)
+        {
+            cmbColumn.DataSource = nguoiDungDAL.LayDsNguoiDung();
+            cmbColumn.DisplayMember = "TenND";
+            cmbColumn.ValueMember = "MaND";
+            cmbColumn.DataPropertyName = "MaND";
+            cmbColumn.HeaderText = "Người dùng";
+        }
+
+        public bool LuuNguoiDung()
+        {
+            return nguoiDungDAL.LuuNguoiDung();
+        }
+
+        public DataRow ThemDongMoi()
+        {
+            return nguoiDungDAL.ThemDongMoi();
+        }
+
+        public void ThemNguoiDung(DataRow row)
+        {
+            nguoiDungDAL.ThemNguoiDung(row);
         }
     }
 }

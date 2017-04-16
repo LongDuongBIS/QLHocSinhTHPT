@@ -41,7 +41,7 @@ namespace QuanLyTruongCap3
             bindingNavigatorDeleteItem.Enabled |= dGVKetQua.RowCount == 0;
 
             DataRow row = ketQuaBLL.ThemDongMoi();
-            row["MaKetQua"] = string.Format("KQ{0}", quyDinh.LaySTT(dGVKetQua.Rows.Count + 1));
+            row["MaKetQua"] = string.Format("KQ{0}", QuyDinh.LaySTT(dGVKetQua.Rows.Count + 1));
             row["TenKetQua"] = string.Empty;
             ketQuaBLL.ThemKetQua(row);
             bindingNavigatorKetQua.BindingSource.MoveLast();

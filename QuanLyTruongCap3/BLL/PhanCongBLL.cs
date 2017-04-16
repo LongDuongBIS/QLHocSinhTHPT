@@ -42,16 +42,6 @@ namespace QuanLyTruongCap3.BLL
             dGV.DataSource = bS;
         }
 
-        public DataRow ThemDongMoi()
-        {
-            return phanCongDAL.ThemDongMoi();
-        }
-
-        public void ThemPhanCong(DataRow row)
-        {
-            phanCongDAL.ThemPhanCong(row);
-        }
-
         public bool LuuPhanCong()
         {
             return phanCongDAL.LuuPhanCong();
@@ -62,14 +52,24 @@ namespace QuanLyTruongCap3.BLL
             phanCongDAL.LuuPhanCong(maNamHoc, maLop, maMonHoc, maGiaoVien);
         }
 
-        public void TimTheoTenLop(string tenLop)
+        public DataRow ThemDongMoi()
         {
-            phanCongDAL.TimTheoTenLop(tenLop);
+            return phanCongDAL.ThemDongMoi();
+        }
+
+        public void ThemPhanCong(DataRow row)
+        {
+            phanCongDAL.ThemPhanCong(row);
         }
 
         public void TimTheoTenGV(string tenGiaoVien)
         {
             phanCongDAL.TimTheoTenGV(tenGiaoVien);
+        }
+
+        public void TimTheoTenLop(string tenLop)
+        {
+            phanCongDAL.TimTheoTenLop(tenLop);
         }
     }
 }

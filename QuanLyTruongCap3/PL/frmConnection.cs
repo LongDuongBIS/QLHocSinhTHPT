@@ -14,11 +14,6 @@ namespace QuanLyTruongCap3
             InitializeComponent();
         }
 
-        private void frmConnection_Load(object sender, EventArgs e)
-        {
-            cmbAuthentication.SelectedIndex = 0;
-        }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -115,6 +110,11 @@ namespace QuanLyTruongCap3
                 txtUsername.Enabled = true;
                 txtPassword.Enabled = true;
             }
+        }
+
+        private void frmConnection_Load(object sender, EventArgs e)
+        {
+            cmbAuthentication.SelectedIndex = 0;
         }
     }
 }

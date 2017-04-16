@@ -1,6 +1,6 @@
 ﻿using System;
 
-//Hoàn chỉnh
+
 namespace QuanLyTruongCap3.DTO
 {
     public class HocSinhDTO

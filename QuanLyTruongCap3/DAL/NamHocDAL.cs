@@ -4,9 +4,15 @@ using System.Data.SqlClient;
 
 namespace QuanLyTruongCap3.DAL
 {
-    public class NamHocDAL
+    public class NamHocDAL : System.IDisposable
     {
         private readonly DataService namHocDS = new DataService();
+
+        public void Dispose()
+        {
+            namHocDS.Dispose();
+            System.GC.SuppressFinalize(this);
+        }
 
         public DataTable LayDsNamHoc()
         {
@@ -18,6 +24,11 @@ namespace QuanLyTruongCap3.DAL
             return namHocDS;
         }
 
+        public bool LuuNamHoc()
+        {
+            return namHocDS.ExecuteNonQuery() > 0;
+        }
+
         public DataRow ThemDongMoi()
         {
             return namHocDS.NewRow();
@@ -26,11 +37,6 @@ namespace QuanLyTruongCap3.DAL
         public void ThemNamHoc(DataRow row)
         {
             namHocDS.Rows.Add(row);
-        }
-
-        public bool LuuNamHoc()
-        {
-            return namHocDS.ExecuteNonQuery() > 0;
         }
     }
 }

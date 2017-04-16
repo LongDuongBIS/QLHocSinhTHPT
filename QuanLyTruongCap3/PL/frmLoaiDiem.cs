@@ -43,7 +43,7 @@ namespace QuanLyTruongCap3
             bindingNavigatorDeleteItem.Enabled |= dGVLoaiDiem.RowCount == 0;
 
             DataRow row = loaiDiemBLL.ThemDongMoi();
-            row["MaLoai"] = string.Format("LD{0}", quyDinh.LaySTT(dGVLoaiDiem.Rows.Count + 1));
+            row["MaLoai"] = string.Format("LD{0}", QuyDinh.LaySTT(dGVLoaiDiem.Rows.Count + 1));
             row["TenLoai"] = string.Empty;
             row["HeSo"] = 0;
             loaiDiemBLL.ThemLoaiDiem(row);

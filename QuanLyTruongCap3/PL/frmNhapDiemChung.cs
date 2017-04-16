@@ -75,7 +75,7 @@ namespace QuanLyTruongCap3
 
                             diemDaXuLy = chuoiDiemChuaXuLy.Substring(i - count, count);
 
-                            if (count != 0 && quyDinh.KiemTraDiem(diemDaXuLy) == false)
+                            if (count != 0 && QuyDinh.KiemTraDiem(diemDaXuLy) == false)
                             {
                                 MessageBoxEx.Show(string.Format("Điểm của học sinh {0} không hợp lệ!", row.Cells["colHoTen"].Value), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return false;
@@ -122,7 +122,7 @@ namespace QuanLyTruongCap3
 
                                     diemDaXuLy = chuoiDiemChuaXuLy.Substring(i - count, count);
 
-                                    if (diemDaXuLy != null && diemDaXuLy != " " && quyDinh.KiemTraDiem(diemDaXuLy))
+                                    if (diemDaXuLy != null && diemDaXuLy != " " && QuyDinh.KiemTraDiem(diemDaXuLy))
                                         diemBLL.LuuDiem(row.Cells["colMaHocSinh"].Value.ToString(), cmbMonHoc.SelectedValue.ToString(), cmbHocKy.SelectedValue.ToString(), cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), "LD0001", float.Parse(diemDaXuLy));
 
                                     diemDaXuLy = null;
@@ -151,7 +151,7 @@ namespace QuanLyTruongCap3
 
                                     diemDaXuLy = chuoiDiemChuaXuLy.Substring(i - count, count);
 
-                                    if (diemDaXuLy != null && diemDaXuLy != " " && quyDinh.KiemTraDiem(diemDaXuLy))
+                                    if (diemDaXuLy != null && diemDaXuLy != " " && QuyDinh.KiemTraDiem(diemDaXuLy))
                                         diemBLL.LuuDiem(row.Cells["colMaHocSinh"].Value.ToString(), cmbMonHoc.SelectedValue.ToString(), cmbHocKy.SelectedValue.ToString(), cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), "LD0002", float.Parse(diemDaXuLy));
 
                                     diemDaXuLy = null;
@@ -180,7 +180,7 @@ namespace QuanLyTruongCap3
 
                                     diemDaXuLy = chuoiDiemChuaXuLy.Substring(i - count, count);
 
-                                    if (diemDaXuLy != null && diemDaXuLy != " " && quyDinh.KiemTraDiem(diemDaXuLy))
+                                    if (diemDaXuLy != null && diemDaXuLy != " " && QuyDinh.KiemTraDiem(diemDaXuLy))
                                         diemBLL.LuuDiem(row.Cells["colMaHocSinh"].Value.ToString(), cmbMonHoc.SelectedValue.ToString(), cmbHocKy.SelectedValue.ToString(), cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), "LD0003", float.Parse(diemDaXuLy));
 
                                     diemDaXuLy = null;
@@ -192,7 +192,7 @@ namespace QuanLyTruongCap3
                         if (row.Cells["colDiemThi"].Value != null)
                         {
                             string diemThi = row.Cells["colDiemThi"].Value.ToString();
-                            if (quyDinh.KiemTraDiem(diemThi))
+                            if (QuyDinh.KiemTraDiem(diemThi))
                                 diemBLL.LuuDiem(row.Cells["colMaHocSinh"].Value.ToString(), cmbMonHoc.SelectedValue.ToString(), cmbHocKy.SelectedValue.ToString(), cmbNamHoc.SelectedValue.ToString(), cmbLop.SelectedValue.ToString(), "LD0004", float.Parse(diemThi));
                         }
 
@@ -238,7 +238,7 @@ namespace QuanLyTruongCap3
 
                                     diemDaXuLy = chuoiDiemChuaXuLy.Substring(i - count, count);
 
-                                    if (diemDaXuLy != null && diemDaXuLy != " " && quyDinh.KiemTraDiem(diemDaXuLy))
+                                    if (diemDaXuLy != null && diemDaXuLy != " " && QuyDinh.KiemTraDiem(diemDaXuLy))
                                         diemBLL.LuuDiem(row.Cells["colMaHocSinh"].Value.ToString(), cmbMonHocSD.SelectedValue.ToString(), cmbHocKySD.SelectedValue.ToString(), cmbNamHocSD.SelectedValue.ToString(), cmbLopSD.SelectedValue.ToString(), "LD0001", float.Parse(diemDaXuLy));
 
                                     diemDaXuLy = null;
@@ -267,7 +267,7 @@ namespace QuanLyTruongCap3
 
                                     diemDaXuLy = chuoiDiemChuaXuLy.Substring(i - count, count);
 
-                                    if (diemDaXuLy != null && diemDaXuLy != " " && quyDinh.KiemTraDiem(diemDaXuLy))
+                                    if (diemDaXuLy != null && diemDaXuLy != " " && QuyDinh.KiemTraDiem(diemDaXuLy))
                                         diemBLL.LuuDiem(row.Cells["colMaHocSinh"].Value.ToString(), cmbMonHocSD.SelectedValue.ToString(), cmbHocKySD.SelectedValue.ToString(), cmbNamHocSD.SelectedValue.ToString(), cmbLopSD.SelectedValue.ToString(), "LD0002", float.Parse(diemDaXuLy));
 
                                     diemDaXuLy = null;
@@ -296,7 +296,7 @@ namespace QuanLyTruongCap3
 
                                     diemDaXuLy = chuoiDiemChuaXuLy.Substring(i - count, count);
 
-                                    if (diemDaXuLy != null && diemDaXuLy != " " && quyDinh.KiemTraDiem(diemDaXuLy))
+                                    if (diemDaXuLy != null && diemDaXuLy != " " && QuyDinh.KiemTraDiem(diemDaXuLy))
                                         diemBLL.LuuDiem(row.Cells["colMaHocSinh"].Value.ToString(), cmbMonHocSD.SelectedValue.ToString(), cmbHocKySD.SelectedValue.ToString(), cmbNamHocSD.SelectedValue.ToString(), cmbLopSD.SelectedValue.ToString(), "LD0003", float.Parse(diemDaXuLy));
 
                                     diemDaXuLy = null;
@@ -308,7 +308,7 @@ namespace QuanLyTruongCap3
                         if (row.Cells["colDiemThi"].Value != null)
                         {
                             string diemThi = row.Cells["colDiemThi"].Value.ToString();
-                            if (quyDinh.KiemTraDiem(diemThi))
+                            if (QuyDinh.KiemTraDiem(diemThi))
                                 diemBLL.LuuDiem(row.Cells["colMaHocSinh"].Value.ToString(), cmbMonHocSD.SelectedValue.ToString(), cmbHocKySD.SelectedValue.ToString(), cmbNamHocSD.SelectedValue.ToString(), cmbLopSD.SelectedValue.ToString(), "LD0004", float.Parse(diemThi));
                         }
 
@@ -433,9 +433,9 @@ namespace QuanLyTruongCap3
                     }
                 }
 
-                rowHocSinh.Cells["colDiemMieng"].Value = quyDinh.ArrayToString(diemMieng, soDiemMieng);
-                rowHocSinh.Cells["colDiem15Phut"].Value = quyDinh.ArrayToString(diem15Phut, soDiem15Phut);
-                rowHocSinh.Cells["colDiem45Phut"].Value = quyDinh.ArrayToString(diem45Phut, soDiem45Phut);
+                rowHocSinh.Cells["colDiemMieng"].Value = QuyDinh.ArrayToString(diemMieng, soDiemMieng);
+                rowHocSinh.Cells["colDiem15Phut"].Value = QuyDinh.ArrayToString(diem15Phut, soDiem15Phut);
+                rowHocSinh.Cells["colDiem45Phut"].Value = QuyDinh.ArrayToString(diem45Phut, soDiem45Phut);
                 rowHocSinh.Cells["colDiemThi"].Value = diemThi;
             }
         }

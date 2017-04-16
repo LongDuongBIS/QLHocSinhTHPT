@@ -9,6 +9,15 @@ namespace QuanLyTruongCap3.BLL
     {
         private readonly TonGiaoDAL tonGiaoDAL = new TonGiaoDAL();
 
+        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        {
+            BindingSource bS = new BindingSource();
+
+            bS.DataSource = tonGiaoDAL.LayDsTonGiao();
+            bN.BindingSource = bS;
+            dGV.DataSource = bS;
+        }
+
         public void HienThiComboBox(ComboBoxEx comboBox)
         {
             comboBox.DataSource = tonGiaoDAL.LayDsTonGiao();
@@ -25,13 +34,9 @@ namespace QuanLyTruongCap3.BLL
             cmbColumn.HeaderText = "Tôn giáo";
         }
 
-        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        public bool LuuTonGiao()
         {
-            BindingSource bS = new BindingSource();
-
-            bS.DataSource = tonGiaoDAL.LayDsTonGiao();
-            bN.BindingSource = bS;
-            dGV.DataSource = bS;
+            return tonGiaoDAL.LuuTonGiao();
         }
 
         public DataRow ThemDongMoi()
@@ -42,11 +47,6 @@ namespace QuanLyTruongCap3.BLL
         public void ThemTonGiao(DataRow row)
         {
             tonGiaoDAL.ThemTonGiao(row);
-        }
-
-        public bool LuuTonGiao()
-        {
-            return tonGiaoDAL.LuuTonGiao();
         }
     }
 }

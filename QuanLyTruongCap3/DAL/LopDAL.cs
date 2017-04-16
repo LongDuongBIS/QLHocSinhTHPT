@@ -4,9 +4,15 @@ using System.Data.SqlClient;
 
 namespace QuanLyTruongCap3.DAL
 {
-    public class LopDAL
+    public class LopDAL : System.IDisposable
     {
         private readonly DataService lopDS = new DataService();
+
+        public void Dispose()
+        {
+            lopDS.Dispose();
+            System.GC.SuppressFinalize(this);
+        }
 
         public DataTable LayDsLop()
         {
@@ -65,16 +71,6 @@ namespace QuanLyTruongCap3.DAL
             return lopDS;
         }
 
-        public DataRow ThemDongMoi()
-        {
-            return lopDS.NewRow();
-        }
-
-        public void ThemLop(DataRow row)
-        {
-            lopDS.Rows.Add(row);
-        }
-
         public bool LuuLop()
         {
             return lopDS.ExecuteNonQuery() > 0;
@@ -93,6 +89,16 @@ namespace QuanLyTruongCap3.DAL
 
                 lopDS.Load(cmd);
             }
+        }
+
+        public DataRow ThemDongMoi()
+        {
+            return lopDS.NewRow();
+        }
+
+        public void ThemLop(DataRow row)
+        {
+            lopDS.Rows.Add(row);
         }
 
         public DataTable TimTheoMa(string id)

@@ -95,7 +95,7 @@ namespace QuanLyTruongCap3
                     {
                         int siSo = Convert.ToInt32(row.Cells[siSoColumn].Value.ToString());
 
-                        if (quyDinh.KiemTraSiSo(siSo) == false)
+                        if (QuyDinh.KiemTraSiSo(siSo) == false)
                         {
                             MessageBoxEx.Show("Sỉ số không đúng quy định!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return false;
@@ -166,7 +166,7 @@ namespace QuanLyTruongCap3
 
         private void btnLuuVaoDS_Click(object sender, EventArgs e)
         {
-            if (txtMaLop.Text != string.Empty && txtTenLop.Text != string.Empty && cmbKhoiLop.SelectedValue != null && cmbNamHoc.SelectedValue != null && cmbGiaoVien.SelectedValue != null && quyDinh.KiemTraSiSo(iniSiSo.Value) == true)
+            if (txtMaLop.Text != string.Empty && txtTenLop.Text != string.Empty && cmbKhoiLop.SelectedValue != null && cmbNamHoc.SelectedValue != null && cmbGiaoVien.SelectedValue != null && QuyDinh.KiemTraSiSo(iniSiSo.Value) == true)
             {
                 lopBLL.LuuLop(txtMaLop.Text, txtTenLop.Text, cmbKhoiLop.SelectedValue.ToString(), cmbNamHoc.SelectedValue.ToString(), iniSiSo.Value, cmbGiaoVien.SelectedValue.ToString());
                 lopBLL.HienThi(dGVLop, bindingNavigatorLop, txtMaLop, txtTenLop, cmbKhoiLop, cmbNamHoc, iniSiSo, cmbGiaoVien);

@@ -4,9 +4,15 @@ using System.Data.SqlClient;
 
 namespace QuanLyTruongCap3.DAL
 {
-    public class KetQuaDAL
+    public class KetQuaDAL : System.IDisposable
     {
         private readonly DataService ketQuaDS = new DataService();
+
+        public void Dispose()
+        {
+            ketQuaDS.Dispose();
+            System.GC.SuppressFinalize(this);
+        }
 
         public DataTable LayDsKetQua()
         {
@@ -18,6 +24,11 @@ namespace QuanLyTruongCap3.DAL
             return ketQuaDS;
         }
 
+        public bool LuuKetQua()
+        {
+            return ketQuaDS.ExecuteNonQuery() > 0;
+        }
+
         public DataRow ThemDongMoi()
         {
             return ketQuaDS.NewRow();
@@ -26,11 +37,6 @@ namespace QuanLyTruongCap3.DAL
         public void ThemKetQua(DataRow row)
         {
             ketQuaDS.Rows.Add(row);
-        }
-
-        public bool LuuKetQua()
-        {
-            return ketQuaDS.ExecuteNonQuery() > 0;
         }
     }
 }

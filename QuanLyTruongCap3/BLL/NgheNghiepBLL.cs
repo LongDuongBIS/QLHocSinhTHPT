@@ -9,6 +9,15 @@ namespace QuanLyTruongCap3.BLL
     {
         private readonly NgheNghiepDAL ngheNghiepDAL = new NgheNghiepDAL();
 
+        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        {
+            BindingSource bS = new BindingSource();
+
+            bS.DataSource = ngheNghiepDAL.LayDsNgheNghiep();
+            bN.BindingSource = bS;
+            dGV.DataSource = bS;
+        }
+
         public void HienThiComboBox(ComboBoxEx comboBox)
         {
             comboBox.DataSource = ngheNghiepDAL.LayDsNgheNghiep();
@@ -34,13 +43,9 @@ namespace QuanLyTruongCap3.BLL
             cmbColumn.HeaderText = "Nghề nghiệp mẹ";
         }
 
-        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        public bool LuuNgheNghiep()
         {
-            BindingSource bS = new BindingSource();
-
-            bS.DataSource = ngheNghiepDAL.LayDsNgheNghiep();
-            bN.BindingSource = bS;
-            dGV.DataSource = bS;
+            return ngheNghiepDAL.LuuNgheNghiep();
         }
 
         public DataRow ThemDongMoi()
@@ -51,11 +56,6 @@ namespace QuanLyTruongCap3.BLL
         public void ThemNgheNghiep(DataRow row)
         {
             ngheNghiepDAL.ThemNgheNghiep(row);
-        }
-
-        public bool LuuNgheNghiep()
-        {
-            return ngheNghiepDAL.LuuNgheNghiep();
         }
     }
 }

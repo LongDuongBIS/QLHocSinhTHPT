@@ -43,7 +43,7 @@ namespace QuanLyTruongCap3
             bindingNavigatorDeleteItem.Enabled |= dGVHanhKiem.RowCount == 0;
 
             DataRow row = hanhKiemBLL.ThemDongMoi();
-            row["MaHanhKiem"] = string.Format("HK{0}", quyDinh.LaySTT(dGVHanhKiem.Rows.Count + 1));
+            row["MaHanhKiem"] = string.Format("HK{0}", QuyDinh.LaySTT(dGVHanhKiem.Rows.Count + 1));
             row["TenHanhKiem"] = string.Empty;
             hanhKiemBLL.ThemHanhKiem(row);
             bindingNavigatorHanhKiem.BindingSource.MoveLast();

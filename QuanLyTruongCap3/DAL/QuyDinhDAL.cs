@@ -4,18 +4,19 @@ using System.Data.SqlClient;
 
 namespace QuanLyTruongCap3.DAL
 {
-    public class QuyDinhDAL
+    public class QuyDinhDAL : System.IDisposable
     {
         private readonly DataService quyDinhDS = new DataService();
 
-        public DataTable LayDsQuyDinh()
+        public void CapNhatQuyDinhDoTuoi(int tuoiCanDuoi, int tuoiCanTren)
         {
-            using (SqlCommand cmd = new SqlCommand("SELECT * " + "FROM QUYDINH"))
+            using (SqlCommand cmd = new SqlCommand("UPDATE QUYDINH " + "SET TuoiCanDuoi = @tuoiCanDuoi, TuoiCanTren = @tuoiCanTren"))
             {
+                cmd.Parameters.Add("tuoiCanDuoi", SqlDbType.Int).Value = tuoiCanDuoi;
+                cmd.Parameters.Add("tuoiCanTren", SqlDbType.Int).Value = tuoiCanTren;
+
                 quyDinhDS.Load(cmd);
             }
-
-            return quyDinhDS;
         }
 
         public void CapNhatQuyDinhSiSo(int siSoCanDuoi, int siSoCanTren)
@@ -29,12 +30,11 @@ namespace QuanLyTruongCap3.DAL
             }
         }
 
-        public void CapNhatQuyDinhDoTuoi(int tuoiCanDuoi, int tuoiCanTren)
+        public void CapNhatQuyDinhThangDiem(int thangDiem)
         {
-            using (SqlCommand cmd = new SqlCommand("UPDATE QUYDINH " + "SET TuoiCanDuoi = @tuoiCanDuoi, TuoiCanTren = @tuoiCanTren"))
+            using (SqlCommand cmd = new SqlCommand("UPDATE QUYDINH " + "SET ThangDiem = @thangDiem"))
             {
-                cmd.Parameters.Add("tuoiCanDuoi", SqlDbType.Int).Value = tuoiCanDuoi;
-                cmd.Parameters.Add("tuoiCanTren", SqlDbType.Int).Value = tuoiCanTren;
+                cmd.Parameters.Add("thangDiem", SqlDbType.Int).Value = thangDiem;
 
                 quyDinhDS.Load(cmd);
             }
@@ -51,14 +51,20 @@ namespace QuanLyTruongCap3.DAL
             }
         }
 
-        public void CapNhatQuyDinhThangDiem(int thangDiem)
+        public void Dispose()
         {
-            using (SqlCommand cmd = new SqlCommand("UPDATE QUYDINH " + "SET ThangDiem = @thangDiem"))
-            {
-                cmd.Parameters.Add("thangDiem", SqlDbType.Int).Value = thangDiem;
+            quyDinhDS.Dispose();
+            System.GC.SuppressFinalize(this);
+        }
 
+        public DataTable LayDsQuyDinh()
+        {
+            using (SqlCommand cmd = new SqlCommand("SELECT * " + "FROM QUYDINH"))
+            {
                 quyDinhDS.Load(cmd);
             }
+
+            return quyDinhDS;
         }
     }
 }

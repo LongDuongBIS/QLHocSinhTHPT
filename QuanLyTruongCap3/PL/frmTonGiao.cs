@@ -43,7 +43,7 @@ namespace QuanLyTruongCap3
             bindingNavigatorDeleteItem.Enabled &= dGVTonGiao.RowCount != 0;
 
             DataRow row = tonGiaoBLL.ThemDongMoi();
-            row["MaTonGiao"] = string.Format("TG{0}", quyDinh.LaySTT(dGVTonGiao.Rows.Count + 1));
+            row["MaTonGiao"] = string.Format("TG{0}", QuyDinh.LaySTT(dGVTonGiao.Rows.Count + 1));
             row["TenTonGiao"] = string.Empty;
             tonGiaoBLL.ThemTonGiao(row);
             bindingNavigatorTonGiao.BindingSource.MoveLast();

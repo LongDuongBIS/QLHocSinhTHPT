@@ -12,6 +12,11 @@ namespace QuanLyTruongCap3
             InitializeComponent();
         }
 
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void frmAbout_Load(object sender, EventArgs e)
         {
             this.lbl08Email.Links.Add(0, 19, "mailto:huulongduong@gmail.com");
@@ -30,11 +35,6 @@ namespace QuanLyTruongCap3
             string strURL = Convert.ToString(e.Link.LinkData);
             if (strURL.StartsWith("http://", StringComparison.CurrentCulture))
                 Process.Start(strURL);
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

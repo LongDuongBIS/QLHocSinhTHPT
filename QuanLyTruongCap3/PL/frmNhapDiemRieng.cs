@@ -80,7 +80,7 @@ namespace QuanLyTruongCap3
 
         private void btnLuuVaoDS_Click(object sender, EventArgs e)
         {
-            if (quyDinh.KiemTraDiem(txtDiem.Text) == false || txtDiem.Text == string.Empty)
+            if (QuyDinh.KiemTraDiem(txtDiem.Text) == false || txtDiem.Text == string.Empty)
             {
                 MessageBoxEx.Show("Giá trị điểm không hợp lệ!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -133,7 +133,7 @@ namespace QuanLyTruongCap3
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (quyDinh.KiemTraDiem(txtDiem.Text) == false || txtDiem.Text == string.Empty)
+                if (QuyDinh.KiemTraDiem(txtDiem.Text) == false || txtDiem.Text == string.Empty)
                 {
                     MessageBoxEx.Show("Giá trị điểm không hợp lệ!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }

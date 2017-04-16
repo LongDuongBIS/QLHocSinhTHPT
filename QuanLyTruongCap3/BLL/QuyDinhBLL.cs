@@ -11,6 +11,26 @@ namespace QuanLyTruongCap3.BLL
     {
         private readonly QuyDinhDAL quyDinhDAL = new QuyDinhDAL();
 
+        public void CapNhatQuyDinhDoTuoi(int tuoiCanDuoi, int tuoiCanTren)
+        {
+            quyDinhDAL.CapNhatQuyDinhDoTuoi(tuoiCanDuoi, tuoiCanTren);
+        }
+
+        public void CapNhatQuyDinhSiSo(int siSoCanDuoi, int siSoCanTren)
+        {
+            quyDinhDAL.CapNhatQuyDinhSiSo(siSoCanDuoi, siSoCanTren);
+        }
+
+        public void CapNhatQuyDinhThangDiem(int thangDiem)
+        {
+            quyDinhDAL.CapNhatQuyDinhThangDiem(thangDiem);
+        }
+
+        public void CapNhatQuyDinhTruong(string tenTruong, string diaChiTruong)
+        {
+            quyDinhDAL.CapNhatQuyDinhTruong(tenTruong, diaChiTruong);
+        }
+
         public void HienThi(IntegerInput txtSiSoCanDuoi, IntegerInput txtSiSoCanTren, IntegerInput txtDoTuoiCanDuoi, IntegerInput txtDoTuoiCanTren, CheckBoxX ckbThang10, CheckBoxX ckbThang100, TextBoxX txtTenTruong, TextBoxX txtDiaChiTruong)
         {
             BindingSource bS = new BindingSource();
@@ -41,26 +61,6 @@ namespace QuanLyTruongCap3.BLL
 
             txtDiaChiTruong.DataBindings.Clear();
             txtDiaChiTruong.DataBindings.Add("Text", bS, "DiaChiTruong");
-        }
-
-        public void CapNhatQuyDinhSiSo(int siSoCanDuoi, int siSoCanTren)
-        {
-            quyDinhDAL.CapNhatQuyDinhSiSo(siSoCanDuoi, siSoCanTren);
-        }
-
-        public void CapNhatQuyDinhDoTuoi(int tuoiCanDuoi, int tuoiCanTren)
-        {
-            quyDinhDAL.CapNhatQuyDinhDoTuoi(tuoiCanDuoi, tuoiCanTren);
-        }
-
-        public void CapNhatQuyDinhTruong(string tenTruong, string diaChiTruong)
-        {
-            quyDinhDAL.CapNhatQuyDinhTruong(tenTruong, diaChiTruong);
-        }
-
-        public void CapNhatQuyDinhThangDiem(int thangDiem)
-        {
-            quyDinhDAL.CapNhatQuyDinhThangDiem(thangDiem);
         }
     }
 }

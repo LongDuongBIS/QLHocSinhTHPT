@@ -4,9 +4,23 @@ using System.Data.SqlClient;
 
 namespace QuanLyTruongCap3.DAL
 {
-    public class GiaoVienDAL
+    public class GiaoVienDAL : System.IDisposable
     {
         private readonly DataService giaoVienDS = new DataService();
+
+        public string TruyVanChung
+        {
+            get
+            {
+                return "SELECT G.MaGiaoVien, G.TenGiaoVien, G.DiaChi, G.DienThoai, H.TenMonHoc " + "FROM GIAOVIEN G " + "INNER JOIN MONHOC H ON G.MaMonHoc = H.MaMonHoc";
+            }
+        }
+
+        public void Dispose()
+        {
+            giaoVienDS.Dispose();
+            System.GC.SuppressFinalize(this);
+        }
 
         public DataTable LayDsGiaoVien()
         {
@@ -28,16 +42,6 @@ namespace QuanLyTruongCap3.DAL
             return giaoVienDS;
         }
 
-        public DataRow ThemDongMoi()
-        {
-            return giaoVienDS.NewRow();
-        }
-
-        public void ThemGiaoVien(DataRow row)
-        {
-            giaoVienDS.Rows.Add(row);
-        }
-
         public bool LuuGiaoVien()
         {
             return giaoVienDS.ExecuteNonQuery() > 0;
@@ -57,36 +61,14 @@ namespace QuanLyTruongCap3.DAL
             }
         }
 
-        public DataTable TimTheoMa(string id)
+        public DataRow ThemDongMoi()
         {
-            using (var cmd = new SqlCommand("SELECT * " + "FROM GIAOVIEN " + "WHERE MaGiaoVien LIKE '%' + @id + '%'"))
-            {
-                cmd.Parameters.Add("id", SqlDbType.VarChar).Value = id;
-
-                giaoVienDS.Load(cmd);
-            }
-
-            return giaoVienDS;
+            return giaoVienDS.NewRow();
         }
 
-        public DataTable TimTheoTen(string ten)
+        public void ThemGiaoVien(DataRow row)
         {
-            using (SqlCommand cmd = new SqlCommand("SELECT * " + "FROM GIAOVIEN " + "WHERE TenGiaoVien LIKE '%' + @ten + '%'"))
-            {
-                cmd.Parameters.Add("ten", SqlDbType.NVarChar).Value = ten;
-
-                giaoVienDS.Load(cmd);
-            }
-
-            return giaoVienDS;
-        }
-
-        public string TruyVanChung
-        {
-            get
-            {
-                return "SELECT G.MaGiaoVien, G.TenGiaoVien, G.DiaChi, G.DienThoai, H.TenMonHoc " + "FROM GIAOVIEN G " + "INNER JOIN MONHOC H ON G.MaMonHoc = H.MaMonHoc";
-            }
+            giaoVienDS.Rows.Add(row);
         }
 
         public DataTable TimKiemGiaoVien(string hoTen, string theoDChi, string diaChi, string theoCMon, string cMon)
@@ -109,6 +91,30 @@ namespace QuanLyTruongCap3.DAL
                 }
 
                 cmd.CommandText = sql;
+                giaoVienDS.Load(cmd);
+            }
+
+            return giaoVienDS;
+        }
+
+        public DataTable TimTheoMa(string id)
+        {
+            using (var cmd = new SqlCommand("SELECT * " + "FROM GIAOVIEN " + "WHERE MaGiaoVien LIKE '%' + @id + '%'"))
+            {
+                cmd.Parameters.Add("id", SqlDbType.VarChar).Value = id;
+
+                giaoVienDS.Load(cmd);
+            }
+
+            return giaoVienDS;
+        }
+
+        public DataTable TimTheoTen(string ten)
+        {
+            using (SqlCommand cmd = new SqlCommand("SELECT * " + "FROM GIAOVIEN " + "WHERE TenGiaoVien LIKE '%' + @ten + '%'"))
+            {
+                cmd.Parameters.Add("ten", SqlDbType.NVarChar).Value = ten;
+
                 giaoVienDS.Load(cmd);
             }
 

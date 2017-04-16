@@ -4,9 +4,20 @@ using System.Data.SqlClient;
 
 namespace QuanLyTruongCap3.DAL
 {
-    public class NguoiDungDAL
+    public class NguoiDungDAL : System.IDisposable
     {
         private readonly DataService nguoiDungDS = new DataService();
+
+        public void ChangePassword(string userName, string newPassword)
+        {
+            nguoiDungDS.ChangePassword(userName, newPassword);
+        }
+
+        public void Dispose()
+        {
+            nguoiDungDS.Dispose();
+            System.GC.SuppressFinalize(this);
+        }
 
         public DataTable LayDsNguoiDung()
         {
@@ -30,6 +41,11 @@ namespace QuanLyTruongCap3.DAL
             return nguoiDungDS;
         }
 
+        public bool LuuNguoiDung()
+        {
+            return nguoiDungDS.ExecuteNonQuery() > 0;
+        }
+
         public DataRow ThemDongMoi()
         {
             return nguoiDungDS.NewRow();
@@ -38,16 +54,6 @@ namespace QuanLyTruongCap3.DAL
         public void ThemNguoiDung(DataRow row)
         {
             nguoiDungDS.Rows.Add(row);
-        }
-
-        public bool LuuNguoiDung()
-        {
-            return nguoiDungDS.ExecuteNonQuery() > 0;
-        }
-
-        public void ChangePassword(string userName, string newPassword)
-        {
-            nguoiDungDS.ChangePassword(userName, newPassword);
         }
     }
 }

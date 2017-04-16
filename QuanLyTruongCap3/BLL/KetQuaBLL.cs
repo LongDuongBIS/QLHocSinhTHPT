@@ -9,6 +9,15 @@ namespace QuanLyTruongCap3.BLL
     {
         private readonly KetQuaDAL ketQuaDAL = new KetQuaDAL();
 
+        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        {
+            BindingSource bS = new BindingSource();
+
+            bS.DataSource = ketQuaDAL.LayDsKetQua();
+            bN.BindingSource = bS;
+            dGV.DataSource = bS;
+        }
+
         public void HienThiComboBox(ComboBoxEx comboBox)
         {
             comboBox.DataSource = ketQuaDAL.LayDsKetQua();
@@ -25,13 +34,9 @@ namespace QuanLyTruongCap3.BLL
             cmbColumn.HeaderText = "Kết quả";
         }
 
-        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        public bool LuuKetQua()
         {
-            BindingSource bS = new BindingSource();
-
-            bS.DataSource = ketQuaDAL.LayDsKetQua();
-            bN.BindingSource = bS;
-            dGV.DataSource = bS;
+            return ketQuaDAL.LuuKetQua();
         }
 
         public DataRow ThemDongMoi()
@@ -42,11 +47,6 @@ namespace QuanLyTruongCap3.BLL
         public void ThemKetQua(DataRow row)
         {
             ketQuaDAL.ThemKetQua(row);
-        }
-
-        public bool LuuKetQua()
-        {
-            return ketQuaDAL.LuuKetQua();
         }
     }
 }

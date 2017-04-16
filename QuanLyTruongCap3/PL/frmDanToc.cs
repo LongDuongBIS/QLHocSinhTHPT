@@ -18,37 +18,6 @@ namespace QuanLyTruongCap3
             DataService.OpenConnection();
         }
 
-        private void frmDanToc_Load(object sender, EventArgs e)
-        {
-            danTocBLL.HienThi(dGVDanToc, bindingNavigatorDanToc);
-        }
-
-        private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
-        {
-            if (dGVDanToc.RowCount == 0)
-                bindingNavigatorDeleteItem.Enabled = false;
-            else if (MessageBoxEx.Show("Bạn có chắc chắn xóa dòng này không?", "DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                bindingNavigatorDanToc.BindingSource.RemoveCurrent();
-            }
-        }
-
-        private void bindingNavigatorExitItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
-        {
-            bindingNavigatorDeleteItem.Enabled |= dGVDanToc.RowCount == 0;
-
-            DataRow row = danTocBLL.ThemDongMoi();
-            row["MaDanToc"] = string.Format("DT{0}", quyDinh.LaySTT(dGVDanToc.Rows.Count + 1));
-            row["TenDanToc"] = string.Empty;
-            danTocBLL.ThemDanToc(row);
-            bindingNavigatorDanToc.BindingSource.MoveLast();
-        }
-
         public bool KiemTraTruocKhiLuu(string cellString)
         {
             foreach (DataGridViewRow row in dGVDanToc.Rows)
@@ -66,6 +35,32 @@ namespace QuanLyTruongCap3
             return true;
         }
 
+        private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
+        {
+            bindingNavigatorDeleteItem.Enabled |= dGVDanToc.RowCount == 0;
+
+            DataRow row = danTocBLL.ThemDongMoi();
+            row["MaDanToc"] = string.Format("DT{0}", QuyDinh.LaySTT(dGVDanToc.Rows.Count + 1));
+            row["TenDanToc"] = string.Empty;
+            danTocBLL.ThemDanToc(row);
+            bindingNavigatorDanToc.BindingSource.MoveLast();
+        }
+
+        private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
+        {
+            if (dGVDanToc.RowCount == 0)
+                bindingNavigatorDeleteItem.Enabled = false;
+            else if (MessageBoxEx.Show("Bạn có chắc chắn xóa dòng này không?", "DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                bindingNavigatorDanToc.BindingSource.RemoveCurrent();
+            }
+        }
+
+        private void bindingNavigatorExitItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void bindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
             if (KiemTraTruocKhiLuu("colMaDanToc") == true &&
@@ -79,6 +74,11 @@ namespace QuanLyTruongCap3
         private void dGVDanToc_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
+        }
+
+        private void frmDanToc_Load(object sender, EventArgs e)
+        {
+            danTocBLL.HienThi(dGVDanToc, bindingNavigatorDanToc);
         }
     }
 }

@@ -12,20 +12,31 @@ namespace QuanLyTruongCap3.BLL
     {
         private readonly GiaoVienDAL giaoVienDAL = new GiaoVienDAL();
 
-        public void HienThiComboBox(ComboBox comboBox)
+        public static IList<GiaoVienDTO> LayDsGiaoVien()
         {
-            comboBox.DataSource = giaoVienDAL.LayDsGiaoVien();
-            comboBox.DisplayMember = "TenGiaoVien";
-            comboBox.ValueMember = "MaGiaoVien";
-        }
+            DataTable dt = new GiaoVienDAL().LayDsGiaoVienForReport();
 
-        public void HienThiDataGridViewComboBoxColumn(DataGridViewComboBoxColumn cmbColumn)
-        {
-            cmbColumn.DataSource = giaoVienDAL.LayDsGiaoVien();
-            cmbColumn.DisplayMember = "TenGiaoVien";
-            cmbColumn.ValueMember = "MaGiaoVien";
-            cmbColumn.DataPropertyName = "MaGiaoVien";
-            cmbColumn.HeaderText = "Giáo viên";
+            IList<GiaoVienDTO> ds = new List<GiaoVienDTO>();
+
+            foreach (DataRow Row in dt.Rows)
+            {
+                GiaoVienDTO giaoVienDTO = new GiaoVienDTO();
+
+                MonHocDTO monHocDTO = new MonHocDTO();
+                monHocDTO.MaMonHoc = Convert.ToString(Row["MaMonHoc"]);
+                monHocDTO.TenMonHoc = Convert.ToString(Row["TenMonHoc"]);
+                monHocDTO.SoTiet = Convert.ToInt32(Row["SoTiet"]);
+                monHocDTO.HeSo = Convert.ToInt32(Row["HeSo"]);
+
+                giaoVienDTO.MaGiaoVien = Convert.ToString(Row["MaGiaoVien"]);
+                giaoVienDTO.TenGiaoVien = Convert.ToString(Row["TenGiaoVien"]);
+                giaoVienDTO.DiaChi = Convert.ToString(Row["DiaChi"]);
+                giaoVienDTO.DienThoai = Convert.ToString(Row["DienThoai"]);
+                giaoVienDTO.MonHoc = monHocDTO;
+
+                ds.Add(giaoVienDTO);
+            }
+            return ds;
         }
 
         public void HienThi(DataGridView dGV, BindingNavigator bN)
@@ -61,41 +72,20 @@ namespace QuanLyTruongCap3.BLL
             dGV.DataSource = bS;
         }
 
-        public static IList<GiaoVienDTO> LayDsGiaoVien()
+        public void HienThiComboBox(ComboBox comboBox)
         {
-            DataTable dt = new GiaoVienDAL().LayDsGiaoVienForReport();
-
-            IList<GiaoVienDTO> ds = new List<GiaoVienDTO>();
-
-            foreach (DataRow Row in dt.Rows)
-            {
-                GiaoVienDTO giaoVienDTO = new GiaoVienDTO();
-
-                MonHocDTO monHocDTO = new MonHocDTO();
-                monHocDTO.MaMonHoc = Convert.ToString(Row["MaMonHoc"]);
-                monHocDTO.TenMonHoc = Convert.ToString(Row["TenMonHoc"]);
-                monHocDTO.SoTiet = Convert.ToInt32(Row["SoTiet"]);
-                monHocDTO.HeSo = Convert.ToInt32(Row["HeSo"]);
-
-                giaoVienDTO.MaGiaoVien = Convert.ToString(Row["MaGiaoVien"]);
-                giaoVienDTO.TenGiaoVien = Convert.ToString(Row["TenGiaoVien"]);
-                giaoVienDTO.DiaChi = Convert.ToString(Row["DiaChi"]);
-                giaoVienDTO.DienThoai = Convert.ToString(Row["DienThoai"]);
-                giaoVienDTO.MonHoc = monHocDTO;
-
-                ds.Add(giaoVienDTO);
-            }
-            return ds;
+            comboBox.DataSource = giaoVienDAL.LayDsGiaoVien();
+            comboBox.DisplayMember = "TenGiaoVien";
+            comboBox.ValueMember = "MaGiaoVien";
         }
 
-        public DataRow ThemDongMoi()
+        public void HienThiDataGridViewComboBoxColumn(DataGridViewComboBoxColumn cmbColumn)
         {
-            return giaoVienDAL.ThemDongMoi();
-        }
-
-        public void ThemGiaoVien(DataRow row)
-        {
-            giaoVienDAL.ThemGiaoVien(row);
+            cmbColumn.DataSource = giaoVienDAL.LayDsGiaoVien();
+            cmbColumn.DisplayMember = "TenGiaoVien";
+            cmbColumn.ValueMember = "MaGiaoVien";
+            cmbColumn.DataPropertyName = "MaGiaoVien";
+            cmbColumn.HeaderText = "Giáo viên";
         }
 
         public bool LuuGiaoVien()
@@ -106,6 +96,16 @@ namespace QuanLyTruongCap3.BLL
         public void LuuGiaoVien(string maGiaoVien, string tenGiaoVien, string diaChi, string dienThoai, string chuyenMon)
         {
             giaoVienDAL.LuuGiaoVien(maGiaoVien, tenGiaoVien, diaChi, dienThoai, chuyenMon);
+        }
+
+        public DataRow ThemDongMoi()
+        {
+            return giaoVienDAL.ThemDongMoi();
+        }
+
+        public void ThemGiaoVien(DataRow row)
+        {
+            giaoVienDAL.ThemGiaoVien(row);
         }
 
         public void TimKiemGiaoVien(TextBoxX txtHoTen, ComboBoxEx cmbTheoDChi, TextBoxX txtDiaChi, ComboBoxEx cmbTheoCMon, ComboBoxEx cmbCMon, DataGridViewX dGV, BindingNavigator bN)

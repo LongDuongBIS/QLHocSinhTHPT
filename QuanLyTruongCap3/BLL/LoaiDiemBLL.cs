@@ -9,6 +9,15 @@ namespace QuanLyTruongCap3.BLL
     {
         private readonly LoaiDiemDAL loaiDiemDAL = new LoaiDiemDAL();
 
+        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        {
+            BindingSource bS = new BindingSource();
+
+            bS.DataSource = loaiDiemDAL.LayDsLoaiDiem();
+            bN.BindingSource = bS;
+            dGV.DataSource = bS;
+        }
+
         public void HienThiComboBox(ComboBoxEx comboBox)
         {
             comboBox.DataSource = loaiDiemDAL.LayDsLoaiDiem();
@@ -25,13 +34,9 @@ namespace QuanLyTruongCap3.BLL
             cmbColumn.HeaderText = "Loại điểm";
         }
 
-        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        public bool LuuLoaiDiem()
         {
-            BindingSource bS = new BindingSource();
-
-            bS.DataSource = loaiDiemDAL.LayDsLoaiDiem();
-            bN.BindingSource = bS;
-            dGV.DataSource = bS;
+            return loaiDiemDAL.LuuLoaiDiem();
         }
 
         public DataRow ThemDongMoi()
@@ -42,11 +47,6 @@ namespace QuanLyTruongCap3.BLL
         public void ThemLoaiDiem(DataRow row)
         {
             loaiDiemDAL.ThemLoaiDiem(row);
-        }
-
-        public bool LuuLoaiDiem()
-        {
-            return loaiDiemDAL.LuuLoaiDiem();
         }
     }
 }

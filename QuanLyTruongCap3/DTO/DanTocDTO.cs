@@ -1,5 +1,4 @@
-﻿//Hoàn chỉnh
-namespace QuanLyTruongCap3.DTO
+﻿namespace QuanLyTruongCap3.DTO
 {
     public class DanTocDTO
     {

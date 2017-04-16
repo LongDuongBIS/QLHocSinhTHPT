@@ -1,4 +1,4 @@
-﻿//Hoàn chỉnh
+﻿
 namespace QuanLyTruongCap3.DTO
 {
     public class HanhKiemDTO

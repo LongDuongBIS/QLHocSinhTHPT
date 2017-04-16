@@ -9,6 +9,10 @@ namespace QuanLyTruongCap3.Components
         {
         }
 
+        public CalendarColumn(DataGridViewCell cellTemplate) : base(cellTemplate)
+        {
+        }
+
         public override DataGridViewCell CellTemplate
         {
             get
@@ -31,11 +35,9 @@ namespace QuanLyTruongCap3.Components
             this.Style.Format = "dd/MM/yyyy";
         }
 
-        public override void InitializeEditingControl(int rowIndex, object initialFormattedValue, DataGridViewCellStyle dataGridViewCellStyle)
+        public override object DefaultNewRowValue
         {
-            base.InitializeEditingControl(rowIndex, initialFormattedValue, dataGridViewCellStyle);
-            CalendarEditingControl ctl = DataGridView.EditingControl as CalendarEditingControl;
-            ctl.Value = (DateTime)this.Value;
+            get { return DateTime.Now; }
         }
 
         public override Type EditType
@@ -48,22 +50,23 @@ namespace QuanLyTruongCap3.Components
             get { return typeof(DateTime); }
         }
 
-        public override object DefaultNewRowValue
+        public override void InitializeEditingControl(int rowIndex, object initialFormattedValue, DataGridViewCellStyle dataGridViewCellStyle)
         {
-            get { return DateTime.Now; }
+            base.InitializeEditingControl(rowIndex, initialFormattedValue, dataGridViewCellStyle);
+            var ctl = DataGridView.EditingControl as CalendarEditingControl;
+            ctl.Value = (DateTime)this.Value;
         }
     }
 
     public class CalendarEditingControl : DateTimePicker, IDataGridViewEditingControl
     {
-        private DataGridView dataGridView;
-        private bool valueChanged;
-        private int rowIndex;
 
         public CalendarEditingControl()
         {
             this.Format = DateTimePickerFormat.Short;
         }
+
+        public DataGridView EditingControlDataGridView { get; set; }
 
         public object EditingControlFormattedValue
         {
@@ -73,14 +76,23 @@ namespace QuanLyTruongCap3.Components
             }
             set
             {
-                if (value is string)
+                if ((value != null) && (value is string))
                     this.Value = DateTime.Parse((string)value);
             }
         }
 
-        public object GetEditingControlFormattedValue(DataGridViewDataErrorContexts context)
+        public int EditingControlRowIndex { get; set; }
+
+        public bool EditingControlValueChanged { get; set; }
+
+        public Cursor EditingPanelCursor
         {
-            return EditingControlFormattedValue;
+            get { return base.Cursor; }
+        }
+
+        public bool RepositionEditingControlOnValueChange
+        {
+            get { return false; }
         }
 
         public void ApplyCellStyleToEditingControl(DataGridViewCellStyle dataGridViewCellStyle)
@@ -88,12 +100,6 @@ namespace QuanLyTruongCap3.Components
             this.Font = dataGridViewCellStyle.Font;
             this.CalendarForeColor = dataGridViewCellStyle.ForeColor;
             this.CalendarMonthBackground = dataGridViewCellStyle.BackColor;
-        }
-
-        public int EditingControlRowIndex
-        {
-            get { return rowIndex; }
-            set { rowIndex = value; }
         }
 
         public bool EditingControlWantsInputKey(Keys key, bool dataGridViewWantsInputKey)
@@ -115,36 +121,19 @@ namespace QuanLyTruongCap3.Components
             }
         }
 
+        public object GetEditingControlFormattedValue(DataGridViewDataErrorContexts context)
+        {
+            return EditingControlFormattedValue;
+        }
+
         public void PrepareEditingControlForEdit(bool selectAll)
         {
             //No preparation needs to be done.
         }
 
-        public bool RepositionEditingControlOnValueChange
-        {
-            get { return false; }
-        }
-
-        public DataGridView EditingControlDataGridView
-        {
-            get { return dataGridView; }
-            set { dataGridView = value; }
-        }
-
-        public bool EditingControlValueChanged
-        {
-            get { return valueChanged; }
-            set { valueChanged = value; }
-        }
-
-        public Cursor EditingPanelCursor
-        {
-            get { return base.Cursor; }
-        }
-
         protected override void OnValueChanged(EventArgs eventargs)
         {
-            valueChanged = true;
+            EditingControlValueChanged = true;
             this.EditingControlDataGridView.NotifyCurrentCellDirty(true);
             base.OnValueChanged(eventargs);
         }

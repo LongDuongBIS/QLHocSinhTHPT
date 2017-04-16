@@ -5,9 +5,29 @@ using System.Data.SqlClient;
 
 namespace QuanLyTruongCap3.DAL
 {
-    public class KQCaNamMonHocDAL
+    public class KQCaNamMonHocDAL : IDisposable
     {
         private readonly DataService kqCaNamMonHocDS = new DataService();
+
+        public void Dispose()
+        {
+            kqCaNamMonHocDS.Dispose();
+            GC.SuppressFinalize(this);
+        }
+
+        public DataTable LayDsKQCaNamMonHocForReport(string maLop, string maMonHoc, string maNamHoc)
+        {
+            using (SqlCommand cmd = new SqlCommand("SELECT * " + "FROM HOCSINH HS " + "INNER JOIN KQ_CA_NAM_MON_HOC KQ ON KQ.MaHocSinh = HS.MaHocSinh " + "INNER JOIN LOP L ON KQ.MaLop = L.MaLop " + "INNER JOIN MONHOC MH ON KQ.MaMonHoc = MH.MaMonHoc " + "INNER JOIN NAMHOC NH ON KQ.MaNamHoc = NH.MaNamHoc " + "WHERE KQ.MaLop = @maLop AND KQ.MaMonHoc = @maMonHoc AND KQ.MaNamHoc = @maNamHoc"))
+            {
+                cmd.Parameters.Add("maLop", SqlDbType.VarChar).Value = maLop;
+                cmd.Parameters.Add("maMonHoc", SqlDbType.VarChar).Value = maMonHoc;
+                cmd.Parameters.Add("maNamHoc", SqlDbType.VarChar).Value = maNamHoc;
+
+                kqCaNamMonHocDS.Load(cmd);
+            }
+
+            return kqCaNamMonHocDS;
+        }
 
         public void LuuKetQua(string maHocSinh, string maLop, string maMonHoc, string maNamHoc, float diemThiLai, float diemTBMonCN)
         {
@@ -35,20 +55,6 @@ namespace QuanLyTruongCap3.DAL
 
                 kqCaNamMonHocDS.Load(cmd);
             }
-        }
-
-        public DataTable LayDsKQCaNamMonHocForReport(string maLop, string maMonHoc, string maNamHoc)
-        {
-            using (SqlCommand cmd = new SqlCommand("SELECT * " + "FROM HOCSINH HS " + "INNER JOIN KQ_CA_NAM_MON_HOC KQ ON KQ.MaHocSinh = HS.MaHocSinh " + "INNER JOIN LOP L ON KQ.MaLop = L.MaLop " + "INNER JOIN MONHOC MH ON KQ.MaMonHoc = MH.MaMonHoc " + "INNER JOIN NAMHOC NH ON KQ.MaNamHoc = NH.MaNamHoc " + "WHERE KQ.MaLop = @maLop AND KQ.MaMonHoc = @maMonHoc AND KQ.MaNamHoc = @maNamHoc"))
-            {
-                cmd.Parameters.Add("maLop", SqlDbType.VarChar).Value = maLop;
-                cmd.Parameters.Add("maMonHoc", SqlDbType.VarChar).Value = maMonHoc;
-                cmd.Parameters.Add("maNamHoc", SqlDbType.VarChar).Value = maNamHoc;
-
-                kqCaNamMonHocDS.Load(cmd);
-            }
-
-            return kqCaNamMonHocDS;
         }
     }
 }

@@ -5,9 +5,28 @@ using System.Data.SqlClient;
 
 namespace QuanLyTruongCap3.DAL
 {
-    public class KQCaNamTongHopDAL
+    public class KQCaNamTongHopDAL : IDisposable
     {
         private readonly DataService kqCaNamTongHopDS = new DataService();
+
+        public void Dispose()
+        {
+            kqCaNamTongHopDS.Dispose();
+            GC.SuppressFinalize(this);
+        }
+
+        public DataTable LayDsKQCaNamTongHopForReport(string maLop, string maNamHoc)
+        {
+            using (SqlCommand cmd = new SqlCommand("SELECT * " + "FROM HOCSINH HS " + "INNER JOIN KQ_CA_NAM_TONG_HOP KQ ON KQ.MaHocSinh = HS.MaHocSinh " + "INNER JOIN LOP L ON KQ.MaLop = L.MaLop " + "INNER JOIN NAMHOC NH ON KQ.MaNamHoc = NH.MaNamHoc " + "INNER JOIN HOCLUC HL ON KQ.MaHocLuc = HL.MaHocLuc " + "INNER JOIN HANHKIEM HKIEM ON KQ.MaHanhKiem = HKIEM.MaHanhKiem " + "INNER JOIN KETQUA KQUA ON KQ.MaKetQua = KQUA.MaKetQua " + "WHERE KQ.MaLop = @maLop AND KQ.MaNamHoc = @maNamHoc"))
+            {
+                cmd.Parameters.Add("maLop", SqlDbType.VarChar).Value = maLop;
+                cmd.Parameters.Add("maNamHoc", SqlDbType.VarChar).Value = maNamHoc;
+
+                kqCaNamTongHopDS.Load(cmd);
+            }
+
+            return kqCaNamTongHopDS;
+        }
 
         public void LuuKetQua(string maHocSinh, string maLop, string maNamHoc, string maHocLuc, string maHanhKiem, float diemTBChungCacMonCN, string maKetQua)
         {
@@ -35,19 +54,6 @@ namespace QuanLyTruongCap3.DAL
 
                 kqCaNamTongHopDS.Load(cmd);
             }
-        }
-
-        public DataTable LayDsKQCaNamTongHopForReport(string maLop, string maNamHoc)
-        {
-            using (SqlCommand cmd = new SqlCommand("SELECT * " + "FROM HOCSINH HS " + "INNER JOIN KQ_CA_NAM_TONG_HOP KQ ON KQ.MaHocSinh = HS.MaHocSinh " + "INNER JOIN LOP L ON KQ.MaLop = L.MaLop " + "INNER JOIN NAMHOC NH ON KQ.MaNamHoc = NH.MaNamHoc " + "INNER JOIN HOCLUC HL ON KQ.MaHocLuc = HL.MaHocLuc " + "INNER JOIN HANHKIEM HKIEM ON KQ.MaHanhKiem = HKIEM.MaHanhKiem " + "INNER JOIN KETQUA KQUA ON KQ.MaKetQua = KQUA.MaKetQua " + "WHERE KQ.MaLop = @maLop AND KQ.MaNamHoc = @maNamHoc"))
-            {
-                cmd.Parameters.Add("maLop", SqlDbType.VarChar).Value = maLop;
-                cmd.Parameters.Add("maNamHoc", SqlDbType.VarChar).Value = maNamHoc;
-
-                kqCaNamTongHopDS.Load(cmd);
-            }
-
-            return kqCaNamTongHopDS;
         }
     }
 }

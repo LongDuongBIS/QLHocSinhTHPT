@@ -9,6 +9,17 @@ namespace QuanLyTruongCap3.BLL
     {
         private readonly HanhKiemDAL hanhKiemDAL = new HanhKiemDAL();
 
+        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        {
+            var bS = new BindingSource
+            {
+
+                DataSource = hanhKiemDAL.LayDsHanhKiem()
+            };
+            bN.BindingSource = bS;
+            dGV.DataSource = bS;
+        }
+
         public void HienThiComboBox(ComboBoxEx comboBox)
         {
             comboBox.DataSource = hanhKiemDAL.LayDsHanhKiem();
@@ -25,13 +36,9 @@ namespace QuanLyTruongCap3.BLL
             cmbColumn.HeaderText = "Hạnh kiểm";
         }
 
-        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        public bool LuuHanhKiem()
         {
-            BindingSource bS = new BindingSource();
-
-            bS.DataSource = hanhKiemDAL.LayDsHanhKiem();
-            bN.BindingSource = bS;
-            dGV.DataSource = bS;
+            return hanhKiemDAL.LuuHanhKiem();
         }
 
         public DataRow ThemDongMoi()
@@ -42,11 +49,6 @@ namespace QuanLyTruongCap3.BLL
         public void ThemHanhKiem(DataRow row)
         {
             hanhKiemDAL.ThemHanhKiem(row);
-        }
-
-        public bool LuuHanhKiem()
-        {
-            return hanhKiemDAL.LuuHanhKiem();
         }
     }
 }

@@ -9,6 +9,15 @@ namespace QuanLyTruongCap3.BLL
     {
         private readonly MonHocDAL monHocDAL = new MonHocDAL();
 
+        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        {
+            BindingSource bS = new BindingSource();
+
+            bS.DataSource = monHocDAL.LayDsMonHoc();
+            bN.BindingSource = bS;
+            dGV.DataSource = bS;
+        }
+
         public void HienThiComboBox(ComboBoxEx comboBox)
         {
             comboBox.DataSource = monHocDAL.LayDsMonHoc();
@@ -41,13 +50,9 @@ namespace QuanLyTruongCap3.BLL
             cmbColumn.HeaderText = "Chuyên môn";
         }
 
-        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        public bool LuuMonHoc()
         {
-            BindingSource bS = new BindingSource();
-
-            bS.DataSource = monHocDAL.LayDsMonHoc();
-            bN.BindingSource = bS;
-            dGV.DataSource = bS;
+            return monHocDAL.LuuMonHoc();
         }
 
         public DataRow ThemDongMoi()
@@ -58,11 +63,6 @@ namespace QuanLyTruongCap3.BLL
         public void ThemMonHoc(DataRow row)
         {
             monHocDAL.ThemMonHoc(row);
-        }
-
-        public bool LuuMonHoc()
-        {
-            return monHocDAL.LuuMonHoc();
         }
     }
 }

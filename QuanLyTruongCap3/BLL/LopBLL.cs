@@ -13,81 +13,6 @@ namespace QuanLyTruongCap3.BLL
     {
         private readonly LopDAL lopDAL = new LopDAL();
 
-        public void HienThiComboBox(ComboBox comboBox)
-        {
-            comboBox.DataSource = lopDAL.LayDsLop();
-            comboBox.DisplayMember = "TenLop";
-            comboBox.ValueMember = "MaLop";
-        }
-
-        public void HienThiComboBox(string namHoc, ComboBox comboBox)
-        {
-            comboBox.DataSource = lopDAL.LayDsLop(namHoc);
-            comboBox.DisplayMember = "TenLop";
-            comboBox.ValueMember = "MaLop";
-        }
-
-        public void HienThiComboBox(string khoiLop, string namHoc, ComboBox comboBox)
-        {
-            comboBox.DataSource = lopDAL.LayDsLop(khoiLop, namHoc);
-            comboBox.DisplayMember = "TenLop";
-            comboBox.ValueMember = "MaLop";
-        }
-
-        public void HienThiDataGridViewComboBoxColumn(DataGridViewComboBoxColumn cmbColumn)
-        {
-            cmbColumn.DataSource = lopDAL.LayDsLop();
-            cmbColumn.DisplayMember = "TenLop";
-            cmbColumn.ValueMember = "MaLop";
-            cmbColumn.DataPropertyName = "MaLop";
-            cmbColumn.HeaderText = "Lớp";
-        }
-
-        public void HienThiDataGridViewComboBoxColumn(string namHoc, DataGridViewComboBoxColumn cmbColumn)
-        {
-            cmbColumn.DataSource = lopDAL.LayDsLop(namHoc);
-            cmbColumn.DisplayMember = "TenLop";
-            cmbColumn.ValueMember = "MaLop";
-            cmbColumn.DataPropertyName = "MaLop";
-            cmbColumn.HeaderText = "Lớp";
-        }
-
-        public void HienThi(DataGridView dGV, BindingNavigator bN)
-        {
-            BindingSource bS = new BindingSource();
-
-            bS.DataSource = lopDAL.LayDsLop();
-            bN.BindingSource = bS;
-            dGV.DataSource = bS;
-        }
-
-        public void HienThi(DataGridViewX dGV, BindingNavigator bN, TextBoxX txtMaLop, TextBoxX txtTenLop, ComboBoxEx cmbKhoiLop, ComboBoxEx cmbNamHoc, IntegerInput iniSiSo, ComboBoxEx cmbGiaoVien)
-        {
-            BindingSource bS = new BindingSource();
-            bS.DataSource = lopDAL.LayDsLop();
-
-            bN.BindingSource = bS;
-            dGV.DataSource = bS;
-
-            txtMaLop.DataBindings.Clear();
-            txtMaLop.DataBindings.Add("Text", bS, "MaLop");
-
-            txtTenLop.DataBindings.Clear();
-            txtTenLop.DataBindings.Add("Text", bS, "TenLop");
-
-            cmbKhoiLop.DataBindings.Clear();
-            cmbKhoiLop.DataBindings.Add("SelectedValue", bS, "MaKhoiLop");
-
-            cmbNamHoc.DataBindings.Clear();
-            cmbNamHoc.DataBindings.Add("SelectedValue", bS, "MaNamHoc");
-
-            iniSiSo.DataBindings.Clear();
-            iniSiSo.DataBindings.Add("Text", bS, "SiSo");
-
-            cmbGiaoVien.DataBindings.Clear();
-            cmbGiaoVien.DataBindings.Add("SelectedValue", bS, "MaGiaoVien");
-        }
-
         public static IList<LopDTO> LayDsLop()
         {
             DataTable m_DT = new LopDAL().LayDsLopForReport();
@@ -156,14 +81,79 @@ namespace QuanLyTruongCap3.BLL
             return dS;
         }
 
-        public DataRow ThemDongMoi()
+        public void HienThi(DataGridView dGV, BindingNavigator bN)
         {
-            return lopDAL.ThemDongMoi();
+            BindingSource bS = new BindingSource();
+
+            bS.DataSource = lopDAL.LayDsLop();
+            bN.BindingSource = bS;
+            dGV.DataSource = bS;
         }
 
-        public void ThemLop(DataRow row)
+        public void HienThi(DataGridViewX dGV, BindingNavigator bN, TextBoxX txtMaLop, TextBoxX txtTenLop, ComboBoxEx cmbKhoiLop, ComboBoxEx cmbNamHoc, IntegerInput iniSiSo, ComboBoxEx cmbGiaoVien)
         {
-            lopDAL.ThemLop(row);
+            BindingSource bS = new BindingSource();
+            bS.DataSource = lopDAL.LayDsLop();
+
+            bN.BindingSource = bS;
+            dGV.DataSource = bS;
+
+            txtMaLop.DataBindings.Clear();
+            txtMaLop.DataBindings.Add("Text", bS, "MaLop");
+
+            txtTenLop.DataBindings.Clear();
+            txtTenLop.DataBindings.Add("Text", bS, "TenLop");
+
+            cmbKhoiLop.DataBindings.Clear();
+            cmbKhoiLop.DataBindings.Add("SelectedValue", bS, "MaKhoiLop");
+
+            cmbNamHoc.DataBindings.Clear();
+            cmbNamHoc.DataBindings.Add("SelectedValue", bS, "MaNamHoc");
+
+            iniSiSo.DataBindings.Clear();
+            iniSiSo.DataBindings.Add("Text", bS, "SiSo");
+
+            cmbGiaoVien.DataBindings.Clear();
+            cmbGiaoVien.DataBindings.Add("SelectedValue", bS, "MaGiaoVien");
+        }
+
+        public void HienThiComboBox(ComboBox comboBox)
+        {
+            comboBox.DataSource = lopDAL.LayDsLop();
+            comboBox.DisplayMember = "TenLop";
+            comboBox.ValueMember = "MaLop";
+        }
+
+        public void HienThiComboBox(string namHoc, ComboBox comboBox)
+        {
+            comboBox.DataSource = lopDAL.LayDsLop(namHoc);
+            comboBox.DisplayMember = "TenLop";
+            comboBox.ValueMember = "MaLop";
+        }
+
+        public void HienThiComboBox(string khoiLop, string namHoc, ComboBox comboBox)
+        {
+            comboBox.DataSource = lopDAL.LayDsLop(khoiLop, namHoc);
+            comboBox.DisplayMember = "TenLop";
+            comboBox.ValueMember = "MaLop";
+        }
+
+        public void HienThiDataGridViewComboBoxColumn(DataGridViewComboBoxColumn cmbColumn)
+        {
+            cmbColumn.DataSource = lopDAL.LayDsLop();
+            cmbColumn.DisplayMember = "TenLop";
+            cmbColumn.ValueMember = "MaLop";
+            cmbColumn.DataPropertyName = "MaLop";
+            cmbColumn.HeaderText = "Lớp";
+        }
+
+        public void HienThiDataGridViewComboBoxColumn(string namHoc, DataGridViewComboBoxColumn cmbColumn)
+        {
+            cmbColumn.DataSource = lopDAL.LayDsLop(namHoc);
+            cmbColumn.DisplayMember = "TenLop";
+            cmbColumn.ValueMember = "MaLop";
+            cmbColumn.DataPropertyName = "MaLop";
+            cmbColumn.HeaderText = "Lớp";
         }
 
         public bool LuuLop()
@@ -174,6 +164,16 @@ namespace QuanLyTruongCap3.BLL
         public void LuuLop(string maLop, string tenLop, string maKhoiLop, string maNamHoc, int siSo, string maGiaoVien)
         {
             lopDAL.LuuLop(maLop, tenLop, maKhoiLop, maNamHoc, siSo, maGiaoVien);
+        }
+
+        public DataRow ThemDongMoi()
+        {
+            return lopDAL.ThemDongMoi();
+        }
+
+        public void ThemLop(DataRow row)
+        {
+            lopDAL.ThemLop(row);
         }
 
         public void TimTheoMa(string maLop)

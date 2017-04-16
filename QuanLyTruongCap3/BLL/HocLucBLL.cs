@@ -12,6 +12,15 @@ namespace QuanLyTruongCap3.BLL
         private readonly HocLucDAL hocLucDAL = new HocLucDAL();
         private MonHocDAL monHocDAL = new MonHocDAL();
 
+        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        {
+            BindingSource bS = new BindingSource();
+
+            bS.DataSource = hocLucDAL.LayDsHocLuc();
+            bN.BindingSource = bS;
+            dGV.DataSource = bS;
+        }
+
         public void HienThiComboBox(ComboBoxEx comboBox)
         {
             comboBox.DataSource = hocLucDAL.LayDsHocLuc();
@@ -26,6 +35,21 @@ namespace QuanLyTruongCap3.BLL
             cmbColumn.ValueMember = "MaHocLuc";
             cmbColumn.DataPropertyName = "MaHocLuc";
             cmbColumn.HeaderText = "Học lực";
+        }
+
+        public bool LuuHocLuc()
+        {
+            return hocLucDAL.LuuHocLuc();
+        }
+
+        public DataRow ThemDongMoi()
+        {
+            return hocLucDAL.ThemDongMoi();
+        }
+
+        public void ThemHocLuc(DataRow row)
+        {
+            hocLucDAL.ThemHocLuc(row);
         }
 
         public string XepLoaiHocLucMonHoc(float[] arrayDiemTBTungMon, float tongDiem)
@@ -65,34 +89,6 @@ namespace QuanLyTruongCap3.BLL
             return xepLoai;
         }
 
-        public string XepLoaiLocLucHocKy(string maHocSinh, string maLop, string maHocKy, string maNamHoc)
-        {
-            float tongDiem = 0;
-            float tongDiemCacMon = 0;
-            float diemTBTungMon = 0;
-            int tongHeSoCacMon = 0;
-
-            DataTable dt = monHocDAL.LayDsMonHoc(maNamHoc, maLop);
-
-            float[] arrayDiemTBTungMon = new float[dt.Rows.Count];
-
-            int soMonHoc = 0;
-            foreach (DataRow row in dt.Rows)
-            {
-                diemTBTungMon = diemBLL.DiemTrungBinhMonHocKy(maHocSinh, row["MaMonHoc"].ToString(), maHocKy, maNamHoc, maLop);
-                arrayDiemTBTungMon[soMonHoc++] = diemTBTungMon;
-
-                tongDiemCacMon += diemTBTungMon * Convert.ToInt32(row["HeSo"].ToString());
-                tongHeSoCacMon += Convert.ToInt32(row["HeSo"].ToString());
-            }
-            if (tongHeSoCacMon > 0)
-                tongDiem = tongDiemCacMon / tongHeSoCacMon;
-            else
-                tongDiem = 0;
-
-            return XepLoaiHocLucMonHoc(arrayDiemTBTungMon, tongDiem);
-        }
-
         public string XepLoaiLocLucCaNam(string maHocSinh, string maLop, string maNamHoc)
         {
             float tongDiem = 0;
@@ -121,28 +117,32 @@ namespace QuanLyTruongCap3.BLL
             return XepLoaiHocLucMonHoc(arrayDiemTBTungMon, tongDiem);
         }
 
-        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        public string XepLoaiLocLucHocKy(string maHocSinh, string maLop, string maHocKy, string maNamHoc)
         {
-            BindingSource bS = new BindingSource();
+            float tongDiem = 0;
+            float tongDiemCacMon = 0;
+            float diemTBTungMon = 0;
+            int tongHeSoCacMon = 0;
 
-            bS.DataSource = hocLucDAL.LayDsHocLuc();
-            bN.BindingSource = bS;
-            dGV.DataSource = bS;
-        }
+            DataTable dt = monHocDAL.LayDsMonHoc(maNamHoc, maLop);
 
-        public DataRow ThemDongMoi()
-        {
-            return hocLucDAL.ThemDongMoi();
-        }
+            float[] arrayDiemTBTungMon = new float[dt.Rows.Count];
 
-        public void ThemHocLuc(DataRow row)
-        {
-            hocLucDAL.ThemHocLuc(row);
-        }
+            int soMonHoc = 0;
+            foreach (DataRow row in dt.Rows)
+            {
+                diemTBTungMon = diemBLL.DiemTrungBinhMonHocKy(maHocSinh, row["MaMonHoc"].ToString(), maHocKy, maNamHoc, maLop);
+                arrayDiemTBTungMon[soMonHoc++] = diemTBTungMon;
 
-        public bool LuuHocLuc()
-        {
-            return hocLucDAL.LuuHocLuc();
+                tongDiemCacMon += diemTBTungMon * Convert.ToInt32(row["HeSo"].ToString());
+                tongHeSoCacMon += Convert.ToInt32(row["HeSo"].ToString());
+            }
+            if (tongHeSoCacMon > 0)
+                tongDiem = tongDiemCacMon / tongHeSoCacMon;
+            else
+                tongDiem = 0;
+
+            return XepLoaiHocLucMonHoc(arrayDiemTBTungMon, tongDiem);
         }
     }
 }

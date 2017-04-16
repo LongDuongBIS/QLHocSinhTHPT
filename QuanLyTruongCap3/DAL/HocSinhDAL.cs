@@ -5,13 +5,37 @@ using System.Data.SqlClient;
 
 namespace QuanLyTruongCap3.DAL
 {
-    public class HocSinhDAL
+    public class HocSinhDAL : IDisposable
     {
         private readonly DataService hocSinhDS = new DataService();
+
+        public string TruyVanChung
+        {
+            get
+            {
+                return "SELECT HS.MaHocSinh, HS.HoTen, HS.GioiTinh, HS.NgaySinh, HS.NoiSinh, DT.TenDanToc, TG.TenTonGiao " + "FROM HOCSINH HS " + "INNER JOIN DANTOC DT ON HS.MaDanToc = DT.MaDanToc " + "INNER JOIN TONGIAO TG ON HS.MaTonGiao = TG.MaTonGiao";
+            }
+        }
+
+        public void Dispose()
+        {
+            hocSinhDS.Dispose();
+            GC.SuppressFinalize(this);
+        }
 
         public DataTable LayDsHocSinh()
         {
             using (SqlCommand cmd = new SqlCommand("SELECT * " + "FROM HOCSINH"))
+            {
+                hocSinhDS.Load(cmd);
+            }
+
+            return hocSinhDS;
+        }
+
+        public DataTable LayDsHocSinhForReport()
+        {
+            using (SqlCommand cmd = new SqlCommand("SELECT * " + "FROM NGHENGHIEP NNC, NGHENGHIEP NNM, HOCSINH HS, DANTOC DT, TONGIAO TG " + "WHERE HS.MaNNghiepCha = NNC.MaNghe AND HS.MaNNghiepMe = NNM.MaNghe AND HS.MaDanToc = DT.MaDanToc AND HS.MaTonGiao = TG.MaTonGiao"))
             {
                 hocSinhDS.Load(cmd);
             }
@@ -58,52 +82,6 @@ namespace QuanLyTruongCap3.DAL
             return hocSinhDS;
         }
 
-        public void LuuHSVaoBangPhanLop(string maNamHoc, string maKhoiLop, string maLop, string maHS)
-        {
-            using (SqlCommand cmd = new SqlCommand("INSERT INTO PHANLOP " + "VALUES(@maNamHoc, @maKhoiLop, @maLop, @maHS)"))
-            {
-                cmd.Parameters.Add("maNamHoc", SqlDbType.VarChar).Value = maNamHoc;
-                cmd.Parameters.Add("maKhoiLop", SqlDbType.VarChar).Value = maKhoiLop;
-                cmd.Parameters.Add("maLop", SqlDbType.VarChar).Value = maLop;
-                cmd.Parameters.Add("maHS", SqlDbType.VarChar).Value = maHS;
-
-                hocSinhDS.Load(cmd);
-            }
-        }
-
-        public void XoaHSKhoiBangPhanLop(string maNamHoc, string maKhoiLop, string maLop, string maHS)
-        {
-            using (SqlCommand cmd = new SqlCommand("DELETE FROM PHANLOP " + "WHERE MaNamHoc = @maNamHoc AND MaKhoiLop = @maKhoiLop AND MaLop = @maLop AND MaHocSinh = @maHS"))
-            {
-                cmd.Parameters.Add("maNamHoc", SqlDbType.VarChar).Value = maNamHoc;
-                cmd.Parameters.Add("maKhoiLop", SqlDbType.VarChar).Value = maKhoiLop;
-                cmd.Parameters.Add("maLop", SqlDbType.VarChar).Value = maLop;
-                cmd.Parameters.Add("maHS", SqlDbType.VarChar).Value = maHS;
-
-                hocSinhDS.Load(cmd);
-            }
-        }
-
-        public DataTable LayDsHocSinhForReport()
-        {
-            using (SqlCommand cmd = new SqlCommand("SELECT * " + "FROM NGHENGHIEP NNC, NGHENGHIEP NNM, HOCSINH HS, DANTOC DT, TONGIAO TG " + "WHERE HS.MaNNghiepCha = NNC.MaNghe AND HS.MaNNghiepMe = NNM.MaNghe AND HS.MaDanToc = DT.MaDanToc AND HS.MaTonGiao = TG.MaTonGiao"))
-            {
-                hocSinhDS.Load(cmd);
-            }
-
-            return hocSinhDS;
-        }
-
-        public DataRow ThemDongMoi()
-        {
-            return hocSinhDS.NewRow();
-        }
-
-        public void ThemHocSinh(DataRow row)
-        {
-            hocSinhDS.Rows.Add(row);
-        }
-
         public bool LuuHocSinh()
         {
             return hocSinhDS.ExecuteNonQuery() > 0;
@@ -129,36 +107,27 @@ namespace QuanLyTruongCap3.DAL
             }
         }
 
-        public DataTable TimTheoMa(string id)
+        public void LuuHSVaoBangPhanLop(string maNamHoc, string maKhoiLop, string maLop, string maHS)
         {
-            using (SqlCommand cmd = new SqlCommand("SELECT * " + "FROM HOCSINH " + "WHERE MaHocSinh LIKE '%' + @id + '%'"))
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO PHANLOP " + "VALUES(@maNamHoc, @maKhoiLop, @maLop, @maHS)"))
             {
-                cmd.Parameters.Add("id", SqlDbType.VarChar).Value = id;
+                cmd.Parameters.Add("maNamHoc", SqlDbType.VarChar).Value = maNamHoc;
+                cmd.Parameters.Add("maKhoiLop", SqlDbType.VarChar).Value = maKhoiLop;
+                cmd.Parameters.Add("maLop", SqlDbType.VarChar).Value = maLop;
+                cmd.Parameters.Add("maHS", SqlDbType.VarChar).Value = maHS;
 
                 hocSinhDS.Load(cmd);
             }
-
-            return hocSinhDS;
         }
 
-        public DataTable TimTheoTen(string ten)
+        public DataRow ThemDongMoi()
         {
-            using (SqlCommand cmd = new SqlCommand("SELECT * " + "FROM HOCSINH " + "WHERE HoTen LIKE '%' + @ten + '%'"))
-            {
-                cmd.Parameters.Add("ten", SqlDbType.NVarChar).Value = ten;
-
-                hocSinhDS.Load(cmd);
-            }
-
-            return hocSinhDS;
+            return hocSinhDS.NewRow();
         }
 
-        public string TruyVanChung
+        public void ThemHocSinh(DataRow row)
         {
-            get
-            {
-                return "SELECT HS.MaHocSinh, HS.HoTen, HS.GioiTinh, HS.NgaySinh, HS.NoiSinh, DT.TenDanToc, TG.TenTonGiao " + "FROM HOCSINH HS " + "INNER JOIN DANTOC DT ON HS.MaDanToc = DT.MaDanToc " + "INNER JOIN TONGIAO TG ON HS.MaTonGiao = TG.MaTonGiao";
-            }
+            hocSinhDS.Rows.Add(row);
         }
 
         public DataTable TimKiemHocSinh(string hoTen, string theoNSinh, string noiSinh, string theoDToc, string danToc, string theoTGiao, string tonGiao)
@@ -191,6 +160,43 @@ namespace QuanLyTruongCap3.DAL
             }
 
             return hocSinhDS;
+        }
+
+        public DataTable TimTheoMa(string id)
+        {
+            using (SqlCommand cmd = new SqlCommand("SELECT * " + "FROM HOCSINH " + "WHERE MaHocSinh LIKE '%' + @id + '%'"))
+            {
+                cmd.Parameters.Add("id", SqlDbType.VarChar).Value = id;
+
+                hocSinhDS.Load(cmd);
+            }
+
+            return hocSinhDS;
+        }
+
+        public DataTable TimTheoTen(string ten)
+        {
+            using (SqlCommand cmd = new SqlCommand("SELECT * " + "FROM HOCSINH " + "WHERE HoTen LIKE '%' + @ten + '%'"))
+            {
+                cmd.Parameters.Add("ten", SqlDbType.NVarChar).Value = ten;
+
+                hocSinhDS.Load(cmd);
+            }
+
+            return hocSinhDS;
+        }
+
+        public void XoaHSKhoiBangPhanLop(string maNamHoc, string maKhoiLop, string maLop, string maHS)
+        {
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM PHANLOP " + "WHERE MaNamHoc = @maNamHoc AND MaKhoiLop = @maKhoiLop AND MaLop = @maLop AND MaHocSinh = @maHS"))
+            {
+                cmd.Parameters.Add("maNamHoc", SqlDbType.VarChar).Value = maNamHoc;
+                cmd.Parameters.Add("maKhoiLop", SqlDbType.VarChar).Value = maKhoiLop;
+                cmd.Parameters.Add("maLop", SqlDbType.VarChar).Value = maLop;
+                cmd.Parameters.Add("maHS", SqlDbType.VarChar).Value = maHS;
+
+                hocSinhDS.Load(cmd);
+            }
         }
     }
 }

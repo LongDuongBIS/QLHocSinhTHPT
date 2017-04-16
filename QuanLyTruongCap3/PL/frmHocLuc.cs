@@ -43,7 +43,7 @@ namespace QuanLyTruongCap3
             bindingNavigatorDeleteItem.Enabled |= dGVHocLuc.RowCount == 0;
 
             DataRow row = hocLucBLL.ThemDongMoi();
-            row["MaHocLuc"] = string.Format("HL{0}", quyDinh.LaySTT(dGVHocLuc.Rows.Count + 1));
+            row["MaHocLuc"] = string.Format("HL{0}", QuyDinh.LaySTT(dGVHocLuc.Rows.Count + 1));
             row["TenHocLuc"] = string.Empty;
             row["DiemCanTren"] = 0;
             row["DiemCanDuoi"] = 0;
@@ -76,7 +76,7 @@ namespace QuanLyTruongCap3
                 if (row.Cells[loaiDiem].Value != null)
                 {
                     string diem = row.Cells[loaiDiem].Value.ToString();
-                    if (diem == string.Empty || quyDinh.KiemTraDiem(diem) == false)
+                    if (diem == string.Empty || QuyDinh.KiemTraDiem(diem) == false)
                     {
                         MessageBoxEx.Show("Giá trị điểm không hợp lệ!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;

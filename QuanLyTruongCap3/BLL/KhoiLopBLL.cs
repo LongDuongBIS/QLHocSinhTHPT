@@ -9,6 +9,15 @@ namespace QuanLyTruongCap3.BLL
     {
         private readonly KhoiLopDAL khoiLopDAL = new KhoiLopDAL();
 
+        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        {
+            BindingSource bS = new BindingSource();
+
+            bS.DataSource = khoiLopDAL.LayDsKhoiLop();
+            bN.BindingSource = bS;
+            dGV.DataSource = bS;
+        }
+
         public void HienThiComboBox(ComboBoxEx comboBox)
         {
             comboBox.DataSource = khoiLopDAL.LayDsKhoiLop();
@@ -32,13 +41,9 @@ namespace QuanLyTruongCap3.BLL
             cmbColumn.HeaderText = "Khối lớp";
         }
 
-        public void HienThi(DataGridViewX dGV, BindingNavigator bN)
+        public bool LuuKhoiLop()
         {
-            BindingSource bS = new BindingSource();
-
-            bS.DataSource = khoiLopDAL.LayDsKhoiLop();
-            bN.BindingSource = bS;
-            dGV.DataSource = bS;
+            return khoiLopDAL.LuuKhoiLop();
         }
 
         public DataRow ThemDongMoi()
@@ -49,11 +54,6 @@ namespace QuanLyTruongCap3.BLL
         public void ThemKhoiLop(DataRow row)
         {
             khoiLopDAL.ThemKhoiLop(row);
-        }
-
-        public bool LuuKhoiLop()
-        {
-            return khoiLopDAL.LuuKhoiLop();
         }
     }
 }

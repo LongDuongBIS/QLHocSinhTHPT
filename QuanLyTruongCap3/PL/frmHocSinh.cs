@@ -57,7 +57,7 @@ namespace QuanLyTruongCap3
             bindingNavigatorDeleteItem.Enabled |= dGVHocSinh.RowCount == 0;
 
             DataRow row = hocSinhBLL.ThemDongMoi();
-            row["MaHocSinh"] = string.Format("HS{0}", quyDinh.LaySTT(dGVHocSinh.Rows.Count + 1));
+            row["MaHocSinh"] = string.Format("HS{0}", QuyDinh.LaySTT(dGVHocSinh.Rows.Count + 1));
             row["HoTen"] = string.Empty;
             row["GioiTinh"] = false;
             row["NgaySinh"] = DateTime.Today;
@@ -102,7 +102,7 @@ namespace QuanLyTruongCap3
                 {
                     DateTime ngaySinh = Convert.ToDateTime(row.Cells[doTuoiColumn].Value.ToString());
 
-                    if (quyDinh.KiemTraDoTuoi(ngaySinh) == false)
+                    if (QuyDinh.KiemTraDoTuoi(ngaySinh) == false)
                     {
                         MessageBoxEx.Show(string.Format("Tuổi học sinh {0} không đúng quy định!", row.Cells["colHoTen"].Value), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
@@ -188,7 +188,7 @@ namespace QuanLyTruongCap3
 
             if (txtMaHocSinh.Text != string.Empty && txtTenHocSinh.Text != string.Empty && txtNoiSinh.Text != string.Empty && txtHoTenCha.Text != string.Empty && txtHoTenMe.Text != string.Empty && true && cmbDanToc.SelectedValue != null && cmbTonGiao.SelectedValue != null && cmbNgheNghiepCha.SelectedValue != null && cmbNgheNghiepMe.SelectedValue != null)
             {
-                if (quyDinh.KiemTraDoTuoi(dtpNgaySinh.Value) == true)
+                if (QuyDinh.KiemTraDoTuoi(dtpNgaySinh.Value) == true)
                 {
                     hocSinhBLL.LuuHocSinh(txtMaHocSinh.Text, txtTenHocSinh.Text, gioiTinh, dtpNgaySinh.Value, txtNoiSinh.Text, cmbDanToc.SelectedValue.ToString(), cmbTonGiao.SelectedValue.ToString(), txtHoTenCha.Text, cmbNgheNghiepCha.SelectedValue.ToString(), txtHoTenMe.Text, cmbNgheNghiepMe.SelectedValue.ToString());
                     hocSinhBLL.HienThi(dGVHocSinh, bindingNavigatorHocSinh, txtMaHocSinh, txtTenHocSinh, txtGioiTinh, ckbGTinhNam, ckbGTinhNu, dtpNgaySinh, txtNoiSinh, cmbDanToc, cmbTonGiao, txtHoTenCha, cmbNgheNghiepCha, txtHoTenMe, cmbNgheNghiepMe);

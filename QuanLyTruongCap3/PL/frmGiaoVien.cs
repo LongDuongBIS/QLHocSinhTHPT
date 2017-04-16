@@ -47,7 +47,7 @@ namespace QuanLyTruongCap3
             bindingNavigatorDeleteItem.Enabled |= dGVGiaoVien.RowCount == 0;
 
             DataRow row = giaoVienBLL.ThemDongMoi();
-            row["MaGiaoVien"] = string.Format("GV{0}", quyDinh.LaySTT(dGVGiaoVien.Rows.Count + 1));
+            row["MaGiaoVien"] = string.Format("GV{0}", QuyDinh.LaySTT(dGVGiaoVien.Rows.Count + 1));
             row["TenGiaoVien"] = string.Empty;
             row["DiaChi"] = string.Empty;
             row["DienThoai"] = string.Empty;
