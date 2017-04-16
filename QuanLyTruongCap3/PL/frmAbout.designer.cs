@@ -147,9 +147,9 @@
             this.lbl06.AutoSize = true;
             this.lbl06.Location = new System.Drawing.Point(160, 90);
             this.lbl06.Name = "lbl06";
-            this.lbl06.Size = new System.Drawing.Size(159, 13);
+            this.lbl06.Size = new System.Drawing.Size(175, 13);
             this.lbl06.TabIndex = 4;
-            this.lbl06.Text = "Dương Hữu Long - TH001 - K40";
+            this.lbl06.Text = "Long - Xuyến - Hằng - TH001 - K40";
             // 
             // lbl08Email
             // 

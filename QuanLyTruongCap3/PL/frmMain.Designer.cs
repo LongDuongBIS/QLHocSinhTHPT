@@ -133,8 +133,8 @@
             // 
             this.ribbonControl.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.ribbonControl.CaptionVisible = true;
-            this.ribbonControl.Controls.Add(this.ribbonPanelQuanLy);
             this.ribbonControl.Controls.Add(this.ribbonPanelGiupDo);
+            this.ribbonControl.Controls.Add(this.ribbonPanelQuanLy);
             this.ribbonControl.Controls.Add(this.ribbonPanelQuyDinh);
             this.ribbonControl.Controls.Add(this.ribbonPanelTraCuu);
             this.ribbonControl.Controls.Add(this.ribbonPanelThongKe);
@@ -204,6 +204,7 @@
             // 
             this.ribbonPanelQuanLy.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.ribbonPanelQuanLy.TabIndex = 1;
+            this.ribbonPanelQuanLy.Visible = false;
             // 
             // ribbonBarGiaoVien
             // 
@@ -584,10 +585,10 @@
             this.ctxMenuMain.SetContextMenuEx(this.ribbonPanelGiupDo, this.btnMenuMain);
             this.ribbonPanelGiupDo.Controls.Add(this.ribbonBarHuongDan);
             this.ribbonPanelGiupDo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ribbonPanelGiupDo.Location = new System.Drawing.Point(0, 56);
+            this.ribbonPanelGiupDo.Location = new System.Drawing.Point(0, 57);
             this.ribbonPanelGiupDo.Name = "ribbonPanelGiupDo";
             this.ribbonPanelGiupDo.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanelGiupDo.Size = new System.Drawing.Size(792, 91);
+            this.ribbonPanelGiupDo.Size = new System.Drawing.Size(790, 89);
             // 
             // 
             // 
@@ -601,7 +602,6 @@
             // 
             this.ribbonPanelGiupDo.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.ribbonPanelGiupDo.TabIndex = 3;
-            this.ribbonPanelGiupDo.Visible = false;
             // 
             // ribbonBarHuongDan
             // 
@@ -622,7 +622,7 @@
             this.btnThongTin});
             this.ribbonBarHuongDan.Location = new System.Drawing.Point(3, 0);
             this.ribbonBarHuongDan.Name = "ribbonBarHuongDan";
-            this.ribbonBarHuongDan.Size = new System.Drawing.Size(134, 88);
+            this.ribbonBarHuongDan.Size = new System.Drawing.Size(134, 86);
             this.ribbonBarHuongDan.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarHuongDan.TabIndex = 1;
             this.ribbonBarHuongDan.Text = "Hướng Dẫn";
@@ -1149,7 +1149,6 @@
             // 
             // ribbonTabQuanLy
             // 
-            this.ribbonTabQuanLy.Checked = true;
             this.ribbonTabQuanLy.Name = "ribbonTabQuanLy";
             this.ribbonTabQuanLy.Panel = this.ribbonPanelQuanLy;
             this.ribbonTabQuanLy.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F2);
@@ -1182,6 +1181,7 @@
             // 
             // ribbonTabGiupDo
             // 
+            this.ribbonTabGiupDo.Checked = true;
             this.ribbonTabGiupDo.Name = "ribbonTabGiupDo";
             this.ribbonTabGiupDo.Panel = this.ribbonPanelGiupDo;
             this.ribbonTabGiupDo.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F6);
